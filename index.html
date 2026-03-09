@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuba Chojnacki | Paintings</title>
     
+    <!-- SEO and Meta Tags -->
+    <meta name="description" content="Paintings by Polish artist Kuba Chojnacki. Abstract works exploring gradients, gravity and diffusion on raw canvas.">
+    <meta property="og:title" content="Kuba Chojnacki | Paintings">
+    <meta property="og:description" content="Studio works by Kuba Chojnacki — gradients, gravity and diffusion on raw canvas.">
+    <meta property="og:image" content="19.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
     <!-- Google Fonts: EB Garamond & Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,11 +166,13 @@
             pointer-events: auto;
         }
 
+        /* Improved hero slider image quality */
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center;
+            background: #f6f6f6;
         }
 
         .slider-btn {
@@ -220,6 +232,7 @@
             grid-template-columns: repeat(6, 1fr);
             gap: 1.5rem 1rem;
             margin-bottom: 4rem;
+            align-items: end; /* Wyrównuje wszystkie obrazy w rzędzie do dołu, by numery leżały w równej linii */
         }
 
         /* Academic Grid Override (4 Columns) */
@@ -228,13 +241,14 @@
         }
 
         .visual-item {
-            position: relative;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         .item-image-wrapper {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            /* Usunięto sztywne proporcje kwadratu (aspect-ratio), aby zachować prawdziwy format obrazów */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -243,8 +257,8 @@
 
         .item-image-wrapper img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto; /* Pozwala zdjęciom przyjąć ich prawdziwą wysokość i proporcje */
+            object-fit: contain;
             transition: opacity 0.3s ease;
         }
 
@@ -253,14 +267,11 @@
         }
 
         .ref-number {
-            position: absolute;
-            bottom: 0.5rem;
-            left: 0.5rem;
-            font-size: 0.75rem; 
-            color: #111;
-            font-weight: bold;
-            z-index: 2;
-            pointer-events: none;
+            font-family: var(--font-display); /* Zmiana na font z logo (EB Garamond) */
+            font-size: 1rem; 
+            color: var(--text-color);
+            margin-top: 0.5rem; /* Odsunięcie od zdjęcia w dół */
+            display: block;
         }
 
         /* Text Legend Grid */
@@ -280,8 +291,9 @@
         }
 
         .legend-ref {
-            font-weight: bold;
-            color: #111;
+            font-family: var(--font-display); /* Zmiana na font z logo, by pasował do .ref-number */
+            font-size: 1rem;
+            color: var(--text-color);
         }
 
         .clickable-ref {
@@ -484,7 +496,6 @@
             .hero-slider { height: 50vh; }
             .visual-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
             .legend-grid { grid-template-columns: repeat(3, 1fr); }
-            .academic-grid { grid-template-columns: repeat(2, 1fr); }
             
             .about { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; align-items: start; }
             .about-image-left { order: 1; }
@@ -521,7 +532,7 @@
             <a href="#works">Works</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <a href="#">Instagram</a>
+            <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener">Instagram</a>
         </nav>
     </header>
 
@@ -533,27 +544,25 @@
             </button>
             <div class="slides-container">
                 <div class="slide active">
-                    <img src="19.jpg" alt="Untitled, acrylic on canvas, 150 x 100 cm, 2025" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
+                    <img src="IMAGES/19.jpg" alt="Untitled, acrylic on canvas, 150 x 100 cm, 2025" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
                 </div>
                 <div class="slide">
-                    <img src="21.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2026" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/21.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2026" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide">
-                    <img src="17.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2024" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/17.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2024" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
-                <!-- Dodano obraz nr 25 -->
                 <div class="slide">
-                    <img src="25.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2026" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-                </div>
-                <!-- Dodano projekty akademickie -->
-                <div class="slide" data-type="archival">
-                    <img src="AB_0000_Warstwa 3.jpg" alt="Archival work 01, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/25.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2026" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide" data-type="archival">
-                    <img src="AB_0001_IMG_1853.jpg" alt="Archival work 02, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/AB_0000_Warstwa 3.jpg" alt="Archival work 01, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide" data-type="archival">
-                    <img src="AB_0002_Warstwa 1 kopia.jpg" alt="Archival work 03, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/AB_0001_IMG_1853.jpg" alt="Archival work 02, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                </div>
+                <div class="slide" data-type="archival">
+                    <img src="IMAGES/AB_0002_Warstwa 1 kopia.jpg" alt="Archival work 03, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
             </div>
             <button class="slider-btn next-btn">
@@ -561,7 +570,7 @@
             </button>
         </div>
         <div class="hero-caption">
-            <span id="hero-caption-title">Studio works</span>
+            <span id="hero-caption-title">Studio Paintings</span>
             <span id="hero-caption-date">2024–2026</span>
         </div>
     </section>
@@ -575,99 +584,99 @@
         <!-- 24 Images -->
         <div id="main-grid" class="visual-grid">
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="1.jpg" alt="Untitled 01, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="Untitled 01, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[01]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="2.jpg" alt="Untitled 02, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="Untitled 02, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[02]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="3.jpg" alt="Untitled 03, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="Untitled 03, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[03]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="4.jpg" alt="Untitled 04, Acrylic on raw canvas, 30 × 30 cm, 2025" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="Untitled 04, Acrylic on raw canvas, 30 × 30 cm, 2025" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[04]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="5.jpg" alt="Untitled 05, Acrylic on raw canvas, 30 × 30 cm, 2025" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="Untitled 05, Acrylic on raw canvas, 30 × 30 cm, 2025" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[05]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="6.jpg" alt="Untitled 06, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="Untitled 06, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[06]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="7.jpg" alt="Untitled 07, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="Untitled 07, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[07]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="8.jpg" alt="Untitled 08, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="Untitled 08, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[08]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="9.jpg" alt="Untitled 09, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="Untitled 09, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[09]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="10.jpg" alt="Untitled 10, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="Untitled 10, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[10]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="11.jpg" alt="Untitled 11, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="Untitled 11, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[11]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="12.jpg" alt="Untitled 12, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="Untitled 12, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[12]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="13.jpg" alt="Untitled 13, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="Untitled 13, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[13]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="14.jpg" alt="Untitled 14, Acrylic on raw canvas, 30 × 40 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="Untitled 14, Acrylic on raw canvas, 30 × 40 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[14]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="15.jpg" alt="Untitled 15, Acrylic on raw canvas, 20 × 40 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="Untitled 15, Acrylic on raw canvas, 20 × 40 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[15]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="16.jpg" alt="Untitled 16, Acrylic on raw canvas, 50 × 40 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="Untitled 16, Acrylic on raw canvas, 50 × 40 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[16]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="17.jpg" alt="Untitled 17, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="Untitled 17, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[17]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="19.jpg" alt="Untitled 18, Acrylic on raw canvas, 100 × 100 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="Untitled 18, Acrylic on raw canvas, 100 × 100 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[18]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="20.jpg" alt="Untitled 19, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="Untitled 19, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[19]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="21.jpg" alt="Untitled 20, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="Untitled 20, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[20]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="22.jpg" alt="Untitled 21, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="Untitled 21, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[21]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="23.jpg" alt="Untitled 22, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="Untitled 22, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[22]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="24.jpg" alt="Untitled 23, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="Untitled 23, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[23]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="25.jpg" alt="Untitled 24, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="Untitled 24, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[24]</span>
             </div>
         </div>
@@ -676,10 +685,10 @@
         <div id="main-legend" class="legend-grid border-t"></div>
     </section>
 
-    <!-- About Section - Editorial Update -->
+    <!-- About Section -->
     <section id="about" class="section-padding about border-b">
         <div class="about-image-left">
-            <img src="IMG_5535.jpg" alt="Kuba Chojnacki working in his studio, cracow" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+            <img src="IMAGES/IMG_5535.jpg" alt="Kuba Chojnacki working in his studio, cracow" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
         </div>
         
         <div class="about-info">
@@ -691,7 +700,7 @@
         </div>
         
         <div class="about-image-right">
-            <img src="APC_0258.jpg" alt="Kuba Chojnacki portrait in studio" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+            <img src="IMAGES/APC_0258.jpg" alt="Kuba Chojnacki portrait in studio" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
             <div class="about-image-caption">
                 studio view, 2026<br>
                 cracow, poland
@@ -706,7 +715,7 @@
             <a href="mailto:chojnacki.studio@gmail.com" style="color: var(--text-color); text-decoration: none;">chojnacki.studio@gmail.com</a>
         </div>
         <div>
-            <a href="#" style="color: var(--text-color); text-decoration: none;">Instagram</a>
+            <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" style="color: var(--text-color); text-decoration: none;">Instagram</a>
         </div>
     </footer>
 
@@ -848,7 +857,7 @@
                             captionTitle.textContent = 'Archival work';
                             captionDate.textContent = '2023';
                         } else {
-                            captionTitle.textContent = 'Studio works';
+                            captionTitle.textContent = 'Studio Paintings';
                             captionDate.textContent = '2024–2026';
                         }
                     } else {
