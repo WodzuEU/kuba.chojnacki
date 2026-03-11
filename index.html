@@ -9,7 +9,7 @@
     <meta name="description" content="Paintings by Polish artist Kuba Chojnacki. Abstract works exploring gradients, gravity and diffusion on raw canvas.">
     <meta property="og:title" content="Kuba Chojnacki | Paintings">
     <meta property="og:description" content="Studio works by Kuba Chojnacki — gradients, gravity and diffusion on raw canvas.">
-    <meta property="og:image" content="19.jpg">
+    <meta property="og:image" content="IMAGES/19.jpg">
     <meta property="og:type" content="website">
     
     <!-- Favicon -->
@@ -125,9 +125,9 @@
             opacity: 0.5;
         }
 
-        /* Hero Section (Slideshow Layout) */
+        /* Hero Section (Slideshow Layout - Updated to Full Bleed) */
         .hero {
-            padding: 2rem 3rem 6rem 3rem;
+            padding: 0 0 6rem 0; /* Zlikwidowano marginesy po bokach */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -136,7 +136,7 @@
         .hero-slider {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 75vh;
             margin-bottom: 2rem;
             background-color: #f9f9f9;
             overflow: hidden;
@@ -166,13 +166,12 @@
             pointer-events: auto;
         }
 
-        /* Improved hero slider image quality */
+        /* Obrazy działające jako close-upy */
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover; /* Wypełnia całą przestrzeń po same brzegi */
             object-position: center;
-            background: #f6f6f6;
         }
 
         .slider-btn {
@@ -181,13 +180,14 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: var(--text-color);
+            color: #ffffff; /* Białe strzałki, żeby odcinały się od malarstwa */
+            mix-blend-mode: difference; /* Zapewnia widoczność bez względu na kolor tła */
             z-index: 10;
             padding: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.4;
+            opacity: 0.6;
             transition: opacity 0.3s ease;
             cursor: pointer;
         }
@@ -200,7 +200,9 @@
         .next-btn { right: 1rem; }
 
         .hero-caption {
+            padding: 0 3rem; /* Przywrócono oddech wokół podpisów */
             width: 100%;
+            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             font-family: var(--font-display);
@@ -232,12 +234,7 @@
             grid-template-columns: repeat(6, 1fr);
             gap: 1.5rem 1rem;
             margin-bottom: 4rem;
-            align-items: end; /* Wyrównuje wszystkie obrazy w rzędzie do dołu, by numery leżały w równej linii */
-        }
-
-        /* Academic Grid Override (4 Columns) */
-        .academic-grid {
-            grid-template-columns: repeat(4, 1fr);
+            align-items: end;
         }
 
         .visual-item {
@@ -248,7 +245,6 @@
 
         .item-image-wrapper {
             width: 100%;
-            /* Usunięto sztywne proporcje kwadratu (aspect-ratio), aby zachować prawdziwy format obrazów */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -257,7 +253,7 @@
 
         .item-image-wrapper img {
             width: 100%;
-            height: auto; /* Pozwala zdjęciom przyjąć ich prawdziwą wysokość i proporcje */
+            height: auto;
             object-fit: contain;
             transition: opacity 0.3s ease;
         }
@@ -267,10 +263,10 @@
         }
 
         .ref-number {
-            font-family: var(--font-display); /* Zmiana na font z logo (EB Garamond) */
+            font-family: var(--font-display);
             font-size: 1rem; 
             color: var(--text-color);
-            margin-top: 0.5rem; /* Odsunięcie od zdjęcia w dół */
+            margin-top: 0.5rem;
             display: block;
         }
 
@@ -291,7 +287,7 @@
         }
 
         .legend-ref {
-            font-family: var(--font-display); /* Zmiana na font z logo, by pasował do .ref-number */
+            font-family: var(--font-display);
             font-size: 1rem;
             color: var(--text-color);
         }
@@ -494,6 +490,8 @@
 
         @media (max-width: 900px) {
             .hero-slider { height: 50vh; }
+            .hero-caption { padding: 0 2rem; }
+            
             .visual-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
             .legend-grid { grid-template-columns: repeat(3, 1fr); }
             
@@ -509,7 +507,7 @@
             .lightbox-info { width: 90vw; align-items: center; text-align: center; gap: 1rem; }
 
             header { padding: 1.5rem 2rem; }
-            .hero { padding: 1rem 2rem 4rem 2rem; }
+            .hero { padding: 0 0 4rem 0; }
             .section-padding { padding: 4rem 2rem; }
         }
 
@@ -518,14 +516,13 @@
             .legend-grid { grid-template-columns: repeat(2, 1fr); }
             header { flex-direction: column; gap: 1rem; align-items: flex-start; }
             nav a { margin-left: 0; margin-right: 1.5rem; }
-            .hero-caption { flex-direction: column; gap: 0.5rem; font-size: 1.2rem; }
+            .hero-caption { flex-direction: column; gap: 0.5rem; font-size: 1.2rem; padding: 0 1.5rem;}
             footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header class="border-b">
         <a href="#" class="logo">KUBA CHOJNACKI</a>
         <nav>
@@ -536,7 +533,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section (Slideshow) -->
     <section class="hero border-b">
         <div class="hero-slider">
             <button class="slider-btn prev-btn">
@@ -544,16 +540,16 @@
             </button>
             <div class="slides-container">
                 <div class="slide active">
-                    <img src="IMAGES/19.jpg" alt="Untitled, acrylic on canvas, 150 x 100 cm, 2025" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
+                    <img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
                 </div>
                 <div class="slide">
-                    <img src="IMAGES/21.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2026" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide">
-                    <img src="IMAGES/17.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2024" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide">
-                    <img src="IMAGES/25.jpg" alt="Untitled, acrylic on canvas, 100 x 70 cm, 2026" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide" data-type="archival">
                     <img src="IMAGES/AB_0000_Warstwa 3.jpg" alt="Archival work 01, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
@@ -575,117 +571,113 @@
         </div>
     </section>
 
-    <!-- Works Section (24 Items) -->
     <section id="works" class="section-padding border-b">
         <div class="works-header">
             <h2 class="section-title" style="margin:0;">Collection 2024–2026</h2>
         </div>
 
-        <!-- 24 Images -->
         <div id="main-grid" class="visual-grid">
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="Untitled 01, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="untitled blue red, acrylic on raw canvas, 20 × 20 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[01]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="Untitled 02, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="untitled (blue orange), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[02]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="Untitled 03, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="untitled (blue), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[03]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="Untitled 04, Acrylic on raw canvas, 30 × 30 cm, 2025" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="untitled blue red, acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[04]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="Untitled 05, Acrylic on raw canvas, 30 × 30 cm, 2025" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="untitled white red steel, acrylic on raw canvas, 20 × 25 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[05]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="Untitled 06, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="untitled khaki red navy, acrylic on raw canvas, 20 × 20 cm, 2026, 120 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[06]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="Untitled 07, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[07]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="Untitled 08, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="untitled turqoise, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[08]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="Untitled 09, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="untitled khaki navy red I, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[09]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="Untitled 10, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="untitled khaki navy red II, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[10]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="Untitled 11, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="untitled navy red, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[11]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="Untitled 12, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[12]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="Untitled 13, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[13]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="Untitled 14, Acrylic on raw canvas, 30 × 40 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[14]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="Untitled 15, Acrylic on raw canvas, 20 × 40 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="untitled blue green, acrylic on raw canvas, 35 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[15]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="Untitled 16, Acrylic on raw canvas, 50 × 40 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="orange vibrancy, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[16]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="Untitled 17, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[17]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="Untitled 18, Acrylic on raw canvas, 100 × 100 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[18]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="Untitled 19, Acrylic on raw canvas, 30 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="CIEK spectrum, acrylic on raw canvas, 70 × 70 cm, 2026, 650 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[19]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="Untitled 20, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[20]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="Untitled 21, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="untitled, acrylic on raw canvas, 40 × 30 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[21]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="Untitled 22, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="untitled, acrylic on raw canvas, 40 × 30 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[22]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="Untitled 23, Acrylic on raw canvas, 40 × 30 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="untitled, acrylic on raw canvas, 40 × 30 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[23]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="Untitled 24, Acrylic on raw canvas, 100 × 70 cm, 2026" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[24]</span>
             </div>
         </div>
 
-        <!-- Museum Legend Grid (Generowany przez JS) -->
         <div id="main-legend" class="legend-grid border-t"></div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="section-padding about border-b">
         <div class="about-image-left">
             <img src="IMAGES/IMG_5535.jpg" alt="Kuba Chojnacki working in his studio, cracow" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
@@ -708,7 +700,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div>Contact</div>
         <div>
@@ -719,7 +710,6 @@
         </div>
     </footer>
 
-    <!-- Lightbox Container -->
     <div id="lightbox" class="lightbox">
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Fullscreen artwork">
@@ -733,36 +723,35 @@
         </div>
     </div>
 
-    <!-- MAIN JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
             // --- 1. GENERATING THE LEGEND DYNAMICALLY ---
             const gridData = [
-                { ref: "[01]", title: "Untitled 01", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[02]", title: "Untitled 02", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[03]", title: "Untitled 03", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[04]", title: "Untitled 04", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2025" },
-                { ref: "[05]", title: "Untitled 05", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2025" },
-                { ref: "[06]", title: "Untitled 06", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[07]", title: "Untitled 07", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[08]", title: "Untitled 08", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[09]", title: "Untitled 09", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[10]", title: "Untitled 10", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[11]", title: "Untitled 11", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[12]", title: "Untitled 12", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[13]", title: "Untitled 13", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[14]", title: "Untitled 14", specs: "Acrylic on raw canvas<br>30 × 40 cm<br>2026" },
-                { ref: "[15]", title: "Untitled 15", specs: "Acrylic on raw canvas<br>20 × 40 cm<br>2026" },
-                { ref: "[16]", title: "Untitled 16", specs: "Acrylic on raw canvas<br>50 × 40 cm<br>2026" },
-                { ref: "[17]", title: "Untitled 17", specs: "Acrylic on raw canvas<br>100 × 70 cm<br>2026" },
-                { ref: "[18]", title: "Untitled 18", specs: "Acrylic on raw canvas<br>100 × 100 cm<br>2026" },
-                { ref: "[19]", title: "Untitled 19", specs: "Acrylic on raw canvas<br>30 × 30 cm<br>2026" },
-                { ref: "[20]", title: "Untitled 20", specs: "Acrylic on raw canvas<br>100 × 70 cm<br>2026" },
-                { ref: "[21]", title: "Untitled 21", specs: "Acrylic on raw canvas<br>40 × 30 cm<br>2026" },
-                { ref: "[22]", title: "Untitled 22", specs: "Acrylic on raw canvas<br>40 × 30 cm<br>2026" },
-                { ref: "[23]", title: "Untitled 23", specs: "Acrylic on raw canvas<br>40 × 30 cm<br>2026" },
-                { ref: "[24]", title: "Untitled 24", specs: "Acrylic on raw canvas<br>100 × 70 cm<br>2026" }
+                { ref: "[01]", title: "untitled blue red", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2025<br>120 €" },
+                { ref: "[02]", title: "untitled (blue orange)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
+                { ref: "[03]", title: "untitled (blue)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
+                { ref: "[04]", title: "untitled blue red", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
+                { ref: "[05]", title: "untitled white red steel", specs: "acrylic on raw canvas<br>20 × 25 cm<br>2026<br>150 €" },
+                { ref: "[06]", title: "untitled khaki red navy", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2026<br>120 €" },
+                { ref: "[07]", title: "untitled khaki navy red III", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
+                { ref: "[08]", title: "untitled turqoise", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[09]", title: "untitled khaki navy red I", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[10]", title: "untitled khaki navy red II", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[11]", title: "untitled navy red", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[12]", title: "untitled blue red", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[13]", title: "untitled blue green", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[14]", title: "untitled blue red", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
+                { ref: "[15]", title: "untitled blue green", specs: "acrylic on raw canvas<br>35 × 20 cm<br>2026<br>150 €" },
+                { ref: "[16]", title: "orange vibrancy", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
+                { ref: "[17]", title: "CIEK red", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
+                { ref: "[18]", title: "CIEK red", specs: "acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1200 €" },
+                { ref: "[19]", title: "CIEK spectrum", specs: "acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
+                { ref: "[20]", title: "CIEK blue", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
+                { ref: "[21]", title: "untitled", specs: "acrylic on raw canvas<br>40 × 30 cm<br>2026<br>220 €" },
+                { ref: "[22]", title: "untitled", specs: "acrylic on raw canvas<br>40 × 30 cm<br>2026<br>220 €" },
+                { ref: "[23]", title: "untitled", specs: "acrylic on raw canvas<br>40 × 30 cm<br>2026<br>220 €" },
+                { ref: "[24]", title: "untitled", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" }
             ];
 
             const legendContainer = document.getElementById('main-legend');
@@ -789,10 +778,8 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             
-            // All images that can be zoomed (Grid + Slider + Academic)
             const images = document.querySelectorAll('.item-image-wrapper img, .slide img');
 
-            // Open on image click
             images.forEach(img => {
                 img.addEventListener('click', () => {
                     lightboxImg.src = img.src;
@@ -812,7 +799,7 @@
                 });
             });
 
-            // Open on legend number click [NEW]
+            // Open on legend number click
             const mainGridImages = document.querySelectorAll('#main-grid .item-image-wrapper img');
             const clickableRefs = document.querySelectorAll('.clickable-ref');
             
@@ -852,7 +839,6 @@
                     if (i === index) {
                         slide.classList.add('active');
                         
-                        // Dynamiczna zmiana tytułu w zależności od wyświetlanego slajdu
                         if(slide.getAttribute('data-type') === 'archival') {
                             captionTitle.textContent = 'Archival work';
                             captionDate.textContent = '2023';
@@ -897,3 +883,4 @@
     </script>
 </body>
 </html>
+```
