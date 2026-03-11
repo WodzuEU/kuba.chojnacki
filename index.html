@@ -71,7 +71,7 @@
         }
 
         /* Maintain custom circle cursor on standard interactive elements */
-        a, button, .logo, .inquire-link, .slider-btn, .clickable-ref {
+        a, button, input[type="submit"], .logo, .inquire-link, .slider-btn, .clickable-ref, .lb-submit {
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%23111111'/%3E%3C/svg%3E") 6 6, pointer !important;
         }
 
@@ -125,9 +125,9 @@
             opacity: 0.5;
         }
 
-        /* Hero Section (Slideshow Layout - Updated to Full Bleed) */
+        /* Hero Section (Slideshow Layout) */
         .hero {
-            padding: 0 0 6rem 0; /* Zlikwidowano marginesy po bokach */
+            padding: 0 0 6rem 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -166,11 +166,10 @@
             pointer-events: auto;
         }
 
-        /* Obrazy działające jako close-upy */
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Wypełnia całą przestrzeń po same brzegi */
+            object-fit: cover;
             object-position: center;
         }
 
@@ -180,8 +179,8 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: #ffffff; /* Białe strzałki, żeby odcinały się od malarstwa */
-            mix-blend-mode: difference; /* Zapewnia widoczność bez względu na kolor tła */
+            color: #ffffff;
+            mix-blend-mode: difference;
             z-index: 10;
             padding: 1rem;
             display: flex;
@@ -200,7 +199,7 @@
         .next-btn { right: 1rem; }
 
         .hero-caption {
-            padding: 0 3rem; /* Przywrócono oddech wokół podpisów */
+            padding: 0 3rem;
             width: 100%;
             box-sizing: border-box;
             display: flex;
@@ -452,20 +451,36 @@
         }
 
         .lightbox img {
-            max-width: 65vw;
+            max-width: 60vw;
             max-height: 90vh;
             object-fit: contain;
         }
 
+        /* Lightbox Information Panel */
         .lightbox-info {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 2rem;
-            width: 280px;
+            justify-content: flex-start;
+            gap: 1.5rem;
+            width: 300px;
             color: var(--text-color);
             text-align: left;
             cursor: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        /* Minimalist scrollbar for info panel */
+        .lightbox-info::-webkit-scrollbar {
+            width: 4px;
+        }
+        .lightbox-info::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .lightbox-info::-webkit-scrollbar-thumb {
+            background-color: #ddd;
+            border-radius: 4px;
         }
 
         .lb-title {
@@ -479,6 +494,84 @@
             font-size: 0.75rem;
             color: #555;
             line-height: 1.6;
+        }
+
+        /* Form Styles inside Lightbox */
+        .lb-inquiry-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .lb-inquiry-title {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #111;
+        }
+
+        .lb-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .lb-input {
+            width: 100%;
+            padding: 0.4rem 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--text-color);
+            border-radius: 0;
+            outline: none;
+            transition: border-color 0.3s ease;
+            cursor: text;
+        }
+
+        .lb-input::placeholder {
+            color: #aaa;
+        }
+
+        .lb-input:focus {
+            border-bottom-color: var(--text-color);
+        }
+
+        .lb-submit {
+            align-self: flex-start;
+            background: none;
+            border: none;
+            padding: 0.5rem 0 0 0;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-style: italic;
+            text-decoration: underline;
+            color: var(--text-color);
+            transition: opacity 0.2s ease;
+        }
+
+        .lb-submit:hover {
+            opacity: 0.5;
+        }
+
+        .lb-extra {
+            font-size: 0.65rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .lb-extra p {
+            margin-bottom: 0.5rem;
+        }
+
+        .lb-extra a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
         }
 
         /* Lightbox Navigation Buttons */
@@ -537,8 +630,13 @@
             .about-image-right img, .about-image-caption { width: 50%; }
             
             .lightbox-content { flex-direction: column; gap: 1.5rem; }
-            .lightbox img { max-width: 90vw; max-height: 65vh; }
-            .lightbox-info { width: 90vw; align-items: center; text-align: center; gap: 1rem; }
+            .lightbox img { max-width: 90vw; max-height: 55vh; }
+            .lightbox-info { 
+                width: 90vw; 
+                align-items: flex-start; 
+                text-align: left; 
+                gap: 1.5rem; 
+            }
 
             header { padding: 1.5rem 2rem; }
             .hero { padding: 0 0 4rem 0; }
@@ -751,12 +849,31 @@
         </button>
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Fullscreen artwork">
+            
+            <!-- NOWY PANEL Z FORMULARZEM KONTAKTOWYM -->
             <div class="lightbox-info">
                 <div>
                     <div id="lb-title" class="lb-title"></div>
                     <div id="lb-specs" class="lb-specs"></div>
                 </div>
-                <a id="lb-inquire" href="#" class="inquire-link">Inquire</a>
+                
+                <div class="lb-inquiry-section">
+                    <div class="lb-inquiry-title">[ Inquire about this work ]</div>
+                    
+                    <form id="lb-form" class="lb-form">
+                        <input type="text" id="lb-name" class="lb-input" placeholder="Name" required>
+                        <input type="email" id="lb-email" class="lb-input" placeholder="Email" required>
+                        <textarea id="lb-message" class="lb-input" placeholder="Message" rows="2" required></textarea>
+                        <button type="submit" class="lb-submit">Send inquiry</button>
+                    </form>
+                    
+                    <div class="lb-extra">
+                        <p>or email directly<br>
+                        <a href="mailto:chojnacki.studio@gmail.com">chojnacki.studio@gmail.com</a></p>
+                        <p>Commissions available</p>
+                        <p>Location: Kraków, Poland<br>Shipping worldwide</p>
+                    </div>
+                </div>
             </div>
         </div>
         <button class="lightbox-btn lb-next">
@@ -821,6 +938,7 @@
             const lightboxImg = document.getElementById('lightbox-img');
             const lbPrevBtn = document.querySelector('.lb-prev');
             const lbNextBtn = document.querySelector('.lb-next');
+            const lbForm = document.getElementById('lb-form');
             
             const images = Array.from(document.querySelectorAll('.item-image-wrapper img, .slide img'));
             let currentLbIndex = 0;
@@ -839,7 +957,9 @@
                 
                 document.getElementById('lb-title').textContent = title;
                 document.getElementById('lb-specs').innerHTML = specs;
-                document.getElementById('lb-inquire').href = `mailto:chojnacki.studio@gmail.com?subject=Inquiry%20%E2%80%94%20${encodeURIComponent(title)}`;
+                
+                // Reset form fields
+                lbForm.reset();
                 
                 lightbox.classList.add('active');
             }
@@ -848,6 +968,21 @@
                 img.addEventListener('click', () => {
                     openLightbox(index);
                 });
+            });
+
+            // Handle Lightbox Form Submission
+            lbForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const title = document.getElementById('lb-title').textContent;
+                const name = document.getElementById('lb-name').value;
+                const email = document.getElementById('lb-email').value;
+                const message = document.getElementById('lb-message').value;
+                
+                const subject = encodeURIComponent(`Inquiry — ${title}`);
+                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+                
+                window.location.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}&body=${body}`;
             });
 
             // Lightbox Navigation Arrows
@@ -878,7 +1013,6 @@
 
             // Close logic
             lightbox.addEventListener('click', (e) => {
-                // Nie zamykaj jeśli kliknięto w tekst lub w przyciski strzałek
                 if (!e.target.closest('.lightbox-info') && !e.target.closest('.lightbox-btn')) {
                     lightbox.classList.remove('active');
                 }
