@@ -481,6 +481,40 @@
             line-height: 1.6;
         }
 
+        /* Lightbox Navigation Buttons */
+        .lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-color);
+            padding: 2rem;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-btn:hover {
+            opacity: 1;
+        }
+
+        .lb-prev { left: 0; }
+        .lb-next { right: 0; }
+
+        /* Scroll Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Responsiveness */
         @media (max-width: 1200px) {
             .visual-grid { grid-template-columns: repeat(4, 1fr); }
@@ -549,7 +583,7 @@
                     <img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide">
-                    <img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide" data-type="archival">
                     <img src="IMAGES/AB_0000_Warstwa 3.jpg" alt="Archival work 01, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
@@ -638,15 +672,15 @@
                 <span class="ref-number">[15]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="orange vibrancy, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[16]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[17]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[18]</span>
             </div>
             <div class="visual-item">
@@ -654,23 +688,23 @@
                 <span class="ref-number">[19]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="orange vibrancy, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[20]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="untitled, acrylic on raw canvas, 40 × 30 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[21]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="untitled, acrylic on raw canvas, 40 × 30 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[22]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="untitled, acrylic on raw canvas, 40 × 30 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[23]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[24]</span>
             </div>
         </div>
@@ -710,7 +744,11 @@
         </div>
     </footer>
 
+    <!-- Lightbox Container -->
     <div id="lightbox" class="lightbox">
+        <button class="lightbox-btn lb-prev">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Fullscreen artwork">
             <div class="lightbox-info">
@@ -721,8 +759,12 @@
                 <a id="lb-inquire" href="#" class="inquire-link">Inquire</a>
             </div>
         </div>
+        <button class="lightbox-btn lb-next">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
     </div>
 
+    <!-- MAIN JAVASCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -743,15 +785,15 @@
                 { ref: "[13]", title: "untitled blue green", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
                 { ref: "[14]", title: "untitled blue red", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
                 { ref: "[15]", title: "untitled blue green", specs: "acrylic on raw canvas<br>35 × 20 cm<br>2026<br>150 €" },
-                { ref: "[16]", title: "orange vibrancy", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
-                { ref: "[17]", title: "CIEK red", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
-                { ref: "[18]", title: "CIEK red", specs: "acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1200 €" },
+                { ref: "[16]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
+                { ref: "[17]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
+                { ref: "[18]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
                 { ref: "[19]", title: "CIEK spectrum", specs: "acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
-                { ref: "[20]", title: "CIEK blue", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
-                { ref: "[21]", title: "untitled", specs: "acrylic on raw canvas<br>40 × 30 cm<br>2026<br>220 €" },
-                { ref: "[22]", title: "untitled", specs: "acrylic on raw canvas<br>40 × 30 cm<br>2026<br>220 €" },
-                { ref: "[23]", title: "untitled", specs: "acrylic on raw canvas<br>40 × 30 cm<br>2026<br>220 €" },
-                { ref: "[24]", title: "untitled", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" }
+                { ref: "[20]", title: "orange vibrancy", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
+                { ref: "[21]", title: "CIEK blue", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
+                { ref: "[22]", title: "CIEK red", specs: "acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1200 €" },
+                { ref: "[23]", title: "CIEK red", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
+                { ref: "[24]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" }
             ];
 
             const legendContainer = document.getElementById('main-legend');
@@ -777,26 +819,48 @@
             // --- 2. LIGHTBOX LOGIC ---
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
+            const lbPrevBtn = document.querySelector('.lb-prev');
+            const lbNextBtn = document.querySelector('.lb-next');
             
-            const images = document.querySelectorAll('.item-image-wrapper img, .slide img');
+            const images = Array.from(document.querySelectorAll('.item-image-wrapper img, .slide img'));
+            let currentLbIndex = 0;
 
-            images.forEach(img => {
+            function openLightbox(index) {
+                currentLbIndex = index;
+                const img = images[index];
+                lightboxImg.src = img.src;
+                
+                const altText = img.alt || "Fullscreen artwork";
+                lightboxImg.alt = altText;
+                
+                const parts = altText.split(',');
+                const title = parts[0] ? parts[0].trim() : "Artwork detail";
+                const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
+                
+                document.getElementById('lb-title').textContent = title;
+                document.getElementById('lb-specs').innerHTML = specs;
+                document.getElementById('lb-inquire').href = `mailto:chojnacki.studio@gmail.com?subject=Inquiry%20%E2%80%94%20${encodeURIComponent(title)}`;
+                
+                lightbox.classList.add('active');
+            }
+
+            images.forEach((img, index) => {
                 img.addEventListener('click', () => {
-                    lightboxImg.src = img.src;
-                    
-                    const altText = img.alt || "Fullscreen artwork";
-                    lightboxImg.alt = altText;
-                    
-                    const parts = altText.split(',');
-                    const title = parts[0] ? parts[0].trim() : "Artwork detail";
-                    const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
-                    
-                    document.getElementById('lb-title').textContent = title;
-                    document.getElementById('lb-specs').innerHTML = specs;
-                    document.getElementById('lb-inquire').href = `mailto:chojnacki.studio@gmail.com?subject=Inquiry%20%E2%80%94%20${encodeURIComponent(title)}`;
-                    
-                    lightbox.classList.add('active');
+                    openLightbox(index);
                 });
+            });
+
+            // Lightbox Navigation Arrows
+            lbPrevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentLbIndex = (currentLbIndex > 0) ? currentLbIndex - 1 : images.length - 1;
+                openLightbox(currentLbIndex);
+            });
+
+            lbNextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentLbIndex = (currentLbIndex < images.length - 1) ? currentLbIndex + 1 : 0;
+                openLightbox(currentLbIndex);
             });
 
             // Open on legend number click
@@ -814,14 +878,23 @@
 
             // Close logic
             lightbox.addEventListener('click', (e) => {
-                if (!e.target.closest('.lightbox-info')) {
+                // Nie zamykaj jeśli kliknięto w tekst lub w przyciski strzałek
+                if (!e.target.closest('.lightbox-info') && !e.target.closest('.lightbox-btn')) {
                     lightbox.classList.remove('active');
                 }
             });
 
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
                     lightbox.classList.remove('active');
+                } else if (e.key === 'ArrowLeft') {
+                    currentLbIndex = (currentLbIndex > 0) ? currentLbIndex - 1 : images.length - 1;
+                    openLightbox(currentLbIndex);
+                } else if (e.key === 'ArrowRight') {
+                    currentLbIndex = (currentLbIndex < images.length - 1) ? currentLbIndex + 1 : 0;
+                    openLightbox(currentLbIndex);
                 }
             });
 
@@ -879,8 +952,24 @@
             });
 
             startSlideshow();
+
+            // --- 4. SCROLL ANIMATIONS (FADE-UP) ---
+            const fadeElements = document.querySelectorAll('.visual-item, .legend-item, .about-image-left, .about-info, .about-image-right');
+            
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            fadeElements.forEach(el => {
+                el.classList.add('fade-up');
+                fadeObserver.observe(el);
+            });
         });
     </script>
 </body>
 </html>
-```
