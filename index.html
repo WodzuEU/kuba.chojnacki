@@ -93,6 +93,17 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        section,
+        footer {
+            scroll-margin-top: 7rem;
         }
 
         .logo {
@@ -546,36 +557,6 @@
             color: #111;
         }
         
-        .lb-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .lb-input {
-            width: 100%;
-            padding: 0.4rem 0;
-            border: none;
-            border-bottom: 1px solid #ddd;
-            background: transparent;
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            color: var(--text-color);
-            border-radius: 0;
-            outline: none;
-            transition: border-color 0.3s ease;
-            cursor: text;
-        }
-
-        .lb-input::placeholder {
-            color: #aaa;
-        }
-
-        .lb-input:focus {
-            border-bottom-color: var(--text-color);
-        }
-
         .lb-submit {
             align-self: flex-start;
             display: inline-block;
@@ -625,6 +606,23 @@
             opacity: 1;
         }
 
+        .lb-close {
+            top: 0.75rem;
+            right: 0.75rem;
+            left: auto;
+            transform: none;
+            opacity: 0.75;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #ddd;
+            border-radius: 999px;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
         .lb-prev { left: 0; }
         .lb-next { right: 0; }
 
@@ -669,6 +667,15 @@
                 text-align: left; 
                 gap: 1.5rem; 
             }
+            .lightbox-btn {
+                padding: 1rem;
+            }
+            .lb-close {
+                top: 0.5rem;
+                right: 0.5rem;
+                width: 2.25rem;
+                height: 2.25rem;
+            }
 
             header { padding: 1.5rem 2rem; }
             .hero { padding: 0 0 4rem 0; }
@@ -699,7 +706,7 @@
 
     <section class="hero border-b">
         <div class="hero-slider">
-            <button class="slider-btn prev-btn">
+            <button class="slider-btn prev-btn" aria-label="Previous slide">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <div class="slides-container">
@@ -725,7 +732,7 @@
                     <img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
             </div>
-            <button class="slider-btn next-btn">
+            <button class="slider-btn next-btn" aria-label="Next slide">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 18l6-6-6-6"/></svg>
             </button>
         </div>
@@ -832,7 +839,7 @@
     </footer>
 
     <div id="lightbox" class="lightbox">
-        <button class="lightbox-btn lb-prev">
+        <button class="lightbox-btn lb-prev" aria-label="Previous artwork">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="lightbox-content">
@@ -846,16 +853,9 @@
                 
                 <div class="lb-inquiry-section">
                     <div class="lb-inquiry-title">[ Inquire about this work ]</div>
-                    
-                    <form id="lb-form" class="lb-form">
-                        <input type="text" id="lb-name" class="lb-input" placeholder="Name" required>
-                        <input type="email" id="lb-email" class="lb-input" placeholder="Email" required>
-                        <textarea id="lb-message" class="lb-input" placeholder="Message" rows="2" required></textarea>
-                        <button type="submit" class="lb-submit" style="margin-bottom: 1rem;">Send via Email</button>
-                    </form>
-                    
+
                     <div style="margin-bottom: 1.5rem;">
-                        <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="lb-submit" style="margin-bottom: 0;">Send a DM on Instagram</a>
+                        <a id="lb-mailto-link" href="mailto:chojnacki.studio@gmail.com" class="lb-submit" style="margin-bottom: 0;">Send inquiry via email</a>
                     </div>
                     
                     <div class="lb-extra">
@@ -867,8 +867,11 @@
                 </div>
             </div>
         </div>
-        <button class="lightbox-btn lb-next">
+        <button class="lightbox-btn lb-next" aria-label="Next artwork">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <button class="lightbox-btn lb-close" aria-label="Close lightbox">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
     </div>
 
@@ -955,7 +958,8 @@
             const lightboxImg = document.getElementById('lightbox-img');
             const lbPrevBtn = document.querySelector('.lb-prev');
             const lbNextBtn = document.querySelector('.lb-next');
-            const lbForm = document.getElementById('lb-form');
+            const lbCloseBtn = document.querySelector('.lb-close');
+            const lbMailtoLink = document.getElementById('lb-mailto-link');
             
             const gridImages = Array.from(document.querySelectorAll('.visual-item .item-image-wrapper img'));
             let currentLbIndex = 0;
@@ -979,8 +983,12 @@
                 
                 document.getElementById('lb-title').textContent = title;
                 document.getElementById('lb-specs').innerHTML = specs;
-                
-                if (lbForm) lbForm.reset();
+
+                if (lbMailtoLink) {
+                    const subject = encodeURIComponent(`Inquiry — ${title}`);
+                    lbMailtoLink.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}`;
+                }
+
                 lightbox.classList.add('active');
             }
 
@@ -1008,7 +1016,10 @@
                     
                     document.getElementById('lb-title').textContent = title;
                     document.getElementById('lb-specs').innerHTML = specs;
-                    if (lbForm) lbForm.reset();
+                    if (lbMailtoLink) {
+                        const subject = encodeURIComponent(`Inquiry — ${title}`);
+                        lbMailtoLink.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}`;
+                    }
                     lightbox.classList.add('active');
                 });
             });
@@ -1023,7 +1034,9 @@
                     lightboxImg.src = img.src;
                     document.getElementById('lb-title').textContent = "Studio view";
                     document.getElementById('lb-specs').innerHTML = img.alt || "Kuba Chojnacki studio";
-                    if (lbForm) lbForm.reset();
+                    if (lbMailtoLink) {
+                        lbMailtoLink.href = 'mailto:chojnacki.studio@gmail.com?subject=' + encodeURIComponent('Inquiry — Studio view');
+                    }
                     lightbox.classList.add('active');
                 });
             });
@@ -1031,6 +1044,7 @@
             // --- FUNKCJA POWIĘKSZANIA ZDJĘĆ W LIGHTBOXIE (ZOOM) ---
             lightboxImg.addEventListener('click', (e) => {
                 e.stopPropagation(); // Blokuje natychmiastowe zamknięcie lightboxa po kliknięciu w obraz
+                if (window.matchMedia('(max-width: 900px)').matches) return;
                 
                 if (!lightboxImg.classList.contains('is-zoomed')) {
                     // Obliczanie klikniętego punktu w relacji do rozmiaru obrazka
@@ -1051,22 +1065,6 @@
                     }, 400); // Czeka na zakończenie animacji CSS
                 }
             });
-
-            // Handle Form submission
-            if (lbForm) {
-                lbForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const title = document.getElementById('lb-title').textContent;
-                    const name = document.getElementById('lb-name').value;
-                    const email = document.getElementById('lb-email').value;
-                    const message = document.getElementById('lb-message').value;
-                    
-                    const subject = encodeURIComponent(`Inquiry — ${title}`);
-                    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-                    
-                    window.location.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}&body=${body}`;
-                });
-            }
 
             // Strzałki lightboxa
             lbPrevBtn.addEventListener('click', (e) => {
@@ -1097,6 +1095,11 @@
                 if (!e.target.closest('.lightbox-info') && !e.target.closest('.lightbox-btn') && e.target !== lightboxImg) {
                     lightbox.classList.remove('active');
                 }
+            });
+
+            lbCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                lightbox.classList.remove('active');
             });
 
             document.addEventListener('keydown', (e) => {
