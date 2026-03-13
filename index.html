@@ -65,19 +65,11 @@
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.6;
             text-transform: lowercase;
-            
-            /* Custom minimalist black square cursor */
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23111111'/%3E%3C/svg%3E") 5 5, auto;
         }
 
-        /* Minimalist circle cursor on interactive elements */
-        a, button, input[type="submit"], .logo, .inquire-link, .slider-btn, .clickable-ref, .lb-submit, .collapsible-header {
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='7' fill='none' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 8 8, pointer !important;
-        }
-
-        /* Circle with PLUS cursor for zoomable artworks */
+        /* Simplified PLUS cursor for zoomable artworks */
         .item-image-wrapper, .slide img, .about img {
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23111111' stroke-width='1.5'/%3E%3Cpath d='M12 6v12M6 12h12' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
         }
 
         /* Minimalist structural lines */
@@ -223,6 +215,7 @@
             margin-bottom: 2rem;
             transition: opacity 0.3s ease;
             user-select: none;
+            cursor: pointer;
         }
 
         .collapsible-header:hover {
@@ -321,6 +314,7 @@
             display: inline-block;
             width: fit-content;
             transition: opacity 0.2s ease;
+            cursor: pointer;
         }
         
         .clickable-ref:hover {
@@ -373,12 +367,12 @@
             opacity: 0.5;
         }
 
-        /* About Section */
+        /* About Section - Aligned bottoms and shifted closer to image */
         .about {
             display: grid;
-            grid-template-columns: 2.5fr 3.5fr 6fr;
-            gap: 4rem;
-            align-items: start;
+            grid-template-columns: 2.5fr 3fr 5.5fr; /* Second column is narrower and closer to the first */
+            gap: 2.5rem; /* Tighter gap */
+            align-items: end; /* Lines up the bottoms of the row's items perfectly */
             margin-top: 4rem;
         }
 
@@ -391,7 +385,8 @@
         .about-info {
             display: flex;
             flex-direction: column;
-            align-self: end;
+            justify-content: flex-end;
+            margin-bottom: 0;
         }
 
         .artist-name {
@@ -404,12 +399,16 @@
             max-width: 100%;
             color: #111;
         }
+        
+        .about-text p:last-child {
+            margin-bottom: 0; /* Ensures the text strictly aligns with the bottom of the image */
+        }
 
         .about-image-right {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            align-self: start;
+            align-self: start; /* Keeps the right side image floating at the top of the grid */
         }
 
         .about-image-right img {
@@ -453,8 +452,8 @@
             justify-content: center;
             opacity: 0;
             transition: opacity 0.4s ease, visibility 0.4s ease;
-            /* Circle with MINUS cursor for close/zoom out in background */
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23111111' stroke-width='1.5'/%3E%3Cpath d='M6 12h12' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out !important;
+            /* Simplified MINUS cursor for close background */
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out !important;
         }
 
         .lightbox.active {
@@ -478,19 +477,19 @@
             transform: scale(1);
         }
 
-        /* Image inside Lightbox and Zoom logic */
+        /* Image inside Lightbox and Zoom logic with simple PLUS/MINUS cursors */
         .lightbox img {
             max-width: 60vw;
             max-height: 90vh;
             object-fit: contain;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             transform-origin: center center;
-            cursor: zoom-in;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in;
         }
 
         .lightbox img.is-zoomed {
             transform: scale(2.2);
-            cursor: zoom-out;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out;
         }
 
         /* Lightbox Information Panel */
@@ -546,6 +545,36 @@
             margin-bottom: 1rem;
             color: #111;
         }
+        
+        .lb-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .lb-input {
+            width: 100%;
+            padding: 0.4rem 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--text-color);
+            border-radius: 0;
+            outline: none;
+            transition: border-color 0.3s ease;
+            cursor: text;
+        }
+
+        .lb-input::placeholder {
+            color: #aaa;
+        }
+
+        .lb-input:focus {
+            border-bottom-color: var(--text-color);
+        }
 
         .lb-submit {
             align-self: flex-start;
@@ -553,7 +582,6 @@
             background: none;
             border: none;
             padding: 0 0 0.2rem 0;
-            margin-bottom: 1.5rem;
             font-family: var(--font-display);
             font-size: 1.1rem;
             font-style: italic;
@@ -561,6 +589,7 @@
             border-bottom: 1px solid var(--text-color);
             color: var(--text-color);
             transition: opacity 0.2s ease;
+            cursor: pointer;
         }
 
         .lb-submit:hover {
@@ -726,10 +755,10 @@
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/28.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" loading="lazy" decoding="async"></div><span class="ref-number">[06]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/29.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" loading="lazy" decoding="async"></div><span class="ref-number">[07]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="untitled navy red, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div><span class="ref-number">[08]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[09]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[10]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[11]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[12]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[09]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[10]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[11]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[12]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="untitled blue green, acrylic on raw canvas, 35 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div><span class="ref-number">[13]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="untitled white red steel, acrylic on raw canvas, 20 × 25 cm, 2026, 150 €" loading="lazy" decoding="async"></div><span class="ref-number">[14]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="untitled blue red, acrylic on raw canvas, 20 × 20 cm, 2025, 120 €" loading="lazy" decoding="async"></div><span class="ref-number">[15]</span></div>
@@ -818,9 +847,20 @@
                 <div class="lb-inquiry-section">
                     <div class="lb-inquiry-title">[ Inquire about this work ]</div>
                     
-                    <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="lb-submit">Send a DM on Instagram</a>
+                    <form id="lb-form" class="lb-form">
+                        <input type="text" id="lb-name" class="lb-input" placeholder="Name" required>
+                        <input type="email" id="lb-email" class="lb-input" placeholder="Email" required>
+                        <textarea id="lb-message" class="lb-input" placeholder="Message" rows="2" required></textarea>
+                        <button type="submit" class="lb-submit" style="margin-bottom: 1rem;">Send via Email</button>
+                    </form>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="lb-submit" style="margin-bottom: 0;">Send a DM on Instagram</a>
+                    </div>
                     
                     <div class="lb-extra">
+                        <p>or email directly<br>
+                        <a href="mailto:chojnacki.studio@gmail.com" style="color: var(--text-color); text-decoration: none; font-weight: 500;">chojnacki.studio@gmail.com</a></p>
                         <p>Commissions available</p>
                         <p>Based in Cracow, Poland<br>Shipping worldwide</p>
                     </div>
@@ -915,6 +955,7 @@
             const lightboxImg = document.getElementById('lightbox-img');
             const lbPrevBtn = document.querySelector('.lb-prev');
             const lbNextBtn = document.querySelector('.lb-next');
+            const lbForm = document.getElementById('lb-form');
             
             const gridImages = Array.from(document.querySelectorAll('.visual-item .item-image-wrapper img'));
             let currentLbIndex = 0;
@@ -939,6 +980,7 @@
                 document.getElementById('lb-title').textContent = title;
                 document.getElementById('lb-specs').innerHTML = specs;
                 
+                if (lbForm) lbForm.reset();
                 lightbox.classList.add('active');
             }
 
@@ -966,6 +1008,7 @@
                     
                     document.getElementById('lb-title').textContent = title;
                     document.getElementById('lb-specs').innerHTML = specs;
+                    if (lbForm) lbForm.reset();
                     lightbox.classList.add('active');
                 });
             });
@@ -980,6 +1023,7 @@
                     lightboxImg.src = img.src;
                     document.getElementById('lb-title').textContent = "Studio view";
                     document.getElementById('lb-specs').innerHTML = img.alt || "Kuba Chojnacki studio";
+                    if (lbForm) lbForm.reset();
                     lightbox.classList.add('active');
                 });
             });
@@ -1007,6 +1051,22 @@
                     }, 400); // Czeka na zakończenie animacji CSS
                 }
             });
+
+            // Handle Form submission
+            if (lbForm) {
+                lbForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const title = document.getElementById('lb-title').textContent;
+                    const name = document.getElementById('lb-name').value;
+                    const email = document.getElementById('lb-email').value;
+                    const message = document.getElementById('lb-message').value;
+                    
+                    const subject = encodeURIComponent(`Inquiry — ${title}`);
+                    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+                    
+                    window.location.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}&body=${body}`;
+                });
+            }
 
             // Strzałki lightboxa
             lbPrevBtn.addEventListener('click', (e) => {
