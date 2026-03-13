@@ -496,7 +496,7 @@
             line-height: 1.6;
         }
 
-        /* Form Styles inside Lightbox */
+        /* Inquiry Section Styles inside Lightbox */
         .lb-inquiry-section {
             display: flex;
             flex-direction: column;
@@ -543,13 +543,16 @@
 
         .lb-submit {
             align-self: flex-start;
+            display: inline-block;
             background: none;
             border: none;
-            padding: 0.5rem 0 0 0;
+            padding: 0 0 0.2rem 0;
+            margin-bottom: 1.5rem;
             font-family: var(--font-display);
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-style: italic;
-            text-decoration: underline;
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-color);
             color: var(--text-color);
             transition: opacity 0.2s ease;
         }
@@ -566,12 +569,6 @@
 
         .lb-extra p {
             margin-bottom: 0.5rem;
-        }
-
-        .lb-extra a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
         }
 
         /* Lightbox Navigation Buttons */
@@ -672,10 +669,10 @@
             </button>
             <div class="slides-container">
                 <div class="slide active">
-                    <img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
+                    <img src="IMAGES/30.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
                 </div>
                 <div class="slide">
-                    <img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <img src="IMAGES/31.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
                 <div class="slide">
                     <img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
@@ -683,14 +680,11 @@
                 <div class="slide">
                     <img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
-                <div class="slide" data-type="archival">
-                    <img src="IMAGES/AB_0000_Warstwa 3.jpg" alt="Archival work 01, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                <div class="slide">
+                    <img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
                 </div>
-                <div class="slide" data-type="archival">
-                    <img src="IMAGES/AB_0001_IMG_1853.jpg" alt="Archival work 02, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-                </div>
-                <div class="slide" data-type="archival">
-                    <img src="IMAGES/AB_0002_Warstwa 1 kopia.jpg" alt="Archival work 03, Mixed media, Poznań University of Technology, 2023" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                <div class="slide">
+                    <img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                 </div>
             </div>
             <button class="slider-btn next-btn">
@@ -710,100 +704,132 @@
 
         <div id="main-grid" class="visual-grid">
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="untitled blue red, acrylic on raw canvas, 20 × 20 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[01]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="untitled (blue orange), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[02]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="untitled (blue), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[03]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="untitled blue red, acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[04]</span>
             </div>
+            
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="untitled white red steel, acrylic on raw canvas, 20 × 25 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[05]</span>
             </div>
+            
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="untitled khaki red navy, acrylic on raw canvas, 20 × 20 cm, 2026, 120 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="orange vibrancy, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[06]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[07]</span>
             </div>
+            
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="untitled turqoise, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="CIEK spectrum, acrylic on raw canvas, 70 × 70 cm, 2026, 650 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[08]</span>
             </div>
+
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="untitled khaki navy red I, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/27.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[09]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="untitled khaki navy red II, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/28.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[10]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="untitled navy red, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/29.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[11]</span>
             </div>
+
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="untitled khaki navy red I, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[12]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="untitled khaki navy red II, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[13]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="untitled navy red, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[14]</span>
             </div>
+
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="untitled blue green, acrylic on raw canvas, 35 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="untitled turqoise, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[15]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[16]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[17]</span>
             </div>
+
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[18]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="CIEK spectrum, acrylic on raw canvas, 70 × 70 cm, 2026, 650 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[19]</span>
             </div>
+
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="orange vibrancy, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="untitled blue green, acrylic on raw canvas, 35 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[20]</span>
             </div>
+
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[21]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[22]</span>
             </div>
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[23]</span>
             </div>
+
             <div class="visual-item">
-                <div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" loading="lazy" decoding="async"></div>
+                <div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="untitled white red steel, acrylic on raw canvas, 20 × 25 cm, 2026, 150 €" loading="lazy" decoding="async"></div>
                 <span class="ref-number">[24]</span>
+            </div>
+
+            <div class="visual-item">
+                <div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="untitled blue red, acrylic on raw canvas, 20 × 20 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <span class="ref-number">[25]</span>
+            </div>
+            <div class="visual-item">
+                <div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="untitled khaki red navy, acrylic on raw canvas, 20 × 20 cm, 2026, 120 €" loading="lazy" decoding="async"></div>
+                <span class="ref-number">[26]</span>
+            </div>
+
+            <div class="visual-item">
+                <div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="untitled (blue orange), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <span class="ref-number">[27]</span>
+            </div>
+            <div class="visual-item">
+                <div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="untitled (blue), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <span class="ref-number">[28]</span>
+            </div>
+            <div class="visual-item">
+                <div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="untitled blue red, acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" loading="lazy" decoding="async"></div>
+                <span class="ref-number">[29]</span>
             </div>
         </div>
 
@@ -850,7 +876,6 @@
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Fullscreen artwork">
             
-            <!-- NOWY PANEL Z FORMULARZEM KONTAKTOWYM -->
             <div class="lightbox-info">
                 <div>
                     <div id="lb-title" class="lb-title"></div>
@@ -869,9 +894,9 @@
                     
                     <div class="lb-extra">
                         <p>or email directly<br>
-                        <a href="mailto:chojnacki.studio@gmail.com">chojnacki.studio@gmail.com</a></p>
+                        <a href="mailto:chojnacki.studio@gmail.com" style="color: var(--text-color); text-decoration: none; font-weight: 500;">chojnacki.studio@gmail.com</a></p>
                         <p>Commissions available</p>
-                        <p>Location: Kraków, Poland<br>Shipping worldwide</p>
+                        <p>Based in Cracow, Poland<br>Shipping worldwide</p>
                     </div>
                 </div>
             </div>
@@ -885,32 +910,37 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- 1. GENERATING THE LEGEND DYNAMICALLY ---
+            // --- 1. GENERATING THE LEGEND DYNAMICALLY (SORTED BY SIZE DESCENDING) ---
             const gridData = [
-                { ref: "[01]", title: "untitled blue red", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2025<br>120 €" },
-                { ref: "[02]", title: "untitled (blue orange)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
-                { ref: "[03]", title: "untitled (blue)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
-                { ref: "[04]", title: "untitled blue red", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
-                { ref: "[05]", title: "untitled white red steel", specs: "acrylic on raw canvas<br>20 × 25 cm<br>2026<br>150 €" },
-                { ref: "[06]", title: "untitled khaki red navy", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2026<br>120 €" },
-                { ref: "[07]", title: "untitled khaki navy red III", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
-                { ref: "[08]", title: "untitled turqoise", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
-                { ref: "[09]", title: "untitled khaki navy red I", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
-                { ref: "[10]", title: "untitled khaki navy red II", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
-                { ref: "[11]", title: "untitled navy red", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
-                { ref: "[12]", title: "untitled blue red", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
-                { ref: "[13]", title: "untitled blue green", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
-                { ref: "[14]", title: "untitled blue red", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
-                { ref: "[15]", title: "untitled blue green", specs: "acrylic on raw canvas<br>35 × 20 cm<br>2026<br>150 €" },
-                { ref: "[16]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
-                { ref: "[17]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
-                { ref: "[18]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
-                { ref: "[19]", title: "CIEK spectrum", specs: "acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
-                { ref: "[20]", title: "orange vibrancy", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
-                { ref: "[21]", title: "CIEK blue", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
-                { ref: "[22]", title: "CIEK red", specs: "acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1200 €" },
-                { ref: "[23]", title: "CIEK red", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
-                { ref: "[24]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" }
+                { ref: "[01]", title: "CIEK red", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
+                { ref: "[02]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+                { ref: "[03]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+                { ref: "[04]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+                { ref: "[05]", title: "CIEK red", specs: "acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1200 €" },
+                { ref: "[06]", title: "orange vibrancy", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
+                { ref: "[07]", title: "CIEK blue", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
+                { ref: "[08]", title: "CIEK spectrum", specs: "acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
+                { ref: "[09]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
+                { ref: "[10]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
+                { ref: "[11]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
+                { ref: "[12]", title: "untitled khaki navy red I", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[13]", title: "untitled khaki navy red II", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[14]", title: "untitled navy red", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[15]", title: "untitled turqoise", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[16]", title: "untitled blue red", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[17]", title: "untitled blue green", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[18]", title: "untitled khaki navy red III", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
+                { ref: "[19]", title: "untitled blue red", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
+                { ref: "[20]", title: "untitled blue green", specs: "acrylic on raw canvas<br>35 × 20 cm<br>2026<br>150 €" },
+                { ref: "[21]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
+                { ref: "[22]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
+                { ref: "[23]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
+                { ref: "[24]", title: "untitled white red steel", specs: "acrylic on raw canvas<br>20 × 25 cm<br>2026<br>150 €" },
+                { ref: "[25]", title: "untitled blue red", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2025<br>120 €" },
+                { ref: "[26]", title: "untitled khaki red navy", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2026<br>120 €" },
+                { ref: "[27]", title: "untitled (blue orange)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
+                { ref: "[28]", title: "untitled (blue)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
+                { ref: "[29]", title: "untitled blue red", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" }
             ];
 
             const legendContainer = document.getElementById('main-legend');
@@ -925,7 +955,7 @@
                             <span class="legend-specs">${item.specs}</span>
                             <div class="legend-status">
                                 <span class="status-dot"></span> Available
-                                <a href="mailto:chojnacki.studio@gmail.com?subject=Inquiry%20%E2%80%94%20${encodeURIComponent(item.title)}" class="inquire-link">Inquire</a>
+                                <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="inquire-link">Inquire via DM</a>
                             </div>
                         </div>
                     </div>
@@ -1036,8 +1066,6 @@
             const slides = document.querySelectorAll('.slide');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
-            const captionTitle = document.getElementById('hero-caption-title');
-            const captionDate = document.getElementById('hero-caption-date');
             let currentSlide = 0;
             let slideInterval;
 
@@ -1045,14 +1073,6 @@
                 slides.forEach((slide, i) => {
                     if (i === index) {
                         slide.classList.add('active');
-                        
-                        if(slide.getAttribute('data-type') === 'archival') {
-                            captionTitle.textContent = 'Archival work';
-                            captionDate.textContent = '2023';
-                        } else {
-                            captionTitle.textContent = 'Studio Paintings';
-                            captionDate.textContent = '2024–2026';
-                        }
                     } else {
                         slide.classList.remove('active');
                     }
