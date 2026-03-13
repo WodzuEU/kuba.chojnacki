@@ -70,14 +70,14 @@
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Crect width='10' height='10' fill='%23111111'/%3E%3C/svg%3E") 5 5, auto;
         }
 
-        /* Maintain custom circle cursor on standard interactive elements */
+        /* Minimalist circle cursor on interactive elements */
         a, button, input[type="submit"], .logo, .inquire-link, .slider-btn, .clickable-ref, .lb-submit, .collapsible-header {
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%23111111'/%3E%3C/svg%3E") 6 6, pointer !important;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='7' fill='none' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 8 8, pointer !important;
         }
 
-        /* Plus cursor for zoomable artworks */
-        .item-image-wrapper, .slide img {
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
+        /* Circle with PLUS cursor for zoomable artworks */
+        .item-image-wrapper, .slide img, .about img {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23111111' stroke-width='1.5'/%3E%3Cpath d='M12 6v12M6 12h12' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
         }
 
         /* Minimalist structural lines */
@@ -234,10 +234,15 @@
             margin: 0;
         }
 
+        /* Animated Chevron Icon */
         .toggle-icon {
-            font-family: var(--font-body);
-            font-size: 1.5rem;
-            font-weight: 300;
+            display: flex;
+            align-items: center;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .collapsible-section.open .toggle-icon {
+            transform: rotate(-180deg);
         }
 
         .collapsible-content {
@@ -448,7 +453,8 @@
             justify-content: center;
             opacity: 0;
             transition: opacity 0.4s ease, visibility 0.4s ease;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out !important;
+            /* Circle with MINUS cursor for close/zoom out in background */
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23111111' stroke-width='1.5'/%3E%3Cpath d='M6 12h12' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out !important;
         }
 
         .lightbox.active {
@@ -705,7 +711,9 @@
         <div class="collapsible-section open">
             <div class="collapsible-header border-b">
                 <h3>Collection 2026</h3>
-                <span class="toggle-icon">–</span>
+                <span class="toggle-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
             </div>
             
             <div class="collapsible-content">
@@ -718,10 +726,10 @@
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/28.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" loading="lazy" decoding="async"></div><span class="ref-number">[06]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/29.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" loading="lazy" decoding="async"></div><span class="ref-number">[07]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="untitled navy red, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" loading="lazy" decoding="async"></div><span class="ref-number">[08]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[09]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[10]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[11]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[12]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[09]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[10]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[11]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" loading="lazy" decoding="async"></div><span class="ref-number">[12]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="untitled blue green, acrylic on raw canvas, 35 × 20 cm, 2026, 150 €" loading="lazy" decoding="async"></div><span class="ref-number">[13]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="untitled white red steel, acrylic on raw canvas, 20 × 25 cm, 2026, 150 €" loading="lazy" decoding="async"></div><span class="ref-number">[14]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="untitled blue red, acrylic on raw canvas, 20 × 20 cm, 2025, 120 €" loading="lazy" decoding="async"></div><span class="ref-number">[15]</span></div>
@@ -737,7 +745,9 @@
         <div class="collapsible-section" style="margin-top: 4rem;">
             <div class="collapsible-header border-b">
                 <h3>Spectrum & Atmosphere</h3>
-                <span class="toggle-icon">+</span>
+                <span class="toggle-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
             </div>
             
             <div class="collapsible-content">
@@ -830,14 +840,10 @@
             accordions.forEach(header => {
                 header.addEventListener('click', () => {
                     const section = header.parentElement;
-                    const icon = header.querySelector('.toggle-icon');
-                    
                     if (section.classList.contains('open')) {
                         section.classList.remove('open');
-                        icon.textContent = '+';
                     } else {
                         section.classList.add('open');
-                        icon.textContent = '–';
                     }
                 });
             });
@@ -852,10 +858,10 @@
                 { ref: "[06]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
                 { ref: "[07]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
                 { ref: "[08]", title: "untitled navy red", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
-                { ref: "[09]", title: "untitled khaki navy red III", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
-                { ref: "[10]", title: "untitled blue red", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
-                { ref: "[11]", title: "untitled blue red", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
-                { ref: "[12]", title: "untitled blue green", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[09]", title: "untitled blue red", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[10]", title: "untitled blue green", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[11]", title: "untitled khaki navy red III", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
+                { ref: "[12]", title: "untitled blue red", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
                 { ref: "[13]", title: "untitled blue green", specs: "acrylic on raw canvas<br>35 × 20 cm<br>2026<br>150 €" },
                 { ref: "[14]", title: "untitled white red steel", specs: "acrylic on raw canvas<br>20 × 25 cm<br>2026<br>150 €" },
                 { ref: "[15]", title: "untitled blue red", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2025<br>120 €" },
@@ -960,6 +966,20 @@
                     
                     document.getElementById('lb-title').textContent = title;
                     document.getElementById('lb-specs').innerHTML = specs;
+                    lightbox.classList.add('active');
+                });
+            });
+
+            // Otwieranie kliknieciem w zdjęcia z sekcji ABOUT
+            const aboutImages = document.querySelectorAll('.about img');
+            aboutImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImg.classList.remove('is-zoomed');
+                    lightboxImg.style.transformOrigin = 'center center';
+
+                    lightboxImg.src = img.src;
+                    document.getElementById('lb-title').textContent = "Studio view";
+                    document.getElementById('lb-specs').innerHTML = img.alt || "Kuba Chojnacki studio";
                     lightbox.classList.add('active');
                 });
             });
