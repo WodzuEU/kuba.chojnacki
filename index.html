@@ -5,54 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuba Chojnacki | Paintings</title>
     
+    <!-- SEO and Meta Tags -->
     <meta name="description" content="Abstract paintings by Polish artist Kuba Chojnacki. Large gradient works on raw canvas exploring gravity, diffusion and color flow.">
     <meta property="og:title" content="Kuba Chojnacki | Paintings">
     <meta property="og:description" content="Abstract paintings by Polish artist Kuba Chojnacki. Large gradient works on raw canvas exploring gravity, diffusion and color flow.">
     <meta property="og:image" content="IMAGES/19.jpg">
+    <meta property="og:type" content="website">
     
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
 
+    <!-- Google Fonts: EB Garamond & Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
     
     <style>
+        /* Global Variables */
         :root {
             --bg-color: #ffffff;
             --text-color: #111111;
             --line-color: #111111;
+            
             --font-display: "EB Garamond", serif;
             --font-body: "Montserrat", sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Zmniejszono dostosowanie pod węższy nagłówek */
+        }
+
+        /* Custom Webkit Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: var(--bg-color);
+            border-left: 1px solid var(--line-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--line-color);
+            border-radius: 0;
+        }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             line-height: 1.6;
             text-transform: lowercase;
         }
 
-        /* Essential Utility */
-        .hidden { display: none !important; }
+        /* Utility classes */
+        .hidden {
+            display: none !important;
+        }
 
-        /* Custom Cursors */
-        .item-image-wrapper, .slide img, .about img, .clickable-ref {
+        /* Simplified PLUS cursor for zoomable artworks */
+        .item-image-wrapper, .slide img, .about img {
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
         }
 
+        /* Minimalist structural lines */
         .border-b { border-bottom: 1px solid var(--line-color); }
         .border-t { border-top: 1px solid var(--line-color); }
 
+        /* Typography */
+        h1, h2, h3, .display-text {
+            font-family: var(--font-display);
+            font-weight: normal;
+        }
+
+        .text-xs {
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Header - STICKY & SLIM */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 3rem;
+            padding: 0.8rem 3rem; /* ZMniejszone pionowe paddingi dla węższego nagłówka */
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -77,90 +123,628 @@
             transition: opacity 0.3s ease;
         }
 
-        nav a:hover { opacity: 0.5; }
-
-        /* Hero */
-        .hero-slider { position: relative; width: 100%; height: 75vh; overflow: hidden; background-color: #f9f9f9; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; }
-        .slide.active { opacity: 1; pointer-events: auto; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        .slide-caption { position: absolute; bottom: 2rem; left: 2rem; color: white; font-family: var(--font-display); mix-blend-mode: difference; font-size: 1.2rem; }
-
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: #fff; mix-blend-mode: difference; z-index: 10; cursor: pointer; padding: 1rem; opacity: 0.6; }
-        .prev-btn { left: 1rem; } .next-btn { right: 1rem; }
-
-        .hero-caption { padding: 1.5rem 3rem; display: flex; justify-content: space-between; font-family: var(--font-display); font-size: 1.5rem; font-style: italic; }
-
-        /* Section Spacing */
-        .section-padding { padding: 6rem 3rem; }
-        .section-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 3rem; }
-
-        /* Grid & Legend */
-        .visual-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem 1fr; margin-bottom: 4rem; align-items: end; }
-        .item-image-wrapper img { width: 100%; height: auto; transition: opacity 0.3s ease; }
-        .ref-number { font-family: var(--font-display); font-size: 1rem; margin-top: 0.5rem; display: block; }
-
-        .legend-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2rem 1fr; padding-top: 2rem; }
-        .legend-item { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.65rem; transition: opacity 0.2s ease; }
-        .legend-item:hover { opacity: 0.6; }
-        .legend-ref { font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.2rem; }
-        .legend-title { font-weight: 600; }
-        .legend-specs { color: #555; }
-        .legend-price { font-weight: 500; margin-top: 0.2rem; }
-        .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: #111; margin-right: 0.4rem; }
-        .status-text { font-weight: 600; }
-
-        /* Collapsible */
-        .collapsible-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; cursor: pointer; }
-        .collapsible-content { display: none; margin-top: 2rem; }
-        .collapsible-section.open .collapsible-content { display: block; }
-        .toggle-icon { transition: transform 0.4s ease; }
-        .collapsible-section.open .toggle-icon { transform: rotate(-180deg); }
-
-        /* Contact */
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; margin-top: 2rem; }
-        .contact-block h3 { font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; font-weight: 500; }
-        .contact-block p { font-size: 0.95rem; margin-bottom: 0.6rem; color: #444; }
-        .contact-block a { color: var(--text-color); text-decoration: underline; }
-        .contact-note { margin-top: 4rem; font-size: 0.85rem; color: #777; font-style: italic; font-family: var(--font-display); }
-
-        /* About */
-        .about { display: grid; grid-template-columns: 2.5fr 3fr 5.5fr; gap: 2.5rem; align-items: end; }
-        .about img { width: 100%; height: auto; display: block; }
-        .about-image-right img { width: 30%; margin-left: auto; }
-        .about-image-caption { font-size: 0.65rem; color: #555; text-align: right; margin-top: 0.5rem; }
-
-        /* Lightbox */
-        .lightbox { 
-            visibility: hidden; opacity: 0; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(255, 255, 255, 0.98); display: flex; align-items: center; justify-content: center; 
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+        nav a:hover {
+            opacity: 0.5;
         }
-        .lightbox.active { visibility: visible; opacity: 1; }
-        .lightbox-content { display: flex; gap: 4rem; max-width: 90%; align-items: center; }
-        .lightbox img { max-width: 60vw; max-height: 85vh; object-fit: contain; transition: transform 0.4s ease; }
-        .lightbox img.is-zoomed { transform: scale(2); cursor: zoom-out; }
+
+        /* Hero Section (Slideshow Layout) */
+        .hero {
+            padding: 0 0 6rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 75vh;
+            margin-bottom: 2rem;
+            background-color: #f9f9f9;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            color: white;
+            font-family: var(--font-display);
+            mix-blend-mode: difference;
+            font-size: 1.2rem;
+            z-index: 5;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #ffffff;
+            mix-blend-mode: difference;
+            z-index: 10;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slider-btn:hover {
+            opacity: 1;
+        }
+
+        .prev-btn { left: 1rem; }
+        .next-btn { right: 1rem; }
+
+        .hero-caption {
+            padding: 0 3rem;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Common Section Setup */
+        .section-padding {
+            padding: 6rem 3rem;
+        }
+
+        /* Available header section */
+        .available-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
         
-        .lightbox-info { width: 300px; display: flex; flex-direction: column; gap: 1.5rem; }
-        .lb-title { font-family: var(--font-display); font-size: 1.5rem; font-style: italic; }
-        .lb-price { font-size: 1.3rem; font-family: var(--font-display); }
-        .lb-specs { font-size: 0.75rem; color: #555; }
-        .lb-submit { font-family: var(--font-display); font-size: 1.1rem; text-decoration: none; border-bottom: 1px solid #111; color: #111; padding-bottom: 2px; align-self: flex-start; }
+        .available-header h2 {
+            margin-bottom: 0.25rem;
+        }
 
-        .lb-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; cursor: pointer; }
-        .lb-nav { position: absolute; top: 50%; background: none; border: none; cursor: pointer; padding: 2rem; }
-        .lb-prev { left: 0; } .lb-next { right: 0; }
+        /* Collapsible Accordeons */
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            transition: opacity 0.3s ease;
+            user-select: none;
+            cursor: pointer;
+        }
 
-        /* Animations */
-        .fade-up { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .collapsible-header:hover {
+            opacity: 0.6;
+        }
+
+        .collapsible-header h3 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Animated Chevron Icon */
+        .toggle-icon {
+            display: flex;
+            align-items: center;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .collapsible-section.open .toggle-icon {
+            transform: rotate(-180deg);
+        }
+
+        .collapsible-content {
+            display: none;
+        }
+
+        .collapsible-section.open .collapsible-content {
+            display: block;
+        }
+
+        /* Works Section Grids */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem 1rem;
+            margin-bottom: 4rem;
+            align-items: end;
+        }
+
+        .visual-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .item-image-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+        }
+
+        .item-image-wrapper img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+
+        .item-image-wrapper:hover img {
+            opacity: 0.85;
+        }
+
+        .ref-number {
+            font-family: var(--font-display);
+            font-size: 1rem; 
+            color: var(--text-color);
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        /* Text Legend Grid */
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem 1rem;
+            padding-top: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            font-size: 0.65rem;
+            line-height: 1.2;
+            transition: opacity 0.2s ease;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
+        }
+
+        .legend-item:hover {
+            opacity: 0.6;
+        }
+
+        .legend-ref {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .legend-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .legend-title {
+            font-weight: 600;
+            margin-bottom: 0.1rem;
+        }
+
+        .legend-specs {
+            color: #555;
+            margin-bottom: 0.2rem;
+        }
+        
+        .legend-price {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: var(--text-color);
+        }
+
+        .legend-status {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #111;
+        }
+
+        .status-text {
+            font-weight: 600;
+        }
+
+        .inquire-link {
+            text-decoration: underline;
+            color: #111;
+            font-style: italic;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            transition: opacity 0.2s ease;
+            width: fit-content;
+        }
+
+        .inquire-link:hover {
+            opacity: 0.5;
+        }
+
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 2.5fr 3fr 5.5fr;
+            gap: 2.5rem;
+            align-items: end;
+            margin-top: 4rem;
+        }
+
+        .about-image-left img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-bottom: 0;
+        }
+
+        .artist-name {
+            text-transform: none;
+        }
+
+        .about-text p {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            max-width: 100%;
+            color: #111;
+        }
+        
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-image-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            align-self: start;
+        }
+
+        .about-image-right img {
+            width: 25%;
+            height: auto;
+            display: block;
+        }
+
+        .about-image-caption {
+            width: 25%;
+            font-size: 0.65rem;
+            margin-top: 0.75rem;
+            color: #555;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        /* Contact Section - More Compact */
+        #contact.section-padding {
+            padding: 3rem 3rem 2rem 3rem; /* Zmniejszone paddingi górne i dolne */
+        }
+        
+        .contact-section {
+            background-color: var(--bg-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem; /* Zmniejszony gap między kolumnami */
+            margin-top: 1.5rem; /* Zmniejszony margines z góry */
+        }
+
+        .contact-block h3 {
+            font-size: 0.8rem; /* Pomniejszony font nagłówka */
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem; /* Mniejsze odstępy */
+            font-weight: 500;
+        }
+
+        .contact-block p {
+            font-size: 0.85rem; /* Mniejszy, zgrabniejszy font dla tekstu */
+            margin-bottom: 0.3rem; /* Ciasniejsze linijki tekstu */
+            color: #444;
+        }
+
+        .contact-block a {
+            color: var(--text-color);
+            text-decoration: underline;
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-block a:hover {
+            opacity: 0.5;
+        }
+
+        .contact-note {
+            margin-top: 2.5rem; /* Zmniejszony odstęp dla noty dolnej */
+            font-size: 0.75rem; /* Mniejszy font noty */
+            color: #777;
+            font-style: italic;
+            font-family: var(--font-display);
+        }
+
+        /* Lightbox (Fullscreen Image Modal) */
+        .lightbox {
+            visibility: hidden;
+            pointer-events: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out !important;
+        }
+
+        .lightbox.active {
+            visibility: visible;
+            pointer-events: auto;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            max-width: 95vw;
+            max-height: 95vh;
+            transform: scale(0.96);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        /* Image inside Lightbox and Zoom logic with simple PLUS/MINUS cursors */
+        .lightbox img {
+            max-width: 60vw;
+            max-height: 90vh;
+            object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: center center;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in;
+        }
+
+        .lightbox img.is-zoomed {
+            transform: scale(2.2);
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out;
+        }
+
+        /* Lightbox Information Panel */
+        .lightbox-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 1.5rem;
+            width: 300px;
+            color: var(--text-color);
+            text-align: left;
+            cursor: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+
+        .lightbox-info::-webkit-scrollbar {
+            width: 4px;
+        }
+        .lightbox-info::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .lightbox-info::-webkit-scrollbar-thumb {
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+        .lb-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 0.2rem;
+        }
+        
+        .lb-price {
+            font-size: 1.3rem;
+            font-family: var(--font-display);
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+        }
+
+        .lb-specs {
+            font-size: 0.75rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Inquiry Section Styles inside Lightbox */
+        .lb-inquiry-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .lb-submit {
+            align-self: flex-start;
+            display: inline-block;
+            background: none;
+            border: none;
+            padding: 0 0 0.2rem 0;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-color);
+            color: var(--text-color);
+            transition: opacity 0.2s ease;
+            cursor: pointer;
+        }
+
+        .lb-submit:hover {
+            opacity: 0.5;
+        }
+
+        /* Trust elements */
+        .lb-extra {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+            color: var(--text-color);
+        }
+
+        .lb-extra p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .purchase-info {
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Lightbox Navigation & Close Buttons */
+        .lightbox-btn {
+            position: absolute;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            padding: 2rem;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-btn:hover {
+            opacity: 1;
+        }
+
+        .lb-prev { top: 50%; transform: translateY(-50%); left: 0; }
+        .lb-next { top: 50%; transform: translateY(-50%); right: 0; }
+        .lb-close { 
+            top: 0; 
+            right: 0; 
+            padding: 1.5rem; 
+            opacity: 0.7;
+        }
+
+        /* Scroll Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1200px) {
+            .visual-grid { grid-template-columns: repeat(4, 1fr); }
+            .legend-grid { grid-template-columns: repeat(4, 1fr); }
+            .about { gap: 2rem; }
+        }
 
         @media (max-width: 900px) {
-            .visual-grid, .legend-grid { grid-template-columns: repeat(2, 1fr); }
-            .about { grid-template-columns: 1fr; }
-            .lightbox-content { flex-direction: column; }
-            .lightbox img { max-width: 85vw; }
-            header { padding: 1rem 1.5rem; }
+            .hero-slider { height: 50vh; }
+            .hero-caption { padding: 0 2rem; }
+            
+            .visual-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+            .legend-grid { grid-template-columns: repeat(3, 1fr); }
+            
+            .about { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; align-items: start; }
+            .about-image-left { order: 1; }
+            .about-image-left img { width: 80%; }
+            .about-info { order: 2; align-self: start; }
+            .about-image-right { order: 3; }
+            .about-image-right img, .about-image-caption { width: 50%; }
+            
+            .lightbox-content { flex-direction: column; gap: 1.5rem; }
+            .lightbox img { max-width: 90vw; max-height: 55vh; }
+            .lightbox-info { 
+                width: 90vw; 
+                align-items: flex-start; 
+                text-align: left; 
+                gap: 1.5rem; 
+            }
+            .lb-close {
+                padding: 1rem;
+            }
+
+            header { padding: 0.8rem 1.5rem; }
+            .hero { padding: 0 0 4rem 0; }
+            .section-padding { padding: 4rem 2rem; }
+            
+            #contact.section-padding {
+                padding: 2rem 2rem 1.5rem 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .visual-grid { grid-template-columns: repeat(2, 1fr); } 
+            .legend-grid { grid-template-columns: repeat(2, 1fr); }
+            header { flex-direction: column; gap: 0.8rem; align-items: flex-start; padding-top: 1.2rem; padding-bottom: 1.2rem; }
+            nav a { margin-left: 0; margin-right: 1.5rem; }
+            .hero-caption { flex-direction: column; gap: 0.5rem; font-size: 1.2rem; padding: 0 1.5rem;}
         }
     </style>
 </head>
@@ -177,86 +761,163 @@
 
     <section class="hero border-b">
         <div class="hero-slider">
-            <button class="slider-btn prev-btn">❮</button>
+            <button class="slider-btn prev-btn" aria-label="Poprzedni slajd">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
             <div class="slides-container">
                 <div class="slide active">
-                    <img src="IMAGES/30.jpg" alt="untitled, 150 × 100 cm, 1500 €">
+                    <img src="IMAGES/30.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
                     <div class="slide-caption">untitled</div>
                 </div>
                 <div class="slide">
-                    <img src="IMAGES/31.jpg" alt="untitled, 150 × 100 cm, 1500 €">
+                    <img src="IMAGES/31.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                     <div class="slide-caption">untitled</div>
                 </div>
                 <div class="slide">
-                    <img src="IMAGES/17.jpg" alt="CIEK red, 150 × 100 cm, 1500 €">
+                    <img src="IMAGES/26.jpg" alt="untitled, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <div class="slide-caption">untitled</div>
+                </div>
+                <div class="slide">
+                    <img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
                     <div class="slide-caption">CIEK red</div>
                 </div>
+                <div class="slide">
+                    <img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <div class="slide-caption">untitled</div>
+                </div>
+                <div class="slide">
+                    <img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" width="1000" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
+                    <div class="slide-caption">CIEK red</div>
+                </div>
+                <div class="slide">
+                    <img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" width="1000" height="700" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+                    <div class="slide-caption">CIEK blue</div>
+                </div>
             </div>
-            <button class="slider-btn next-btn">❯</button>
+            <button class="slider-btn next-btn" aria-label="Następny slajd">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
         </div>
         <div class="hero-caption">
-            <span>Studio Paintings</span>
-            <span>2024–2026</span>
+            <span id="hero-caption-title">Studio Paintings</span>
+            <span id="hero-caption-date">2024–2026</span>
         </div>
     </section>
 
     <section id="works" class="section-padding border-b">
+        
         <div class="available-header fade-up">
             <h2 class="section-title" style="margin-bottom: 0.5rem;">Available works</h2>
-            <p style="margin-bottom: 2rem;">30 paintings currently available</p>
-            <div style="display: flex; gap: 2rem;">
-                <a href="mailto:chojnacki.studio@gmail.com" class="lb-submit">Inquire via Email</a>
-                <a href="https://instagram.com/chojnacki.studio" target="_blank" class="lb-submit">Inquire via DM</a>
+            <p style="font-size: 0.95rem; color: #555; margin-bottom: 1.5rem;">30 paintings currently available</p>
+            <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem;">
+                <a href="mailto:chojnacki.studio@gmail.com" class="inquire-link" style="font-size: 1rem; margin: 0;">Inquire via Email</a>
+                <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="inquire-link" style="font-size: 1rem; margin: 0;">Inquire via DM</a>
             </div>
         </div>
-
+        
         <div class="collapsible-section open">
-            <div class="collapsible-header border-b">
-                <h3>Collection 2026</h3>
-                <span class="toggle-icon">▼</span>
+            <div class="collapsible-header border-b" role="button" tabindex="0" aria-expanded="true" aria-controls="collection-atmosphere">
+                <h3>Atmosphere Collection</h3>
+                <span class="toggle-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
             </div>
-            <div class="collapsible-content">
-                <div class="visual-grid" id="grid-1">
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €"></div><span class="ref-number">[01]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €"></div><span class="ref-number">[02]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €"></div><span class="ref-number">[03]</span></div>
+            
+            <div class="collapsible-content" id="collection-atmosphere">
+                <div class="visual-grid">
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="CIEK red, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[01]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[02]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[03]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/26.jpg" alt="untitled, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[04]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/27.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[05]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/28.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[06]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/29.jpg" alt="untitled, acrylic on raw canvas, 50 × 40 cm, 2026, 320 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[07]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="untitled navy red, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[08]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="untitled khaki navy red III, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" width="1000" height="714" loading="lazy" decoding="async"></div><span class="ref-number">[09]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="untitled blue red, acrylic on raw canvas, 35 × 25 cm, 2026, 180 €" width="1000" height="714" loading="lazy" decoding="async"></div><span class="ref-number">[10]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="untitled blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[11]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="untitled blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[12]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="untitled blue green, acrylic on raw canvas, 35 × 20 cm, 2026, 150 €" width="1000" height="571" loading="lazy" decoding="async"></div><span class="ref-number">[13]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="untitled white red steel, acrylic on raw canvas, 20 × 25 cm, 2026, 150 €" width="1000" height="1250" loading="lazy" decoding="async"></div><span class="ref-number">[14]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="untitled blue red, acrylic on raw canvas, 20 × 20 cm, 2025, 120 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[15]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="untitled khaki red navy, acrylic on raw canvas, 20 × 20 cm, 2026, 120 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[16]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="untitled (blue orange), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[17]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="untitled (blue), acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[18]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="untitled blue red, acrylic on raw canvas, 18 × 18 cm, 2025, 120 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[19]</span></div>
                 </div>
                 <div id="legend-1" class="legend-grid border-t"></div>
             </div>
         </div>
+
+        <div class="collapsible-section" style="margin-top: 4rem;">
+            <div class="collapsible-header border-b" role="button" tabindex="0" aria-expanded="false" aria-controls="collection-chromatic">
+                <h3>Chromatic Collection</h3>
+                <span class="toggle-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+            </div>
+            
+            <div class="collapsible-content" id="collection-chromatic">
+                <div class="visual-grid">
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="untitled, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[20]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="CIEK red, acrylic on raw canvas, 100 × 100 cm, 2025, 1200 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[21]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="orange vibrancy, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">[22]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="CIEK blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">[23]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="CIEK spectrum, acrylic on raw canvas, 70 × 70 cm, 2026, 650 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[24]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="untitled khaki navy red I, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[25]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="untitled khaki navy red II, acrylic on raw canvas, 35 × 35 cm, 2026, 220 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[26]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="untitled turqoise, acrylic on raw canvas, 30 × 30 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[27]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" width="1000" height="666" loading="lazy" decoding="async"></div><span class="ref-number">[28]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" width="1000" height="666" loading="lazy" decoding="async"></div><span class="ref-number">[29]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="untitled, oil on canvas, 30 × 20 cm, 2026, 150 €" width="1000" height="666" loading="lazy" decoding="async"></div><span class="ref-number">[30]</span></div>
+                </div>
+                <div id="legend-2" class="legend-grid border-t"></div>
+            </div>
+        </div>
+
     </section>
 
     <section id="about" class="section-padding about border-b">
         <div class="about-image-left fade-up">
-            <img src="IMAGES/IMG_5535.jpg" alt="Studio view">
+            <img src="IMAGES/IMG_5535.jpg" alt="Kuba Chojnacki working in his studio, cracow" loading="lazy" width="1000" height="1200" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
         </div>
+        
         <div class="about-info fade-up">
             <h2 class="section-title">About</h2>
             <div class="about-text">
                 <p><span class="artist-name">Kuba Chojnacki</span> is a Polish painter working with gradients, gravity and diffusion on raw canvas.</p>
-                <p>Based in Architecture, his work explores spatial tension and structural balance.</p>
+                <p>With a background in architecture, his work explores spatial tension, structural balance, and the delicate intersection between rigorous control and fluid chance.</p>
             </div>
         </div>
+        
         <div class="about-image-right fade-up">
-            <img src="IMAGES/APC_0258.jpg" alt="Portrait">
-            <div class="about-image-caption">studio view, 2026<br>cracow, poland</div>
+            <img src="IMAGES/APC_0258.jpg" alt="Kuba Chojnacki portrait in studio" loading="lazy" width="800" height="1000" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
+            <div class="about-image-caption">
+                studio view, 2026<br>
+                cracow, poland
+            </div>
         </div>
     </section>
 
     <section id="contact" class="section-padding contact-section">
-        <h2 class="section-title fade-up">Contact</h2>
+        <h2 class="section-title fade-up" style="margin-bottom: 0;">Contact</h2>
+
         <div class="contact-grid">
             <div class="contact-block fade-up">
                 <h3>Inquiries</h3>
+                <p>For artwork inquiries, commissions or additional images please contact:</p>
                 <p>Email: <a href="mailto:chojnacki.studio@gmail.com">chojnacki.studio@gmail.com</a></p>
-                <p>Instagram: <a href="https://instagram.com/chojnacki.studio" target="_blank">@chojnacki.studio</a></p>
+                <p>Instagram: <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener">@chojnacki.studio</a></p>
             </div>
+
             <div class="contact-block fade-up">
                 <h3>Purchase & Shipping</h3>
-                <p>Original paintings shipped worldwide.</p>
+                <p>Original paintings are shipped worldwide.</p>
+                <p>Shipping cost depends on artwork size and destination.</p>
                 <p>Typical international shipping: 80–200€</p>
-                <p>All works include certificate of authenticity.</p>
+                <p>All works include a certificate of authenticity.</p>
             </div>
+
             <div class="contact-block fade-up">
                 <h3>Studio</h3>
                 <p>Kuba Chojnacki Studio</p>
@@ -264,132 +925,428 @@
                 <p>Visits by appointment only.</p>
             </div>
         </div>
+
         <p class="contact-note fade-up">Collectors and galleries are welcome to inquire about available works.</p>
     </section>
 
+    <!-- Lightbox Container -->
     <div id="lightbox" class="lightbox">
-        <button class="lb-close"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-        <button class="lb-nav lb-prev">❮</button>
+        <button class="lightbox-btn lb-close" id="lb-close-btn" aria-label="Zamknij okno powiększenia">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <button class="lightbox-btn lb-prev" id="lb-prev-btn" aria-label="Poprzedni obraz">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        
         <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="">
+            <img id="lightbox-img" src="" alt="Fullscreen artwork">
+            
             <div class="lightbox-info">
-                <div id="lb-title" class="lb-title"></div>
-                <div id="lb-price" class="lb-price"></div>
-                <div id="lb-specs" class="lb-specs"></div>
-                <div id="lb-inquiry-section" class="lb-inquiry-section">
-                    <a id="lb-inquire-mail" href="#" class="lb-submit">Inquire via Email</a>
-                    <a href="https://instagram.com/chojnacki.studio" target="_blank" class="lb-submit" style="margin-top:1rem; display:block;">Inquire via DM</a>
+                <div>
+                    <div id="lb-title" class="lb-title"></div>
+                    <div id="lb-price" class="lb-price"></div>
+                    <div id="lb-specs" class="lb-specs"></div>
+                </div>
+                
+                <div class="lb-inquiry-section" id="lb-inquiry-section">
+                    <a id="lb-inquire-mail" href="#" class="lb-submit" style="margin-bottom: 1rem;">Inquire via Email</a>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="lb-submit" style="margin-bottom: 0;">Inquire via DM</a>
+                    </div>
+                    
+                    <p class="purchase-info">For inquiries please use the email or direct message on Instagram.</p>
+                    
+                    <div class="lb-extra">
+                        <p>Certificate of authenticity included</p>
+                        <p>Shipping worldwide</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <button class="lb-nav lb-next">❯</button>
+        
+        <button class="lightbox-btn lb-next" id="lb-next-btn" aria-label="Następny obraz">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Data for collections
+            
+            // --- 1. ACCORDION LOGIC ---
+            const accordions = document.querySelectorAll('.collapsible-header');
+            accordions.forEach(header => {
+                header.addEventListener('click', () => {
+                    const section = header.parentElement;
+                    const isExpanded = section.classList.contains('open');
+                    
+                    if (isExpanded) {
+                        section.classList.remove('open');
+                        header.setAttribute('aria-expanded', 'false');
+                    } else {
+                        section.classList.add('open');
+                        header.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+            // --- 2. GENERATING THE LEGENDS DYNAMICALLY ---
             const col1Data = [
                 { ref: "[01]", title: "CIEK red", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
                 { ref: "[02]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
-                { ref: "[03]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" }
+                { ref: "[03]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+                { ref: "[04]", title: "untitled", specs: "acrylic on raw canvas<br>100 × 80 cm<br>2026<br>1100 €" },
+                { ref: "[05]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
+                { ref: "[06]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
+                { ref: "[07]", title: "untitled", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>320 €" },
+                { ref: "[08]", title: "untitled navy red", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[09]", title: "untitled khaki navy red III", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
+                { ref: "[10]", title: "untitled blue red", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>180 €" },
+                { ref: "[11]", title: "untitled blue red", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[12]", title: "untitled blue green", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[13]", title: "untitled blue green", specs: "acrylic on raw canvas<br>35 × 20 cm<br>2026<br>150 €" },
+                { ref: "[14]", title: "untitled white red steel", specs: "acrylic on raw canvas<br>20 × 25 cm<br>2026<br>150 €" },
+                { ref: "[15]", title: "untitled blue red", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2025<br>120 €" },
+                { ref: "[16]", title: "untitled khaki red navy", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2026<br>120 €" },
+                { ref: "[17]", title: "untitled (blue orange)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
+                { ref: "[18]", title: "untitled (blue)", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" },
+                { ref: "[19]", title: "untitled blue red", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>120 €" }
             ];
 
-            // Render Legends
-            function renderLegend(data, containerId, offset) {
+            const col2Data = [
+                { ref: "[20]", title: "untitled", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+                { ref: "[21]", title: "CIEK red", specs: "acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1200 €" },
+                { ref: "[22]", title: "orange vibrancy", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
+                { ref: "[23]", title: "CIEK blue", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
+                { ref: "[24]", title: "CIEK spectrum", specs: "acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
+                { ref: "[25]", title: "untitled khaki navy red I", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[26]", title: "untitled khaki navy red II", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>220 €" },
+                { ref: "[27]", title: "untitled turqoise", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>180 €" },
+                { ref: "[28]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
+                { ref: "[29]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" },
+                { ref: "[30]", title: "untitled", specs: "oil on canvas<br>30 × 20 cm<br>2026<br>150 €" }
+            ];
+
+            // Renderowanie z użyciem DOM elements
+            function renderLegend(dataArray, containerId, globalStartIndex) {
                 const container = document.getElementById(containerId);
-                data.forEach((item, i) => {
-                    const div = document.createElement('div');
-                    div.className = 'legend-item fade-up clickable-ref';
-                    div.dataset.index = offset + i;
+                container.innerHTML = ''; 
+                
+                dataArray.forEach((item, index) => {
+                    const globalIndex = globalStartIndex + index;
                     
-                    const price = item.specs.match(/\d+\s?€/)?.[0] || "";
-                    const cleanSpecs = item.specs.replace(price, "").replace(/<br>$/, "");
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'legend-item fade-up visible clickable-ref';
+                    itemDiv.setAttribute('data-index', globalIndex);
 
-                    div.innerHTML = `
-                        <span class="legend-ref">${item.ref}</span>
-                        <div class="legend-details">
-                            <span class="legend-title">${item.title}</span>
-                            <span class="legend-specs">${cleanSpecs}</span>
-                            <span class="legend-price">${price}</span>
-                            <div class="legend-status"><span class="status-dot"></span><span class="status-text">Available</span></div>
-                        </div>
-                    `;
-                    container.appendChild(div);
+                    const refSpan = document.createElement('span');
+                    refSpan.className = 'legend-ref';
+                    refSpan.textContent = item.ref;
+
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'legend-details';
+
+                    const titleSpan = document.createElement('span');
+                    titleSpan.className = 'legend-title';
+                    titleSpan.textContent = item.title;
+
+                    // Oddzielenie ceny od specyfikacji w bezpieczny sposób
+                    const priceMatch = item.specs.match(/(\d+\s?€)/);
+                    const priceText = priceMatch ? priceMatch[0] : '';
+                    let cleanSpecs = item.specs;
+                    if (priceText) {
+                        cleanSpecs = item.specs.replace(new RegExp(`(<br>)?${priceText}`), '');
+                    }
+
+                    const specsSpan = document.createElement('span');
+                    specsSpan.className = 'legend-specs';
+                    specsSpan.innerHTML = cleanSpecs;
+
+                    const priceSpan = document.createElement('span');
+                    priceSpan.className = 'legend-price';
+                    priceSpan.textContent = priceText;
+
+                    const statusDiv = document.createElement('div');
+                    statusDiv.className = 'legend-status';
+
+                    const dotSpan = document.createElement('span');
+                    dotSpan.className = 'status-dot';
+
+                    const statusTextSpan = document.createElement('span');
+                    statusTextSpan.className = 'status-text';
+                    statusTextSpan.textContent = 'Available';
+                    
+                    statusDiv.appendChild(dotSpan);
+                    statusDiv.appendChild(statusTextSpan);
+
+                    detailsDiv.appendChild(titleSpan);
+                    detailsDiv.appendChild(specsSpan);
+                    if (priceText) {
+                        detailsDiv.appendChild(priceSpan);
+                    }
+                    detailsDiv.appendChild(statusDiv);
+
+                    itemDiv.appendChild(refSpan);
+                    itemDiv.appendChild(detailsDiv);
+
+                    container.appendChild(itemDiv);
                 });
             }
+
             renderLegend(col1Data, 'legend-1', 0);
+            renderLegend(col2Data, 'legend-2', col1Data.length);
 
-            // Lightbox Logic
-            const lb = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightbox-img');
-            const gridImages = Array.from(document.querySelectorAll('.visual-item img'));
+            // --- 3. LIGHTBOX LOGIC & REFACTORING ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lbPrevBtn = document.getElementById('lb-prev-btn');
+            const lbNextBtn = document.getElementById('lb-next-btn');
+            const lbCloseBtn = document.getElementById('lb-close-btn');
+            
+            const gridImages = Array.from(document.querySelectorAll('.visual-item .item-image-wrapper img'));
+            let currentLbIndex = 0;
 
-            function openLb(index, isArtwork = true) {
-                const img = isArtwork ? gridImages[index] : event.target;
-                lbImg.src = img.src;
-                lbImg.classList.remove('is-zoomed');
+            function populateLightbox({ src, alt, titleOverride, specsOverride, isArtwork = true }) {
+                lightboxImg.classList.remove('is-zoomed');
+                lightboxImg.style.transformOrigin = 'center center';
+
+                lightboxImg.src = src;
+                lightboxImg.alt = alt || "Fullscreen image";
                 
-                const alt = img.alt.split(',');
-                document.getElementById('lb-title').textContent = alt[0] || "Studio View";
+                const inquirySection = document.getElementById('lb-inquiry-section');
+                const priceSection = document.getElementById('lb-price');
                 
-                const price = img.alt.match(/\d+\s?€/)?.[0] || "";
-                document.getElementById('lb-price').textContent = price;
-                document.getElementById('lb-specs').innerHTML = isArtwork ? img.alt.replace(alt[0]+",", "").replace(price, "") : "";
+                if (isArtwork) {
+                    let finalPrice = "";
+                    let finalSpecs = specsOverride;
+                    
+                    if (alt) {
+                        const priceMatch = alt.match(/(\d+\s?€)/);
+                        if (priceMatch) {
+                            finalPrice = priceMatch[0];
+                            finalSpecs = specsOverride.replace(new RegExp(`(<br>)?${finalPrice}`), '');
+                        }
+                    }
+                    
+                    document.getElementById('lb-title').textContent = titleOverride;
+                    priceSection.textContent = finalPrice;
+                    document.getElementById('lb-specs').innerHTML = finalSpecs;
+                    
+                    const subject = encodeURIComponent(`Inquiry — ${titleOverride}`);
+                    const mailLink = document.getElementById('lb-inquire-mail');
+                    if (mailLink) {
+                        mailLink.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}`;
+                    }
+                    
+                    inquirySection.classList.remove('hidden');
+                    priceSection.classList.remove('hidden');
+                    lbPrevBtn.classList.remove('hidden');
+                    lbNextBtn.classList.remove('hidden');
+                } else {
+                    document.getElementById('lb-title').textContent = titleOverride;
+                    document.getElementById('lb-specs').innerHTML = specsOverride;
+                    
+                    // WŁAŚCIWE UKRYWANIE ELEMENTÓW
+                    inquirySection.classList.add('hidden');
+                    priceSection.classList.add('hidden');
+                    lbPrevBtn.classList.add('hidden');
+                    lbNextBtn.classList.add('hidden');
+                }
                 
-                document.getElementById('lb-inquiry-section').classList.toggle('hidden', !isArtwork);
-                document.getElementById('lb-price').classList.toggle('hidden', !isArtwork);
-                
-                lb.classList.add('active');
+                lightbox.classList.add('active');
             }
 
-            document.querySelectorAll('.visual-item, .clickable-ref').forEach(el => {
-                el.addEventListener('click', (e) => {
-                    const idx = e.currentTarget.dataset.index || 0;
-                    openLb(idx, true);
+            // Otwieranie z siatki (Obrazy)
+            gridImages.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    currentLbIndex = index;
+                    const altText = img.alt || "Fullscreen artwork";
+                    const parts = altText.split(',');
+                    const title = parts[0] ? parts[0].trim() : "Artwork detail";
+                    const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
+                    
+                    populateLightbox({ src: img.src, alt: altText, titleOverride: title, specsOverride: specs, isArtwork: true });
                 });
             });
 
-            document.querySelectorAll('.about img').forEach(img => {
-                img.addEventListener('click', () => openLb(0, false));
+            // Otwieranie ze slidera (Obrazy)
+            const sliderImages = document.querySelectorAll('.slide img');
+            sliderImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    const altText = img.alt || "Fullscreen artwork";
+                    const parts = altText.split(',');
+                    const title = parts[0] ? parts[0].trim() : "Artwork detail";
+                    const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
+                    
+                    populateLightbox({ src: img.src, alt: altText, titleOverride: title, specsOverride: specs, isArtwork: true });
+                });
             });
 
-            lbImg.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (!lbImg.classList.contains('is-zoomed')) {
-                    const rect = lbImg.getBoundingClientRect();
-                    lbImg.style.transformOrigin = `${((e.clientX - rect.left)/rect.width)*100}% ${((e.clientY - rect.top)/rect.height)*100}%`;
-                    lbImg.classList.add('is-zoomed');
+            // Otwieranie z sekcji ABOUT (Zwykłe zdjęcia, bez opcji Inquire)
+            const aboutImages = document.querySelectorAll('.about img');
+            aboutImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    populateLightbox({ 
+                        src: img.src, 
+                        alt: img.alt || "Studio view", 
+                        titleOverride: "Studio view", 
+                        specsOverride: img.alt || "Kuba Chojnacki studio",
+                        isArtwork: false
+                    });
+                });
+            });
+
+            // --- FUNKCJA POWIĘKSZANIA ZDJĘĆ W LIGHTBOXIE (ZOOM) ---
+            lightboxImg.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                
+                if (!lightboxImg.classList.contains('is-zoomed')) {
+                    const rect = lightboxImg.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    lightboxImg.style.transformOrigin = `${x}% ${y}%`;
+                    lightboxImg.classList.add('is-zoomed');
                 } else {
-                    lbImg.classList.remove('is-zoomed');
+                    lightboxImg.classList.remove('is-zoomed');
+                    setTimeout(() => {
+                        if(!lightboxImg.classList.contains('is-zoomed')){
+                            lightboxImg.style.transformOrigin = 'center center';
+                        }
+                    }, 400); 
                 }
             });
 
-            lb.addEventListener('click', () => lb.classList.remove('active'));
-            document.querySelector('.lb-close').addEventListener('click', () => lb.classList.remove('active'));
-
-            // Accordion
-            document.querySelectorAll('.collapsible-header').forEach(h => {
-                h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+            // Strzałki lightboxa
+            lbPrevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentLbIndex = (currentLbIndex > 0) ? currentLbIndex - 1 : gridImages.length - 1;
+                const img = gridImages[currentLbIndex];
+                const altText = img.alt || "Fullscreen artwork";
+                const parts = altText.split(',');
+                populateLightbox({
+                    src: img.src, 
+                    alt: altText, 
+                    titleOverride: parts[0] ? parts[0].trim() : "Artwork detail", 
+                    specsOverride: parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "",
+                    isArtwork: true
+                });
             });
 
-            // Slider
-            let curSlide = 0;
-            const slides = document.querySelectorAll('.slide');
-            function showSlide(n) {
-                slides[curSlide].classList.remove('active');
-                curSlide = (n + slides.length) % slides.length;
-                slides[curSlide].classList.add('active');
-            }
-            document.querySelector('.prev-btn').addEventListener('click', () => showSlide(curSlide-1));
-            document.querySelector('.next-btn').addEventListener('click', () => showSlide(curSlide+1));
-
-            // Fade-in effect
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
+            lbNextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentLbIndex = (currentLbIndex < gridImages.length - 1) ? currentLbIndex + 1 : 0;
+                const img = gridImages[currentLbIndex];
+                const altText = img.alt || "Fullscreen artwork";
+                const parts = altText.split(',');
+                populateLightbox({
+                    src: img.src, 
+                    alt: altText, 
+                    titleOverride: parts[0] ? parts[0].trim() : "Artwork detail", 
+                    specsOverride: parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "",
+                    isArtwork: true
                 });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+            });
+
+            // Przycisk "X" zamykający lightbox
+            lbCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                lightbox.classList.remove('active');
+            });
+
+            // Kliknięcie w blok tekstowy w legendzie otwiera zdjęcie
+            const clickableRefs = document.querySelectorAll('.clickable-ref');
+            clickableRefs.forEach((ref) => {
+                ref.addEventListener('click', (e) => {
+                    const globalIndex = parseInt(e.currentTarget.getAttribute('data-index'));
+                    if(gridImages[globalIndex]) {
+                        gridImages[globalIndex].click(); 
+                    }
+                });
+            });
+
+            // Zamykanie lightboxa kliknięciem w tło
+            lightbox.addEventListener('click', (e) => {
+                if (!e.target.closest('.lightbox-info') && !e.target.closest('.lightbox-btn') && e.target !== lightboxImg) {
+                    lightbox.classList.remove('active');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('active');
+                } else if (e.key === 'ArrowLeft' && !lbPrevBtn.classList.contains('hidden')) {
+                    lbPrevBtn.click();
+                } else if (e.key === 'ArrowRight' && !lbNextBtn.classList.contains('hidden')) {
+                    lbNextBtn.click();
+                }
+            });
+
+            // --- 4. SLIDESHOW LOGIC ---
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+            }
+
+            function startSlideshow() {
+                slideInterval = setInterval(() => {
+                    currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+                    showSlide(currentSlide);
+                }, 5000);
+            }
+
+            function resetSlideshow() {
+                clearInterval(slideInterval);
+                startSlideshow();
+            }
+
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+                showSlide(currentSlide);
+                resetSlideshow();
+            });
+
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+                showSlide(currentSlide);
+                resetSlideshow();
+            });
+
+            startSlideshow();
+
+            // --- 5. SCROLL ANIMATIONS (FADE-UP) ---
+            setTimeout(() => {
+                const fadeElements = document.querySelectorAll('.visual-item, .legend-item, .about-image-left, .about-info, .about-image-right, .available-header, .contact-block');
+                
+                const fadeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            fadeObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+                fadeElements.forEach(el => {
+                    el.classList.add('fade-up');
+                    fadeObserver.observe(el);
+                });
+            }, 100);
         });
     </script>
 </body>
