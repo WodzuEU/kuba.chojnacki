@@ -4,758 +4,695 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuba Chojnacki | Paintings</title>
-    
-    <!-- SEO and Meta Tags -->
     <meta name="description" content="Abstract paintings by Polish artist Kuba Chojnacki. Large gradient works on raw canvas exploring gravity, diffusion and color flow.">
     <meta property="og:title" content="Kuba Chojnacki | Paintings">
     <meta property="og:description" content="Abstract paintings by Polish artist Kuba Chojnacki. Large gradient works on raw canvas exploring gravity, diffusion and color flow.">
     <meta property="og:image" content="IMAGES/19.jpg">
     <meta property="og:type" content="website">
-    
-    <!-- Favicon -->
+    <meta property="og:url" content="https://kubachojnacki.com/">
+    <meta name="theme-color" content="#f5f4f0">
     <link rel="icon" type="image/png" href="favicon.png">
-
-    <!-- Google Fonts: EB Garamond & Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
-        /* Global Variables */
         :root {
-            --bg-color: #ffffff;
-            --text-color: #111111;
-            --line-color: #111111;
-            
-            --font-display: "EB Garamond", serif;
-            --font-body: "Montserrat", sans-serif;
+            --bg:   #ffffff;
+            --ink:  #1a1a18;
+            --mid:  #767672;
+            --rule: #111111;
+            --serif: "EB Garamond", Georgia, serif;
+            --sans:  "Montserrat", sans-serif;
+            --pad:   clamp(1.5rem, 4vw, 4rem);
         }
 
-        /* Reset */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px; 
-        }
+        html { scroll-behavior: smooth; }
 
-        /* Custom Webkit Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: var(--bg-color);
-            border-left: 1px solid var(--line-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--line-color);
-            border-radius: 0;
-        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(26,26,24,0.18); border-radius: 3px; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 13px;
+            font-weight: 400;
             line-height: 1.6;
-            text-transform: lowercase;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Utility classes */
-        .hidden {
-            display: none !important;
+        img { display: block; max-width: 100%; }
+        a   { color: inherit; text-decoration: none; }
+        .hidden { display: none !important; }
+
+        /* ── CURSOR SYSTEM ── */
+        /* Default: black square everywhere */
+        *, *::before, *::after {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Crect x='0' y='0' width='12' height='12' fill='%23111'/%3E%3C/svg%3E") 6 6, auto !important;
         }
 
-        /* Simplified PLUS cursor for zoomable artworks */
-        .item-image-wrapper, .slide img, .about img, .clickable-ref {
-            cursor: pointer; /* Zabezpieczenie dla starszych przeglądarek / iOS */
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
+        /* Circle: all clickable / interactive */
+        a, button, [role="button"], label, select,
+        input[type="checkbox"], input[type="radio"],
+        .collapsible-header, .collection-label,
+        .slide-dot, .lightbox-btn, .slider-btn,
+        .legend-item, .clickable-ref,
+        .inquire-link, .lb-submit,
+        .works-header-right a, .contact-col a {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='6.5' fill='%23111'/%3E%3C/svg%3E") 7 7, pointer !important;
         }
 
-        /* Minimalist structural lines */
-        .border-b { border-bottom: 1px solid var(--line-color); }
-        .border-t { border-top: 1px solid var(--line-color); }
-
-        /* Typography */
-        h1, h2, h3, .display-text {
-            font-family: var(--font-display);
-            font-weight: normal;
+        /* Plus: zoom-in on artwork images */
+        .item-image-wrapper,
+        .slide img,
+        .about-photo img,
+        .lightbox img:not(.is-zoomed) {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cline x1='10' y1='2' x2='10' y2='18' stroke='%23111' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='2' y1='10' x2='18' y2='10' stroke='%23111' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 10 10, zoom-in !important;
         }
 
-        .text-xs {
-            font-size: 0.65rem;
-            letter-spacing: 0.05em;
-        }
-        
-        .color-subtitle {
-            display: block;
-            font-size: 0.85em;
-            color: #666;
-            font-style: normal;
-            margin-top: 0.15rem;
-            font-family: var(--font-body);
-            text-transform: lowercase;
+        /* Minus: zoom-out on lightbox bg and zoomed image */
+        .lightbox,
+        .lightbox img.is-zoomed {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cline x1='2' y1='10' x2='18' y2='10' stroke='%23111' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 10 10, zoom-out !important;
         }
 
-        /* Header - STICKY & SLIM */
+        /* HEADER — always solid white */
         header {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 100;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 3rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background-color: var(--bg-color);
+            padding: 0.9rem var(--pad);
+            background: var(--bg);
+            border-bottom: 1px solid var(--rule);
         }
-
         .logo {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            font-style: normal;
             letter-spacing: 0.08em;
-            text-decoration: none;
-            color: var(--text-color);
             text-transform: uppercase;
+            color: var(--ink);
         }
-
+        nav { display: flex; gap: 0; }
         nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 3rem;
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            transition: opacity 0.3s ease;
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0.01em;
+            text-transform: lowercase;
+            color: var(--ink);
+            margin-left: 2.5rem;
+            transition: opacity 0.25s ease;
         }
+        nav a:hover { opacity: 0.45; }
 
-        nav a:hover {
-            opacity: 0.5;
-        }
-
-        /* Hero Section (Slideshow Layout) */
-        .hero {
-            padding: 0 0 6rem 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hero-slider {
+        /* HERO — classic full-bleed slideshow */
+        .hero-section {
             position: relative;
             width: 100%;
-            height: 75vh;
-            margin-bottom: 2rem;
-            background-color: #f9f9f9;
+            height: calc(100vh - 46px);
             overflow: hidden;
-            display: flex;
-            align-items: center;
+            background: #0c0c0a;
+            margin-top: 46px;
         }
-
-        .slides-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
+        .slides-container { position: relative; width: 100%; height: 100%; }
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             opacity: 0;
-            transition: opacity 0.6s ease-in-out;
+            transition: opacity 0.9s cubic-bezier(.4,0,.2,1);
             pointer-events: none;
         }
-
         .slide.active {
             opacity: 1;
             pointer-events: auto;
         }
-
         .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center;
         }
-
-        .slider-btn {
+        .slide-vignette {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.46) 0%, transparent 44%);
+            pointer-events: none;
+        }
+        .slide-caption {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #ffffff;
-            mix-blend-mode: difference;
-            z-index: 10;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-            cursor: pointer;
+            bottom: 2.8rem; left: var(--pad);
+            color: #fff; pointer-events: none;
+        }
+        .slide-caption-title {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 3vw, 2.4rem);
+            font-style: normal; font-weight: 400;
+            text-transform: lowercase;
+            line-height: 1.1; margin-bottom: 0.5rem;
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.7s cubic-bezier(.16,1,.3,1) 0.1s,
+                        transform 0.7s cubic-bezier(.16,1,.3,1) 0.1s;
+        }
+        .slide-caption-specs {
+            font-family: var(--sans);
+            font-size: 10px; letter-spacing: 0.1em; text-transform: lowercase;
+            color: rgba(255,255,255,0.55);
+            opacity: 0; transform: translateY(10px);
+            transition: opacity 0.7s cubic-bezier(.16,1,.3,1) 0.22s,
+                        transform 0.7s cubic-bezier(.16,1,.3,1) 0.22s;
+        }
+        .slide.active .slide-caption-title,
+        .slide.active .slide-caption-specs { opacity: 1; transform: translateY(0); }
+
+        /* Slide counter bottom-right */
+        .hero-counter {
+            position: absolute; bottom: 2.8rem; right: var(--pad);
+            font-family: var(--sans);
+            font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: rgba(255,255,255,0.38); z-index: 10;
         }
 
-        .slider-btn:hover {
-            opacity: 1;
+        /* Progress line */
+        .hero-progress {
+            position: absolute; bottom: 0; left: 0;
+            height: 1px; background: rgba(255,255,255,0.45); width: 0;
+            z-index: 10; transition: width 0.12s linear;
         }
 
+        /* Dot navigation */
+        .slide-dots {
+            position: absolute; bottom: 2.8rem; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 7px; z-index: 10;
+        }
+        .slide-dot {
+            width: 5px; height: 5px; border-radius: 50%;
+            background: rgba(255,255,255,0.35); border: none; padding: 0;
+            cursor: pointer; transition: background 0.3s, transform 0.3s;
+        }
+        .slide-dot.active { background: rgba(255,255,255,0.9); transform: scale(1.25); }
+
+        /* Prev / next arrow buttons */
+        .slider-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: #fff;
+            mix-blend-mode: difference; z-index: 10;
+            padding: 1rem; opacity: 0.55; cursor: pointer;
+            transition: opacity 0.25s;
+        }
+        .slider-btn:hover { opacity: 1; }
         .prev-btn { left: 1rem; }
         .next-btn { right: 1rem; }
 
-        .hero-caption {
-            padding: 0 3rem;
-            width: 100%;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
+        .hero-hint, .hero-track, .hero-sticky, .hero-end-spacer { display: none; }
+
+        /* WORKS */
+        #works { padding: 6rem var(--pad) 0; }
+
+        .works-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: end;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 4rem;
+        }
+        .works-header h2 {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 400;
+            font-style: normal;
+            text-transform: lowercase;
+            letter-spacing: 0.01em;
+            line-height: 1.1;
+        }
+        .works-header-right {
+            display: flex; flex-direction: column; align-items: flex-end; gap: 0.55rem;
+        }
+        .works-header-right p {
+            font-family: var(--sans);
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-transform: lowercase;
+            color: var(--mid);
+        }
+        .works-header-right a {
+            font-family: var(--serif);
+            font-size: 1rem;
             font-style: italic;
+            font-weight: 400;
+            text-transform: lowercase;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.2s;
         }
+        .works-header-right a:hover { opacity: 0.42; }
 
-        /* Common Section Setup */
-        .section-padding {
-            padding: 6rem 3rem;
-        }
+        /* Collection */
+        .collection-block { margin-bottom: 5rem; }
+        .collection-block:last-child { margin-bottom: 0; padding-bottom: 6rem; }
 
-        /* Available header section */
-        .available-header {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-bottom: 2rem;
+        .collection-label {
+            display: flex; align-items: baseline; justify-content: space-between;
+            padding: 1.8rem 0; border-bottom: 1px solid var(--rule);
+            cursor: pointer; user-select: none; transition: opacity 0.2s;
         }
-        
-        .available-header h2 {
-            margin-bottom: 0.25rem;
+        .collection-label:hover { opacity: 0.55; }
+        .collection-label-left { display: flex; align-items: baseline; gap: 1.5rem; }
+        .collection-label h3 {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            font-style: normal;
+            text-transform: lowercase;
+            letter-spacing: 0.01em;
         }
-
-        /* Collapsible Accordeons */
-        .collapsible-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-            transition: opacity 0.3s ease;
-            user-select: none;
-            cursor: pointer;
+        .col-count {
+            font-family: var(--sans);
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-transform: lowercase;
+            color: var(--mid);
         }
-
-        .collapsible-header:hover {
-            opacity: 0.6;
-        }
-
-        .collapsible-header h3 {
-            font-size: 1.5rem;
-            margin: 0;
-        }
-
-        /* Animated Chevron Icon */
-        .toggle-icon {
-            display: flex;
-            align-items: center;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .collapsible-section.open .toggle-icon {
-            transform: rotate(-180deg);
+        .col-toggle {
+            font-family: var(--sans);
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-transform: lowercase;
+            color: var(--mid);
         }
 
         .collapsible-content {
-            display: none;
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(.16,1,.3,1);
         }
+        .collapsible-section.open .collapsible-content { max-height: 9999px; }
 
-        .collapsible-section.open .collapsible-content {
-            display: block;
-        }
-
-        /* Works Section Grids */
+        /* Grid — compact */
         .visual-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 1.5rem 1rem;
-            margin-bottom: 4rem;
-            align-items: end;
+            border-top: 1px solid var(--rule);
         }
-
         .visual-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            padding: 0.6rem 0.7rem 0.5rem;
+            display: flex; flex-direction: column; gap: 0.3rem;
+            opacity: 0; transform: translateY(10px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
         }
+        .visual-item.visible { opacity: 1; transform: translateY(0); }
 
         .item-image-wrapper {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
+            width: 100%; aspect-ratio: 1;
+            background: #ffffff; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
-
         .item-image-wrapper img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            transition: opacity 0.3s ease;
-            pointer-events: none; /* Zabezpieczenie przed błędem warstw kliknięcia na telefonach */
+            width: 100%; height: 100%; object-fit: contain;
+            transition: transform 0.6s cubic-bezier(.16,1,.3,1), opacity 0.25s;
         }
+        .item-image-wrapper:hover img { transform: scale(1.04); opacity: 0.88; }
 
-        .item-image-wrapper:hover img {
-            opacity: 0.85;
-        }
-
+        /* ref-number: matches legend-ref exactly */
         .ref-number {
-            font-family: var(--font-display);
-            font-size: 1rem; 
-            color: var(--text-color);
-            margin-top: 0.5rem;
-            display: block;
-        }
-
-        /* Text Legend Grid */
-        .legend-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1.5rem 1rem;
-            padding-top: 2rem;
-        }
-
-        .legend-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            font-size: 0.65rem;
-            line-height: 1.2;
-            transition: opacity 0.2s ease;
-        }
-
-        .legend-item:hover {
-            opacity: 0.6;
-        }
-
-        .legend-ref {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            color: var(--text-color);
-            margin-bottom: 0.2rem;
-        }
-
-        .legend-details {
-            display: flex;
-            flex-direction: column;
-            pointer-events: none; /* Propagacja klikniecia w gore */
-        }
-
-        .legend-title {
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .legend-specs {
-            color: #555;
-            margin-bottom: 0.2rem;
-        }
-        
-        .legend-price {
+            font-family: var(--sans);
+            font-size: 10px;
             font-weight: 500;
-            margin-bottom: 0.3rem;
-            color: var(--text-color);
+            letter-spacing: 0.04em;
+            color: var(--ink);
+            line-height: 1.3;
         }
 
+        /* Legend — compact, no lines between cells */
+        .legend-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr);
+            border-top: 1px solid var(--rule);
+            margin-top: 1.2rem;
+        }
+        .legend-item {
+            padding: 0.65rem 0.7rem;
+            display: flex; flex-direction: column; gap: 0.12rem;
+            transition: background 0.18s;
+        }
+        .legend-item:hover { background: rgba(26,26,24,0.05); }
+
+        /* legend-ref: identical to ref-number */
+        .legend-ref {
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--ink);
+            margin-bottom: 0.1rem;
+            line-height: 1.3;
+        }
+        /* legend-title: Garamond normal lowercase — "atmosphere" */
+        .legend-title {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 400;
+            text-transform: lowercase;
+            line-height: 1.25;
+            margin-bottom: 0;
+        }
+        /* color-subtitle: grey Montserrat lowercase — "navy khaki" */
+        .color-subtitle {
+            font-family: var(--sans);
+            font-style: normal;
+            font-size: 10px;
+            letter-spacing: 0.02em;
+            text-transform: lowercase;
+            color: var(--mid);
+            display: block;
+            margin-top: 0.08rem;
+        }
+        /* legend-specs: grey Montserrat lowercase */
+        .legend-specs {
+            font-family: var(--sans);
+            font-size: 10px;
+            letter-spacing: 0.02em;
+            text-transform: lowercase;
+            color: var(--mid);
+            line-height: 1.4;
+            margin-top: 0.12rem;
+        }
+        /* legend-price: black Montserrat medium */
+        .legend-price {
+            font-family: var(--sans);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--ink);
+            margin-top: 0.12rem;
+        }
         .legend-status {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin-bottom: 0.4rem;
+            display: flex; align-items: center; gap: 0.35rem;
+            margin-top: 0.1rem;
         }
-
         .status-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #111;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--ink); flex-shrink: 0; display: inline-block;
         }
-
+        /* status-text: black Montserrat lowercase */
         .status-text {
-            font-weight: 600;
+            font-family: var(--sans);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: lowercase;
+            color: var(--ink);
         }
 
         .inquire-link {
-            text-decoration: underline;
-            color: #111;
-            font-style: italic;
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            transition: opacity 0.2s ease;
-            width: fit-content;
-            pointer-events: auto; /* Aktywne linki globalne w panelu Available works */
+            font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+            border-bottom: 1px solid var(--ink); padding-bottom: 1px;
+            background: none; border-top: none; border-left: none; border-right: none;
+            border-bottom: 1px solid var(--ink);
+            cursor: pointer; transition: opacity 0.2s; width: fit-content; color: var(--ink);
         }
+        .inquire-link:hover { opacity: 0.42; }
 
-        .inquire-link:hover {
-            opacity: 0.5;
+        /* ABOUT */
+        #about {
+            padding: 5rem var(--pad) 5rem;
+            border-top: 1px solid var(--rule);
         }
-
-        /* About Section */
-        .about {
+        .about-grid {
             display: grid;
             grid-template-columns: 2.5fr 3fr 5.5fr;
             gap: 2.5rem;
             align-items: end;
-            margin-top: 4rem;
         }
+        .about-photo img { width: 100%; height: auto; display: block; }
 
-        .about-image-left img {
-            width: 100%;
-            height: auto;
+        .about-text-col { padding-top: 0; }
+        .about-label {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            font-style: normal;
+            text-transform: lowercase;
+            letter-spacing: 0.01em;
+            color: var(--ink);
+            margin-bottom: 1rem;
             display: block;
         }
-
-        .about-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            margin-bottom: 0;
+        .about-text-col h2 { display: none; }
+        .about-text-col p {
+            font-family: var(--sans);
+            font-size: 11px;
+            line-height: 1.7;
+            color: var(--ink);
+            margin-bottom: 1rem;
+            text-transform: lowercase;
         }
-
+        .about-text-col p:last-child { margin-bottom: 0; }
         .artist-name {
-            text-transform: none;
+            text-transform: none; /* preserves "Kuba Chojnacki" exact casing */
+            font-family: var(--sans);
         }
 
-        .about-text p {
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            max-width: 100%;
-            color: #111;
-        }
-        
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        .about-image-right {
+        .about-portrait-col {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             align-self: start;
         }
-
-        .about-image-right img {
-            width: 25%;
-            height: auto;
-            display: block;
-        }
-
-        .about-image-caption {
-            width: 25%;
+        .about-portrait-col img { width: 28%; height: auto; display: block; }
+        .photo-caption {
+            width: 28%;
+            font-family: var(--sans);
             font-size: 0.65rem;
-            margin-top: 0.75rem;
-            color: #555;
-            line-height: 1.4;
+            letter-spacing: 0.04em;
+            margin-top: 0.7rem;
+            color: var(--mid);
+            line-height: 1.5;
             text-align: left;
         }
 
-        /* Contact Section - More Compact & Centered */
-        #contact.section-padding {
-            padding: 3rem 3rem 2rem 3rem;
-            text-align: center;
+        /* CONTACT — 4-col editorial layout */
+        #contact {
+            border-top: 1px solid var(--rule);
+            padding: 4rem var(--pad) 3rem;
         }
-        
-        .contact-section {
-            background-color: var(--bg-color);
-        }
-
-        .contact-grid {
+        .contact-inner {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 1.5rem;
-            justify-content: center;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .contact-headline {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-style: normal;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.01em;
+            line-height: 1.55;
+            color: var(--ink);
         }
 
-        .contact-block h3 {
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+        .contact-col { width: auto; text-align: left; }
+        .contact-col h4 {
+            font-family: var(--serif);
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 400;
+            font-style: normal;
+            text-transform: lowercase;
+            letter-spacing: 0.01em;
+            color: var(--ink);
             margin-bottom: 0.5rem;
-            font-weight: 500;
         }
-
-        .contact-block p {
-            font-size: 0.85rem;
+        .contact-col p,
+        .contact-col a {
+            display: block;
+            font-family: var(--sans);
+            font-size: 11px;
+            line-height: 1.7;
+            color: var(--ink);
             margin-bottom: 0.3rem;
-            color: #444;
+            text-transform: lowercase;
         }
-
-        .contact-block a {
-            color: var(--text-color);
+        .contact-col a {
             text-decoration: underline;
-            transition: opacity 0.2s ease;
+            text-underline-offset: 2px;
+            border: none; padding: 0; width: auto;
+            transition: opacity 0.25s;
         }
+        .contact-col a:hover { opacity: 0.45; }
 
-        .contact-block a:hover {
-            opacity: 0.5;
-        }
-
-        .contact-note {
-            margin-top: 2.5rem;
-            font-size: 0.75rem;
-            color: #777;
-            font-style: italic;
-            font-family: var(--font-display);
-        }
-
-        /* Lightbox (Fullscreen Image Modal) */
-        .lightbox {
-            visibility: hidden;
-            pointer-events: none;
-            position: fixed;
-            z-index: 9999;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+        .footer-note {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(26,26,24,0.15);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out !important;
+        }
+        .footer-note span {
+            font-family: var(--sans);
+            font-size: 9px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--mid);
         }
 
-        .lightbox.active {
-            visibility: visible;
-            pointer-events: auto;
-            opacity: 1;
+        /* LIGHTBOX */
+        .lightbox {
+            visibility: hidden; pointer-events: none;
+            position: fixed; z-index: 9999; inset: 0;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.4s ease, visibility 0.4s ease;
         }
+        .lightbox.active { visibility: visible; pointer-events: auto; opacity: 1; }
 
         .lightbox-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4rem;
-            max-width: 95vw;
-            max-height: 95vh;
-            transform: scale(0.96);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; align-items: center; gap: 5rem;
+            max-width: 92vw; max-height: 92vh;
         }
-
-        .lightbox.active .lightbox-content {
-            transform: scale(1);
-        }
-
-        /* Image inside Lightbox and Zoom logic with simple PLUS/MINUS cursors */
         .lightbox img {
-            max-width: 60vw;
-            max-height: 90vh;
-            object-fit: contain;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            transform-origin: center center;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in;
+            max-width: 58vw; max-height: 88vh; object-fit: contain;
+            transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+            transform-origin: center; position: relative; z-index: 1;
         }
+        .lightbox img.is-zoomed { transform: scale(2.2); }
 
-        .lightbox img.is-zoomed {
-            transform: scale(2.2);
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-out;
-        }
-
-        /* Lightbox Information Panel */
         .lightbox-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 1.5rem;
-            width: 300px;
-            color: var(--text-color);
-            text-align: left;
-            cursor: auto;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding-right: 0.5rem;
+            width: 255px; flex-shrink: 0;
+            display: flex; flex-direction: column; justify-content: center; gap: 1.3rem;
+            max-height: 88vh; overflow-y: auto; padding-right: 0.3rem; cursor: auto;
         }
-
-        .lightbox-info::-webkit-scrollbar {
-            width: 4px;
-        }
-        .lightbox-info::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .lightbox-info::-webkit-scrollbar-thumb {
-            background-color: #ddd;
-            border-radius: 4px;
-        }
+        .lightbox-info::-webkit-scrollbar { width: 2px; }
+        .lightbox-info::-webkit-scrollbar-thumb { background: rgba(26,26,24,0.2); }
 
         .lb-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-style: italic;
-            margin-bottom: 0.2rem;
-        }
-        
-        .lb-price {
+            font-family: var(--serif);
             font-size: 1.3rem;
-            font-family: var(--font-display);
-            margin-bottom: 0.8rem;
-            color: var(--text-color);
+            font-style: normal;
+            font-weight: 400;
+            text-transform: lowercase;
+            line-height: 1.25;
         }
-
+        .lb-price {
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ink);
+        }
         .lb-specs {
-            font-size: 0.75rem;
-            color: #555;
-            line-height: 1.6;
+            font-family: var(--sans);
+            font-size: 10px;
+            line-height: 1.8;
+            text-transform: lowercase;
+            color: var(--mid);
         }
 
-        /* Inquiry Section Styles inside Lightbox */
         .lb-inquiry-section {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin-top: 1rem;
+            display: flex; flex-direction: column; gap: 0.75rem;
+            padding-top: 0.8rem; border-top: 1px solid rgba(26,26,24,0.15);
         }
-
-        .lb-submit {
-            align-self: flex-start;
-            display: inline-block;
-            background: none;
-            border: none;
-            padding: 0 0 0.2rem 0;
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            font-style: italic;
-            text-decoration: none;
-            border-bottom: 1px solid var(--text-color);
-            color: var(--text-color);
-            transition: opacity 0.2s ease;
-            cursor: pointer;
-        }
-
-        .lb-submit:hover {
-            opacity: 0.5;
-        }
-
-        /* Trust elements */
-        .lb-extra {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            margin-top: 1rem;
-            color: var(--text-color);
-        }
-
-        .lb-extra p {
-            margin-bottom: 0.5rem;
-        }
-        
         .purchase-info {
-            font-size: 0.85rem;
-            margin-top: 1.5rem;
-            color: #555;
-            line-height: 1.5;
+            font-family: var(--sans);
+            font-size: 10px;
+            line-height: 1.7;
+            text-transform: lowercase;
+            color: var(--mid);
         }
-
-        /* Lightbox Navigation & Close Buttons */
-        .lightbox-btn {
-            position: absolute;
+        .lb-submit {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-style: italic;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.01em;
+            text-decoration: underline;
+            text-underline-offset: 3px;
             background: none;
             border: none;
-            color: var(--text-color);
-            padding: 2rem;
+            padding: 0;
+            width: fit-content;
             cursor: pointer;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
-            z-index: 10001;
+            transition: opacity 0.2s;
+            color: var(--ink);
+        }
+        .lb-submit:hover { opacity: 0.42; }
+        .lb-submit--spaced, .lb-dm-wrap { margin-bottom: 0; }
+        .lb-extra {
+            font-family: var(--sans);
+            font-size: 10px;
+            text-transform: lowercase;
+            color: var(--mid);
+            line-height: 1.8;
         }
 
-        .lightbox-btn:hover {
-            opacity: 1;
+        .lightbox-btn {
+            position: absolute; background: none; border: none;
+            color: var(--ink); cursor: pointer; opacity: 0.28;
+            transition: opacity 0.2s; z-index: 10001; padding: 2rem;
         }
-
+        .lightbox-btn:hover { opacity: 1; }
         .lb-prev { top: 50%; transform: translateY(-50%); left: 0; }
         .lb-next { top: 50%; transform: translateY(-50%); right: 0; }
-        .lb-close { 
-            top: 0; 
-            right: 0; 
-            padding: 1.5rem; 
-            opacity: 0.7;
-        }
+        .lb-close { top: 0; right: 0; padding: 1.5rem; opacity: 0.45; }
 
-        /* Scroll Animations */
+        /* FADE UP */
         .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            opacity: 0; transform: translateY(18px);
+            transition: opacity 0.65s ease-out, transform 0.65s ease-out;
         }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .visual-grid  { grid-template-columns: repeat(4, 1fr); }
+            .legend-grid  { grid-template-columns: repeat(4, 1fr); }
+            .contact-inner { grid-template-columns: 1fr 1fr; gap: 3rem; }
         }
-
-        /* Responsiveness */
-        @media (max-width: 1200px) {
-            .visual-grid { grid-template-columns: repeat(4, 1fr); }
-            .legend-grid { grid-template-columns: repeat(4, 1fr); }
-            .about { gap: 2rem; }
-        }
-
-        @media (max-width: 900px) {
-            .hero-slider { height: 50vh; }
-            .hero-caption { padding: 0 2rem; }
-            
-            .visual-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-            .legend-grid { grid-template-columns: repeat(3, 1fr); }
-            
-            .about { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; align-items: start; }
-            .about-image-left { order: 1; }
-            .about-image-left img { width: 80%; }
-            .about-info { order: 2; align-self: start; }
-            .about-image-right { order: 3; }
-            .about-image-right img, .about-image-caption { width: 50%; }
-            
-            .lightbox-content { flex-direction: column; gap: 1.5rem; }
-            .lightbox img { max-width: 90vw; max-height: 55vh; }
-            .lightbox-info { 
-                width: 90vw; 
-                align-items: flex-start; 
-                text-align: left; 
-                gap: 1.5rem; 
+        @media (max-width: 800px) {
+            .visual-grid  { grid-template-columns: repeat(3, 1fr); }
+            .legend-grid  { grid-template-columns: repeat(3, 1fr); }
+            .works-header { grid-template-columns: 1fr; gap: 1.5rem; }
+            .works-header-right { align-items: flex-start; }
+            .about-grid   {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                align-items: start;
             }
-            .lb-close {
-                padding: 1rem;
+            .about-portrait-col { flex-direction: row; gap: 1.5rem; align-items: flex-start; }
+            .about-portrait-col img { width: 45%; }
+            .about-portrait-col .photo-caption { width: 45%; }
+            .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-note { flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+            .lightbox-content {
+                flex-direction: column; align-items: center; gap: 2rem;
+                padding: 5rem 1.5rem 2rem; max-height: 100vh; overflow-y: auto;
+                justify-content: flex-start;
             }
-
-            header { padding: 0.8rem 1.5rem; }
-            .hero { padding: 0 0 4rem 0; }
-            .section-padding { padding: 4rem 2rem; }
-            
-            #contact.section-padding {
-                padding: 2rem 2rem 1.5rem 2rem;
-            }
+            .lightbox img { max-width: 88vw; max-height: 48vh; }
+            .lightbox-info { width: 100%; max-width: 380px; }
+            #works, #about, #contact { padding-left: clamp(1rem, 3vw, 2.5rem); padding-right: clamp(1rem, 3vw, 2.5rem); }
+            header { padding-left: clamp(1rem, 3vw, 2.5rem); padding-right: clamp(1rem, 3vw, 2.5rem); }
         }
-
-        @media (max-width: 600px) {
-            .visual-grid { grid-template-columns: repeat(2, 1fr); } 
-            .legend-grid { grid-template-columns: repeat(2, 1fr); }
-            header { flex-direction: column; gap: 0.8rem; align-items: flex-start; padding-top: 1.2rem; padding-bottom: 1.2rem; }
-            nav a { margin-left: 0; margin-right: 1.5rem; }
-            .hero-caption { flex-direction: column; gap: 0.5rem; font-size: 1.2rem; padding: 0 1.5rem;}
+        @media (max-width: 520px) {
+            .visual-grid  { grid-template-columns: repeat(2, 1fr); }
+            .legend-grid  { grid-template-columns: repeat(2, 1fr); }
+            nav a { margin-left: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
-    <header class="border-b">
-        <a href="#" class="logo">KUBA CHOJNACKI</a>
+    <header id="site-header">
+        <a href="#" class="logo">Kuba Chojnacki</a>
         <nav>
             <a href="#works">Works</a>
             <a href="#about">About</a>
@@ -763,603 +700,472 @@
         </nav>
     </header>
 
-    <section class="hero border-b">
-        <div class="hero-slider">
-            <button class="slider-btn prev-btn" aria-label="Poprzedni slajd">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <div class="slides-container">
-                <div class="slide active">
-                    <img src="IMAGES/30.jpg" alt="Atmosphere | burgundy khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" fetchpriority="high" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
-                </div>
-                <div class="slide">
-                    <img src="IMAGES/31.jpg" alt="Atmosphere | maroon and khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-                </div>
-                <div class="slide">
-                    <img src="IMAGES/26.jpg" alt="Atmosphere | cyan purple and blue, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-                </div>
-                <div class="slide">
-                    <img src="IMAGES/17.jpg" alt="Atmosphere | navy khaki, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-                </div>
-                <div class="slide">
-                    <img src="IMAGES/25.jpg" alt="Chromatic | blue orange, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-                </div>
-                <div class="slide">
-                    <img src="IMAGES/19.jpg" alt="Chromatic | red, acrylic on raw canvas, 100 × 100 cm, 2025, 1300 €" width="1000" height="1000" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#f0f0f0';">
-                </div>
-                <div class="slide">
-                    <img src="IMAGES/21.jpg" alt="Chromatic | blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" width="1000" height="700" loading="lazy" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-                </div>
-            </div>
-            <button class="slider-btn next-btn" aria-label="Następny slajd">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-        </div>
-        <div class="hero-caption">
-            <span id="hero-caption-title">Studio Paintings</span>
-            <span id="hero-caption-date">2024–2026</span>
-        </div>
-    </section>
+    <!-- HERO — classic slideshow -->
+    <div class="hero-section">
+        <div class="slides-container" id="slides-container">
 
-    <section id="works" class="section-padding border-b">
-        
-        <div class="available-header fade-up">
-            <h2 class="section-title" style="margin-bottom: 1.5rem;">Available works</h2>
-            <div style="display: flex; gap: 1.5rem; margin-bottom: 3rem;">
-                <a href="mailto:chojnacki.studio@gmail.com" class="inquire-link" style="font-size: 1rem; margin: 0;">Inquire via Email</a>
-                <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="inquire-link" style="font-size: 1rem; margin: 0;">Inquire via DM</a>
-            </div>
-        </div>
-        
-        <div class="collapsible-section open">
-            <div class="collapsible-header border-b" role="button" tabindex="0" aria-expanded="true" aria-controls="collection-atmosphere">
-                <h3>Atmosphere Collection</h3>
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <span style="font-size: 0.85rem; color: #777; font-family: var(--font-body);">19 works</span>
-                    <span class="toggle-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
-                    </span>
+            <div class="slide active">
+                <img src="IMAGES/30.jpg" alt="Atmosphere | burgundy khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" fetchpriority="high" decoding="async" onerror="this.style.background='#1a0a06'">
+                <div class="slide-vignette"></div>
+                <div class="slide-caption">
+                    <div class="slide-caption-title">Atmosphere &mdash; burgundy khaki</div>
+                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 150 &times; 100 cm &ensp;&middot;&ensp; 2026</div>
                 </div>
             </div>
-            
+
+            <div class="slide">
+                <img src="IMAGES/31.jpg" alt="Atmosphere | maroon and khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.background='#180808'">
+                <div class="slide-vignette"></div>
+                <div class="slide-caption">
+                    <div class="slide-caption-title">Atmosphere &mdash; maroon and khaki</div>
+                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 150 &times; 100 cm &ensp;&middot;&ensp; 2026</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="IMAGES/26.jpg" alt="Atmosphere | cyan purple and blue, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async" onerror="this.style.background='#08101a'">
+                <div class="slide-vignette"></div>
+                <div class="slide-caption">
+                    <div class="slide-caption-title">Atmosphere &mdash; cyan purple and blue</div>
+                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 100 &times; 80 cm &ensp;&middot;&ensp; 2026</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="IMAGES/25.jpg" alt="Chromatic | blue orange, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.background='#0a0c18'">
+                <div class="slide-vignette"></div>
+                <div class="slide-caption">
+                    <div class="slide-caption-title">Chromatic &mdash; blue orange</div>
+                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 150 &times; 100 cm &ensp;&middot;&ensp; 2026</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="IMAGES/19.jpg" alt="Chromatic | red, acrylic on raw canvas, 100 × 100 cm, 2025, 1300 €" width="1000" height="1000" loading="lazy" decoding="async" onerror="this.style.background='#1a0606'">
+                <div class="slide-vignette"></div>
+                <div class="slide-caption">
+                    <div class="slide-caption-title">Chromatic &mdash; red</div>
+                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 100 &times; 100 cm &ensp;&middot;&ensp; 2025</div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="slider-btn prev-btn" aria-label="Previous slide">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="slider-btn next-btn" aria-label="Next slide">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+
+        <div class="hero-progress" id="hero-progress"></div>
+        <div class="hero-counter" id="hero-counter">01 / 05</div>
+        <div class="slide-dots" id="slide-dots"></div>
+    </div>
+
+    <!-- WORKS -->
+    <section id="works">
+        <div class="works-header fade-up">
+            <div><h2>Available works</h2></div>
+            <div class="works-header-right">
+                <p>30 works &ensp;&middot;&ensp; 2 collections</p>
+                <a href="mailto:chojnacki.studio@gmail.com">Inquire via email</a>
+                <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener">Inquire via instagram</a>
+            </div>
+        </div>
+
+        <div class="collection-block collapsible-section open">
+            <div class="collection-label collapsible-header" role="button" tabindex="0" aria-expanded="true" aria-controls="collection-atmosphere">
+                <div class="collection-label-left">
+                    <h3>Atmosphere</h3>
+                    <span class="col-count">18 works</span>
+                </div>
+                <span class="col-toggle">Close</span>
+            </div>
             <div class="collapsible-content" id="collection-atmosphere">
                 <div class="visual-grid">
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="Atmosphere | navy khaki, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[01]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="Atmosphere | burgundy khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[02]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="Atmosphere | maroon and khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[03]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/26.jpg" alt="Atmosphere | cyan purple and blue, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[04]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/27.jpg" alt="Atmosphere | burnt red and green I, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[05]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/28.jpg" alt="Atmosphere | burnt red and green II, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[06]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/29.jpg" alt="Atmosphere | burnt red and green III, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">[07]</span></div>
-                    
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="Atmosphere | navy red and khaki, acrylic on raw canvas, 35 × 35 cm, 2026, 320 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[08]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="Atmosphere | navy red and khaki, acrylic on raw canvas, 35 × 35 cm, 2026, 320 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[09]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="Atmosphere | navy red and khaki, acrylic on raw canvas, 35 × 35 cm, 2026, 320 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[10]</span></div>
-                    
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="Atmosphere | burgundy navy, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[11]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="Atmosphere | brown black red, acrylic on raw canvas, 35 × 25 cm, 2026, 240 €" width="1000" height="714" loading="lazy" decoding="async"></div><span class="ref-number">[12]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="Atmosphere | red blue, acrylic on raw canvas, 35 × 20 cm, 2026, 220 €" width="1000" height="571" loading="lazy" decoding="async"></div><span class="ref-number">[13]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="Atmosphere | khaki navy red, acrylic on raw canvas, 20 × 20 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[14]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="Atmosphere | red blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[15]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="Atmosphere | steel blue red, acrylic on raw canvas, 20 × 20 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[16]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="Atmosphere | deep orange blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[17]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="Atmosphere | blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[18]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="Atmosphere | orange blue yellow, acrylic on raw canvas, 20 × 20 cm, 2025, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[19]</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="Atmosphere | navy khaki, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">01</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="Atmosphere | burgundy khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">02</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="Atmosphere | maroon and khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">03</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/26.jpg" alt="Atmosphere | cyan purple and blue, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">04</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/27.jpg" alt="Atmosphere | burnt red and green I, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">05</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/28.jpg" alt="Atmosphere | burnt red and green II, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">06</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/29.jpg" alt="Atmosphere | burnt red and green III, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">07</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/11.jpg" alt="Atmosphere | navy red and khaki, acrylic on raw canvas, 35 × 35 cm, 2026, 320 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">08</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/12.jpg" alt="Atmosphere | navy red and khaki, acrylic on raw canvas, 35 × 35 cm, 2026, 320 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">09</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="Atmosphere | navy red and khaki, acrylic on raw canvas, 35 × 35 cm, 2026, 320 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">10</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="Atmosphere | burgundy navy, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">11</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="Atmosphere | brown black red, acrylic on raw canvas, 35 × 25 cm, 2026, 240 €" width="1000" height="714" loading="lazy" decoding="async"></div><span class="ref-number">12</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="Atmosphere | red blue, acrylic on raw canvas, 35 × 20 cm, 2026, 220 €" width="1000" height="571" loading="lazy" decoding="async"></div><span class="ref-number">13</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="Atmosphere | khaki navy red, acrylic on raw canvas, 20 × 20 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">14</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="Atmosphere | red blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">15</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="Atmosphere | steel blue red, acrylic on raw canvas, 20 × 20 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">16</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="Atmosphere | deep orange blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">17</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="Atmosphere | orange blue yellow, acrylic on raw canvas, 20 × 20 cm, 2025, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">18</span></div>
                 </div>
-                <div id="legend-1" class="legend-grid border-t"></div>
+                <div id="legend-1" class="legend-grid"></div>
             </div>
         </div>
 
-        <div class="collapsible-section" style="margin-top: 4rem;">
-            <div class="collapsible-header border-b" role="button" tabindex="0" aria-expanded="false" aria-controls="collection-chromatic">
-                <h3>Chromatic Collection</h3>
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <span style="font-size: 0.85rem; color: #777; font-family: var(--font-body);">11 works</span>
-                    <span class="toggle-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
-                    </span>
+        <div class="collection-block collapsible-section">
+            <div class="collection-label collapsible-header" role="button" tabindex="0" aria-expanded="false" aria-controls="collection-chromatic">
+                <div class="collection-label-left">
+                    <h3>Chromatic</h3>
+                    <span class="col-count">12 works</span>
                 </div>
+                <span class="col-toggle">View</span>
             </div>
-            
             <div class="collapsible-content" id="collection-chromatic">
                 <div class="visual-grid">
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="Chromatic | blue orange, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[20]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="Chromatic | red, acrylic on raw canvas, 100 × 100 cm, 2025, 1300 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[21]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="Chromatic | orange, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">[22]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="Chromatic | blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">[23]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="Chromatic | blue red green yellow, acrylic on raw canvas, 70 × 70 cm, 2026, 650 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[24]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="Chromatic | blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[25]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="Chromatic | blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[26]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="Chromatic | turquoise, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[27]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">[28]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">[29]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="Chromatic | blue, oil on canvas, 24 × 18 cm, 2024, 150 €" width="1000" height="750" loading="lazy" decoding="async"></div><span class="ref-number">[30]</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/25.jpg" alt="Chromatic | blue orange, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">19</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="Chromatic | red, acrylic on raw canvas, 100 × 100 cm, 2025, 1300 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">20</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="Chromatic | orange, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">21</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="Chromatic | blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">22</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="Chromatic | blue red green yellow, acrylic on raw canvas, 70 × 70 cm, 2026, 650 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">23</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="Chromatic | blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">24</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="Chromatic | blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">25</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="Chromatic | turquoise, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">26</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">27</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">28</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="Chromatic | blue, oil on canvas, 24 × 18 cm, 2024, 150 €" width="1000" height="750" loading="lazy" decoding="async"></div><span class="ref-number">29</span></div>
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/3.jpg" alt="Chromatic | blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">30</span></div>
                 </div>
-                <div id="legend-2" class="legend-grid border-t"></div>
+                <div id="legend-2" class="legend-grid"></div>
             </div>
         </div>
-
     </section>
 
-    <section id="about" class="section-padding about border-b">
-        <div class="about-image-left fade-up">
-            <img src="IMAGES/IMG_5535.jpg" alt="Kuba Chojnacki working in his studio, cracow" loading="lazy" width="1000" height="1200" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-        </div>
-        
-        <div class="about-info fade-up">
-            <h2 class="section-title">About</h2>
-            <div class="about-text">
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-photo fade-up">
+                <img src="IMAGES/IMG_5535.jpg" alt="Kuba Chojnacki working in his studio, Cracow" loading="lazy" width="1000" height="1200" decoding="async" onerror="this.style.background='#ddd'">
+            </div>
+            <div class="about-text-col fade-up">
+                <span class="about-label">about</span>
                 <p><span class="artist-name">Kuba Chojnacki</span> is a Polish painter working with gradients, gravity and diffusion on raw canvas.</p>
                 <p>With a background in architecture, his work explores spatial tension, structural balance, and the delicate intersection between rigorous control and fluid chance.</p>
             </div>
-        </div>
-        
-        <div class="about-image-right fade-up">
-            <img src="IMAGES/APC_0258.jpg" alt="Kuba Chojnacki portrait in studio" loading="lazy" width="800" height="1000" decoding="async" onerror="this.style.backgroundColor='#e0e0e0';">
-            <div class="about-image-caption">
-                studio view, 2026<br>
-                cracow, poland
+            <div class="about-portrait-col fade-up">
+                <img src="IMAGES/APC_0258.jpg" alt="Kuba Chojnacki portrait in studio" loading="lazy" width="800" height="1000" decoding="async" onerror="this.style.background='#ddd'">
+                <p class="photo-caption">studio view, 2026<br>cracow, poland</p>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section-padding contact-section">
-        <h2 class="section-title fade-up" style="margin-bottom: 0;">Contact</h2>
-
-        <div class="contact-grid">
-            <div class="contact-block fade-up">
-                <h3>Inquiries</h3>
-                <p>For artwork inquiries, commissions or additional images please contact:</p>
-                <p>Email: <a href="mailto:chojnacki.studio@gmail.com">chojnacki.studio@gmail.com</a></p>
-                <p>Instagram: <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener">@chojnacki.studio</a></p>
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-inner">
+            <div class="fade-up">
+                <p class="contact-headline">Collectors and galleries<br>are welcome to inquire<br>about available works.</p>
             </div>
-
-            <div class="contact-block fade-up">
-                <h3>Purchase & Shipping</h3>
-                <p>Original paintings are shipped worldwide.</p>
-                <p>Shipping cost depends on artwork size and destination.</p>
-                <p>Typical international shipping: 80–200€</p>
-                <p>All works include a certificate of authenticity.</p>
+            <div class="contact-col fade-up">
+                <h4>Inquiries</h4>
+                <p>For artwork inquiries, commissions or additional images:</p>
+                <a href="mailto:chojnacki.studio@gmail.com">chojnacki.studio@gmail.com</a>
+                <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener">@chojnacki.studio</a>
             </div>
-
-            <div class="contact-block fade-up">
-                <h3>Studio</h3>
-                <p>Kuba Chojnacki Studio</p>
+            <div class="contact-col fade-up">
+                <h4>Studio</h4>
                 <p>Cracow, Poland</p>
                 <p>Visits by appointment only.</p>
             </div>
+            <div class="contact-col fade-up">
+                <h4>Purchase &amp; Shipping</h4>
+                <p>Worldwide shipping.</p>
+                <p>80&ndash;200&euro; typical cost.</p>
+                <p>Certificate of authenticity included.</p>
+            </div>
         </div>
-
-        <p class="contact-note fade-up">Collectors and galleries are welcome to inquire about available works.</p>
+        <div class="footer-note fade-up">
+            <span>&copy; Kuba Chojnacki, 2026</span>
+            <span>Cracow, Poland</span>
+        </div>
     </section>
 
-    <!-- Lightbox Container -->
+    <!-- LIGHTBOX -->
     <div id="lightbox" class="lightbox">
-        <button class="lightbox-btn lb-close" id="lb-close-btn" aria-label="Zamknij okno powiększenia">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <button class="lightbox-btn lb-close" id="lb-close-btn" aria-label="Close lightbox">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
-        <button class="lightbox-btn lb-prev" id="lb-prev-btn" aria-label="Poprzedni obraz">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+        <button class="lightbox-btn lb-prev" id="lb-prev-btn" aria-label="Previous artwork">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Fullscreen artwork">
-            
             <div class="lightbox-info">
                 <div>
-                    <div id="lb-title" class="lb-title"></div>
+                    <h3 id="lb-title" class="lb-title"></h3>
                     <div id="lb-price" class="lb-price"></div>
                     <div id="lb-specs" class="lb-specs"></div>
                 </div>
-                
                 <div class="lb-inquiry-section" id="lb-inquiry-section">
-                    <a id="lb-inquire-mail" href="#" class="lb-submit" style="margin-bottom: 1rem;">Inquire via Email</a>
-                    
-                    <div style="margin-bottom: 1rem;">
-                        <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="lb-submit" style="margin-bottom: 0;">Inquire via DM</a>
+                    <p class="purchase-info">For inquiries please use email or instagram direct message.</p>
+                    <a id="lb-inquire-mail" href="mailto:chojnacki.studio@gmail.com" class="lb-submit lb-submit--spaced">Inquire via email</a>
+                    <div class="lb-dm-wrap">
+                        <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="lb-submit">Inquire via instagram</a>
                     </div>
-                    
-                    <p class="purchase-info">For inquiries please use the email or direct message on Instagram.</p>
-                    
                     <div class="lb-extra">
-                        <p>Certificate of authenticity included</p>
-                        <p>Shipping worldwide</p>
+                        <p>Certificate of authenticity included.</p>
+                        <p>Shipping worldwide.</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <button class="lightbox-btn lb-next" id="lb-next-btn" aria-label="Następny obraz">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+        <button class="lightbox-btn lb-next" id="lb-next-btn" aria-label="Next artwork">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 1. ACCORDION LOGIC ---
-            const accordions = document.querySelectorAll('.collapsible-header');
-            accordions.forEach(header => {
-                header.addEventListener('click', () => {
-                    const section = header.parentElement;
-                    const isExpanded = section.classList.contains('open');
-                    
-                    if (isExpanded) {
-                        section.classList.remove('open');
-                        header.setAttribute('aria-expanded', 'false');
-                    } else {
-                        section.classList.add('open');
-                        header.setAttribute('aria-expanded', 'true');
-                    }
-                });
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // 1. ACCORDION
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+            const section  = header.closest('.collapsible-section');
+            const toggleEl = section.querySelector('.col-toggle');
+            function syncLabel() {
+                if (toggleEl) toggleEl.textContent = section.classList.contains('open') ? 'Close' : 'View';
+            }
+            header.addEventListener('click', () => {
+                const open = section.classList.toggle('open');
+                header.setAttribute('aria-expanded', open);
+                syncLabel();
+                // Trigger observer for newly visible items
+                setTimeout(() => {
+                    section.querySelectorAll('.visual-item:not(.visible)').forEach(el => io.observe(el));
+                }, 50);
             });
-
-            // --- 2. GENERATING THE LEGENDS DYNAMICALLY ---
-            const col1Data = [
-                { ref: "[01]", title: "Atmosphere<br><span class='color-subtitle'>navy khaki</span>", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
-                { ref: "[02]", title: "Atmosphere<br><span class='color-subtitle'>burgundy khaki</span>", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
-                { ref: "[03]", title: "Atmosphere<br><span class='color-subtitle'>maroon and khaki</span>", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
-                { ref: "[04]", title: "Atmosphere<br><span class='color-subtitle'>cyan purple and blue</span>", specs: "acrylic on raw canvas<br>100 × 80 cm<br>2026<br>1100 €" },
-                { ref: "[05]", title: "Atmosphere<br><span class='color-subtitle'>burnt red and green I</span>", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
-                { ref: "[06]", title: "Atmosphere<br><span class='color-subtitle'>burnt red and green II</span>", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
-                { ref: "[07]", title: "Atmosphere<br><span class='color-subtitle'>burnt red and green III</span>", specs: "acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
-                { ref: "[08]", title: "Atmosphere<br><span class='color-subtitle'>navy red and khaki</span>", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>320 €" },
-                { ref: "[09]", title: "Atmosphere<br><span class='color-subtitle'>navy red and khaki</span>", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>320 €" },
-                { ref: "[10]", title: "Atmosphere<br><span class='color-subtitle'>navy red and khaki</span>", specs: "acrylic on raw canvas<br>35 × 35 cm<br>2026<br>320 €" },
-                { ref: "[11]", title: "Atmosphere<br><span class='color-subtitle'>burgundy navy</span>", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-                { ref: "[12]", title: "Atmosphere<br><span class='color-subtitle'>brown black red</span>", specs: "acrylic on raw canvas<br>35 × 25 cm<br>2026<br>240 €" },
-                { ref: "[13]", title: "Atmosphere<br><span class='color-subtitle'>red blue</span>", specs: "acrylic on raw canvas<br>35 × 20 cm<br>2026<br>220 €" },
-                { ref: "[14]", title: "Atmosphere<br><span class='color-subtitle'>khaki navy red</span>", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2026<br>180 €" },
-                { ref: "[15]", title: "Atmosphere<br><span class='color-subtitle'>red blue</span>", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
-                { ref: "[16]", title: "Atmosphere<br><span class='color-subtitle'>steel blue red</span>", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2026<br>180 €" },
-                { ref: "[17]", title: "Atmosphere<br><span class='color-subtitle'>deep orange blue</span>", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
-                { ref: "[18]", title: "Atmosphere<br><span class='color-subtitle'>blue</span>", specs: "acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
-                { ref: "[19]", title: "Atmosphere<br><span class='color-subtitle'>orange blue yellow</span>", specs: "acrylic on raw canvas<br>20 × 20 cm<br>2025<br>180 €" }
-            ];
-
-            const col2Data = [
-                { ref: "[20]", title: "Chromatic<br><span class='color-subtitle'>blue orange</span>", specs: "acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
-                { ref: "[21]", title: "Chromatic<br><span class='color-subtitle'>red</span>", specs: "acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1300 €" },
-                { ref: "[22]", title: "Chromatic<br><span class='color-subtitle'>orange</span>", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
-                { ref: "[23]", title: "Chromatic<br><span class='color-subtitle'>blue</span>", specs: "acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
-                { ref: "[24]", title: "Chromatic<br><span class='color-subtitle'>blue red green yellow</span>", specs: "acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
-                { ref: "[25]", title: "Chromatic<br><span class='color-subtitle'>blue green</span>", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-                { ref: "[26]", title: "Chromatic<br><span class='color-subtitle'>blue red</span>", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-                { ref: "[27]", title: "Chromatic<br><span class='color-subtitle'>turquoise</span>", specs: "acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-                { ref: "[28]", title: "Chromatic<br><span class='color-subtitle'>blue</span>", specs: "oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
-                { ref: "[29]", title: "Chromatic<br><span class='color-subtitle'>blue</span>", specs: "oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
-                { ref: "[30]", title: "Chromatic<br><span class='color-subtitle'>blue</span>", specs: "oil on canvas<br>24 × 18 cm<br>2024<br>150 €" }
-            ];
-
-            // Renderowanie z użyciem DOM elements
-            function renderLegend(dataArray, containerId, globalStartIndex) {
-                const container = document.getElementById(containerId);
-                container.innerHTML = ''; 
-                
-                dataArray.forEach((item, index) => {
-                    const globalIndex = globalStartIndex + index;
-                    
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'legend-item fade-up visible clickable-ref';
-                    itemDiv.setAttribute('data-index', globalIndex);
-
-                    const refSpan = document.createElement('span');
-                    refSpan.className = 'legend-ref';
-                    refSpan.textContent = item.ref;
-
-                    const detailsDiv = document.createElement('div');
-                    detailsDiv.className = 'legend-details';
-
-                    const titleSpan = document.createElement('span');
-                    titleSpan.className = 'legend-title';
-                    titleSpan.innerHTML = item.title;
-
-                    // Oddzielenie ceny od specyfikacji w bezpieczny sposób
-                    const priceMatch = item.specs.match(/(\d+\s?€)/);
-                    const priceText = priceMatch ? priceMatch[0] : '';
-                    let cleanSpecs = item.specs;
-                    if (priceText) {
-                        cleanSpecs = item.specs.replace(new RegExp(`(<br>)?\\s*${priceText}`), '');
-                    }
-
-                    const specsSpan = document.createElement('span');
-                    specsSpan.className = 'legend-specs';
-                    specsSpan.innerHTML = cleanSpecs;
-
-                    const priceSpan = document.createElement('span');
-                    priceSpan.className = 'legend-price';
-                    priceSpan.textContent = priceText;
-
-                    const statusDiv = document.createElement('div');
-                    statusDiv.className = 'legend-status';
-
-                    const dotSpan = document.createElement('span');
-                    dotSpan.className = 'status-dot';
-
-                    const statusTextSpan = document.createElement('span');
-                    statusTextSpan.className = 'status-text';
-                    statusTextSpan.textContent = 'Available';
-                    
-                    statusDiv.appendChild(dotSpan);
-                    statusDiv.appendChild(statusTextSpan);
-
-                    detailsDiv.appendChild(titleSpan);
-                    detailsDiv.appendChild(specsSpan);
-                    if (priceText) {
-                        detailsDiv.appendChild(priceSpan);
-                    }
-                    detailsDiv.appendChild(statusDiv);
-
-                    itemDiv.appendChild(refSpan);
-                    itemDiv.appendChild(detailsDiv);
-
-                    container.appendChild(itemDiv);
-                });
-            }
-
-            renderLegend(col1Data, 'legend-1', 0);
-            renderLegend(col2Data, 'legend-2', col1Data.length);
-
-            // --- 3. LIGHTBOX LOGIC & REFACTORING (Robust Click Handling) ---
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lbPrevBtn = document.getElementById('lb-prev-btn');
-            const lbNextBtn = document.getElementById('lb-next-btn');
-            const lbCloseBtn = document.getElementById('lb-close-btn');
-            
-            const gridImages = Array.from(document.querySelectorAll('.visual-item .item-image-wrapper img'));
-            let currentLbIndex = 0;
-
-            function populateLightbox({ src, alt, titleOverride, specsOverride, isArtwork = true }) {
-                try {
-                    lightboxImg.classList.remove('is-zoomed');
-                    lightboxImg.style.transformOrigin = 'center center';
-
-                    lightboxImg.src = src || '';
-                    lightboxImg.alt = alt || "Fullscreen image";
-                    
-                    const inquirySection = document.getElementById('lb-inquiry-section');
-                    const priceSection = document.getElementById('lb-price');
-                    
-                    if (isArtwork) {
-                        let finalPrice = "";
-                        let finalSpecs = specsOverride || "";
-                        let finalTitleHtml = titleOverride || "";
-                        
-                        if (alt) {
-                            const priceMatch = alt.match(/(\d+\s?€)/);
-                            if (priceMatch) {
-                                finalPrice = priceMatch[0];
-                                finalSpecs = finalSpecs.replace(new RegExp(`(<br>)?\\s*${finalPrice}`), '');
-                            }
-                            if (finalTitleHtml.includes('|')) {
-                                const tParts = finalTitleHtml.split('|');
-                                finalTitleHtml = `${tParts[0].trim()}<br><span class="color-subtitle">${tParts[1].trim()}</span>`;
-                            }
-                        }
-                        
-                        document.getElementById('lb-title').innerHTML = finalTitleHtml;
-                        if (priceSection) priceSection.textContent = finalPrice;
-                        document.getElementById('lb-specs').innerHTML = finalSpecs;
-                        
-                        const plainTitle = (titleOverride || "").replace(/\|/g, '-');
-                        const subject = encodeURIComponent(`Inquiry — ${plainTitle}`);
-                        const mailLink = document.getElementById('lb-inquire-mail');
-                        if (mailLink) {
-                            mailLink.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}`;
-                        }
-                        
-                        if (inquirySection) inquirySection.classList.remove('hidden');
-                        if (priceSection) priceSection.classList.remove('hidden');
-                        if (lbPrevBtn) lbPrevBtn.classList.remove('hidden');
-                        if (lbNextBtn) lbNextBtn.classList.remove('hidden');
-                    } else {
-                        document.getElementById('lb-title').textContent = titleOverride || "";
-                        document.getElementById('lb-specs').innerHTML = specsOverride || "";
-                        
-                        if (inquirySection) inquirySection.classList.add('hidden');
-                        if (priceSection) priceSection.classList.add('hidden');
-                        if (lbPrevBtn) lbPrevBtn.classList.add('hidden');
-                        if (lbNextBtn) lbNextBtn.classList.add('hidden');
-                    }
-                    
-                    lightbox.classList.add('active');
-                } catch(e) {
-                    console.error('Error opening lightbox:', e);
-                }
-            }
-
-            // Otwieranie z siatki (Obrazy) - Gwarantowane kliknięcie w kontener lub obraz
-            function openGridImage(index) {
-                currentLbIndex = index;
-                const img = gridImages[index];
-                if (!img) return;
-                const altText = img.alt || "Fullscreen artwork";
-                const parts = altText.split(',');
-                const title = parts[0] ? parts[0].trim() : "Artwork detail";
-                const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
-                
-                populateLightbox({ src: img.src, alt: altText, titleOverride: title, specsOverride: specs, isArtwork: true });
-            }
-
-            gridImages.forEach((img, index) => {
-                const wrapper = img.closest('.item-image-wrapper');
-                if (wrapper) {
-                    wrapper.addEventListener('click', () => openGridImage(index));
-                } else {
-                    img.addEventListener('click', () => openGridImage(index));
-                }
+            header.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); header.click(); }
             });
-
-            // Otwieranie ze slidera (Obrazy)
-            const sliderImages = document.querySelectorAll('.slide img');
-            sliderImages.forEach(img => {
-                img.addEventListener('click', () => {
-                    const altText = img.alt || "Fullscreen artwork";
-                    const parts = altText.split(',');
-                    const title = parts[0] ? parts[0].trim() : "Artwork detail";
-                    const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
-                    
-                    populateLightbox({ src: img.src, alt: altText, titleOverride: title, specsOverride: specs, isArtwork: true });
-                });
-            });
-
-            // Otwieranie z sekcji ABOUT (Zwykłe zdjęcia, bez opcji Inquire)
-            const aboutImages = document.querySelectorAll('.about img');
-            aboutImages.forEach(img => {
-                img.addEventListener('click', () => {
-                    populateLightbox({ 
-                        src: img.src, 
-                        alt: img.alt || "Studio view", 
-                        titleOverride: "Studio view", 
-                        specsOverride: img.alt || "Kuba Chojnacki studio",
-                        isArtwork: false
-                    });
-                });
-            });
-
-            // --- FUNKCJA POWIĘKSZANIA ZDJĘĆ W LIGHTBOXIE (ZOOM) ---
-            lightboxImg.addEventListener('click', (e) => {
-                e.stopPropagation(); 
-                
-                if (!lightboxImg.classList.contains('is-zoomed')) {
-                    const rect = lightboxImg.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    
-                    lightboxImg.style.transformOrigin = `${x}% ${y}%`;
-                    lightboxImg.classList.add('is-zoomed');
-                } else {
-                    lightboxImg.classList.remove('is-zoomed');
-                    setTimeout(() => {
-                        if(!lightboxImg.classList.contains('is-zoomed')){
-                            lightboxImg.style.transformOrigin = 'center center';
-                        }
-                    }, 400); 
-                }
-            });
-
-            // Strzałki lightboxa
-            if (lbPrevBtn) {
-                lbPrevBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    currentLbIndex = (currentLbIndex > 0) ? currentLbIndex - 1 : gridImages.length - 1;
-                    openGridImage(currentLbIndex);
-                });
-            }
-
-            if (lbNextBtn) {
-                lbNextBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    currentLbIndex = (currentLbIndex < gridImages.length - 1) ? currentLbIndex + 1 : 0;
-                    openGridImage(currentLbIndex);
-                });
-            }
-
-            // Przycisk "X" zamykający lightbox
-            if (lbCloseBtn) {
-                lbCloseBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    lightbox.classList.remove('active');
-                });
-            }
-
-            // Kliknięcie w blok tekstowy w legendzie otwiera zdjęcie
-            const clickableRefs = document.querySelectorAll('.clickable-ref');
-            clickableRefs.forEach((ref) => {
-                ref.addEventListener('click', (e) => {
-                    const globalIndex = parseInt(e.currentTarget.getAttribute('data-index'));
-                    openGridImage(globalIndex);
-                });
-            });
-
-            // Zamykanie lightboxa kliknięciem w tło
-            lightbox.addEventListener('click', (e) => {
-                if (!e.target.closest('.lightbox-info') && !e.target.closest('.lightbox-btn') && e.target !== lightboxImg) {
-                    lightbox.classList.remove('active');
-                }
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                
-                if (e.key === 'Escape') {
-                    lightbox.classList.remove('active');
-                } else if (e.key === 'ArrowLeft' && lbPrevBtn && !lbPrevBtn.classList.contains('hidden')) {
-                    lbPrevBtn.click();
-                } else if (e.key === 'ArrowRight' && lbNextBtn && !lbNextBtn.classList.contains('hidden')) {
-                    lbNextBtn.click();
-                }
-            });
-
-            // --- 4. SLIDESHOW LOGIC ---
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.querySelector('.prev-btn');
-            const nextBtn = document.querySelector('.next-btn');
-            let currentSlide = 0;
-            let slideInterval;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    if (i === index) {
-                        slide.classList.add('active');
-                    } else {
-                        slide.classList.remove('active');
-                    }
-                });
-            }
-
-            function startSlideshow() {
-                slideInterval = setInterval(() => {
-                    currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
-                    showSlide(currentSlide);
-                }, 5000);
-            }
-
-            function resetSlideshow() {
-                clearInterval(slideInterval);
-                startSlideshow();
-            }
-
-            if (prevBtn) {
-                prevBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
-                    showSlide(currentSlide);
-                    resetSlideshow();
-                });
-            }
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
-                    showSlide(currentSlide);
-                    resetSlideshow();
-                });
-            }
-
-            startSlideshow();
-
-            // --- 5. SCROLL ANIMATIONS (FADE-UP) ---
-            setTimeout(() => {
-                const fadeElements = document.querySelectorAll('.visual-item, .legend-item, .about-image-left, .about-info, .about-image-right, .available-header, .contact-block');
-                
-                const fadeObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if(entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            fadeObserver.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
-                fadeElements.forEach(el => {
-                    el.classList.add('fade-up');
-                    fadeObserver.observe(el);
-                });
-            }, 100);
+            syncLabel();
         });
+
+        // 2. LEGEND
+        const col1Data = [
+            { ref:"01", title:"Atmosphere | navy khaki",             specs:"acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
+            { ref:"02", title:"Atmosphere | burgundy khaki",         specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+            { ref:"03", title:"Atmosphere | maroon and khaki",       specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+            { ref:"04", title:"Atmosphere | cyan purple and blue",   specs:"acrylic on raw canvas<br>100 × 80 cm<br>2026<br>1100 €" },
+            { ref:"05", title:"Atmosphere | burnt red and green I",  specs:"acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
+            { ref:"06", title:"Atmosphere | burnt red and green II", specs:"acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
+            { ref:"07", title:"Atmosphere | burnt red and green III",specs:"acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
+            { ref:"08", title:"Atmosphere | navy red and khaki",     specs:"acrylic on raw canvas<br>35 × 35 cm<br>2026<br>320 €" },
+            { ref:"09", title:"Atmosphere | navy red and khaki",     specs:"acrylic on raw canvas<br>35 × 35 cm<br>2026<br>320 €" },
+            { ref:"10", title:"Atmosphere | navy red and khaki",     specs:"acrylic on raw canvas<br>35 × 35 cm<br>2026<br>320 €" },
+            { ref:"11", title:"Atmosphere | burgundy navy",          specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
+            { ref:"12", title:"Atmosphere | brown black red",        specs:"acrylic on raw canvas<br>35 × 25 cm<br>2026<br>240 €" },
+            { ref:"13", title:"Atmosphere | red blue",               specs:"acrylic on raw canvas<br>35 × 20 cm<br>2026<br>220 €" },
+            { ref:"14", title:"Atmosphere | khaki navy red",         specs:"acrylic on raw canvas<br>20 × 20 cm<br>2026<br>180 €" },
+            { ref:"15", title:"Atmosphere | red blue",               specs:"acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
+            { ref:"16", title:"Atmosphere | steel blue red",         specs:"acrylic on raw canvas<br>20 × 20 cm<br>2026<br>180 €" },
+            { ref:"17", title:"Atmosphere | deep orange blue",       specs:"acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
+            { ref:"18", title:"Atmosphere | orange blue yellow",     specs:"acrylic on raw canvas<br>20 × 20 cm<br>2025<br>180 €" },
+        ];
+        const col2Data = [
+            { ref:"19", title:"Chromatic | blue orange",            specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+            { ref:"20", title:"Chromatic | red",                    specs:"acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1300 €" },
+            { ref:"21", title:"Chromatic | orange",                 specs:"acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
+            { ref:"22", title:"Chromatic | blue",                   specs:"acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
+            { ref:"23", title:"Chromatic | blue red green yellow",  specs:"acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
+            { ref:"24", title:"Chromatic | blue green",             specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
+            { ref:"25", title:"Chromatic | blue red",               specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
+            { ref:"26", title:"Chromatic | turquoise",              specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
+            { ref:"27", title:"Chromatic | blue",                   specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
+            { ref:"28", title:"Chromatic | blue",                   specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
+            { ref:"29", title:"Chromatic | blue",                   specs:"oil on canvas<br>24 × 18 cm<br>2024<br>150 €" },
+            { ref:"30", title:"Chromatic | blue",                   specs:"acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
+        ];
+
+        function renderLegend(data, id, start) {
+            const c = document.getElementById(id);
+            if (!c) return;
+            c.innerHTML = '';
+            data.forEach((item, i) => {
+                const globalIdx = start + i;
+                const pm = item.specs.match(/(\d[\d\s]*\s*€)/);
+                const price = pm ? pm[0].trim() : '';
+                const cleanSpecs = price ? item.specs.replace(new RegExp('(<br>)?\\s*' + price.replace(/[€]/g,'\\$&')), '') : item.specs;
+                const [tMain, tSub] = item.title.split('|').map(s => s.trim());
+                const el = document.createElement('div');
+                el.className = 'legend-item clickable-ref';
+                el.dataset.index = globalIdx;
+                el.innerHTML =
+                    `<span class="legend-ref">${item.ref}</span>` +
+                    `<span class="legend-title">${tMain}${tSub ? `<br><span class="color-subtitle">${tSub}</span>` : ''}</span>` +
+                    `<span class="legend-specs">${cleanSpecs}</span>` +
+                    (price ? `<span class="legend-price">${price}</span>` : '') +
+                    `<div class="legend-status"><span class="status-dot"></span><span class="status-text">Available</span></div>`;
+                c.appendChild(el);
+            });
+        }
+        renderLegend(col1Data, 'legend-1', 0);
+        renderLegend(col2Data, 'legend-2', col1Data.length);
+
+        // 3. LIGHTBOX
+        const lb       = document.getElementById('lightbox');
+        const lbImg    = document.getElementById('lightbox-img');
+        const lbPrev   = document.getElementById('lb-prev-btn');
+        const lbNext   = document.getElementById('lb-next-btn');
+        const lbClose  = document.getElementById('lb-close-btn');
+        const gridImgs = Array.from(document.querySelectorAll('.visual-item .item-image-wrapper img'));
+        let lbIdx = 0;
+
+        function openLb({ src, alt, title, specs, isArt = true }) {
+            lbImg.classList.remove('is-zoomed');
+            lbImg.style.transformOrigin = 'center center';
+            lbImg.src = src; lbImg.alt = alt || '';
+            const inq = document.getElementById('lb-inquiry-section');
+            const prc = document.getElementById('lb-price');
+            if (isArt) {
+                const pm = (alt||'').match(/(\d[\d\s]*\s*€)/);
+                const price = pm ? pm[0].trim() : '';
+                let sp = specs || '';
+                if (price) sp = sp.replace(new RegExp('(<br>)?\\s*' + price.replace(/[€]/g,'\\$&')), '');
+                let titleHtml = title || '';
+                if (titleHtml.includes('|')) {
+                    const [a,b] = titleHtml.split('|').map(s=>s.trim());
+                    titleHtml = a + (b ? `<br><span class="color-subtitle">${b}</span>` : '');
+                }
+                document.getElementById('lb-title').innerHTML = titleHtml;
+                if (prc) prc.textContent = price;
+                document.getElementById('lb-specs').innerHTML = sp;
+                const mail = document.getElementById('lb-inquire-mail');
+                if (mail) mail.href = 'mailto:chojnacki.studio@gmail.com?subject=' + encodeURIComponent('Inquiry — ' + (title||'').replace(/\|/g,'-'));
+                [inq,prc,lbPrev,lbNext].forEach(el=>el&&el.classList.remove('hidden'));
+            } else {
+                document.getElementById('lb-title').textContent = title||'';
+                document.getElementById('lb-specs').innerHTML = specs||'';
+                [inq,prc,lbPrev,lbNext].forEach(el=>el&&el.classList.add('hidden'));
+            }
+            lb.classList.add('active');
+        }
+
+        function openGrid(i) {
+            lbIdx = i;
+            const img = gridImgs[i]; if (!img) return;
+            const parts = (img.alt||'').split(',');
+            openLb({ src: img.src, alt: img.alt, title: parts[0]?.trim(), specs: parts.slice(1).map(p=>p.trim()).join('<br>'), isArt: true });
+        }
+
+        gridImgs.forEach((img,i) => {
+            (img.closest('.item-image-wrapper')||img).addEventListener('click', ()=>openGrid(i));
+        });
+        document.querySelectorAll('.slide img').forEach(img => {
+            img.addEventListener('click', () => {
+                const parts = (img.alt||'').split(',');
+                openLb({ src:img.src, alt:img.alt, title:parts[0]?.trim(), specs:parts.slice(1).map(p=>p.trim()).join('<br>'), isArt:true });
+            });
+        });
+        document.querySelectorAll('.about-photo img').forEach(img => {
+            img.addEventListener('click', () => openLb({ src:img.src, alt:img.alt, title:'Studio view', specs:img.alt, isArt:false }));
+        });
+        document.querySelectorAll('.clickable-ref').forEach(el => {
+            el.addEventListener('click', () => openGrid(parseInt(el.dataset.index)));
+        });
+
+        lbImg.addEventListener('click', e => {
+            e.stopPropagation();
+            if (!lbImg.classList.contains('is-zoomed')) {
+                const r = lbImg.getBoundingClientRect();
+                lbImg.style.transformOrigin = `${((e.clientX-r.left)/r.width*100).toFixed(1)}% ${((e.clientY-r.top)/r.height*100).toFixed(1)}%`;
+                lbImg.classList.add('is-zoomed');
+            } else {
+                lbImg.classList.remove('is-zoomed');
+                setTimeout(()=>{ if(!lbImg.classList.contains('is-zoomed')) lbImg.style.transformOrigin='center center'; }, 400);
+            }
+        });
+        lbPrev&&lbPrev.addEventListener('click', e=>{ e.stopPropagation(); openGrid(lbIdx>0?lbIdx-1:gridImgs.length-1); });
+        lbNext&&lbNext.addEventListener('click', e=>{ e.stopPropagation(); openGrid(lbIdx<gridImgs.length-1?lbIdx+1:0); });
+        lbClose&&lbClose.addEventListener('click', e=>{ e.stopPropagation(); lb.classList.remove('active'); });
+        lb.addEventListener('click', e=>{ if(!e.target.closest('.lightbox-info,.lightbox-btn')&&e.target!==lbImg) lb.classList.remove('active'); });
+        document.addEventListener('keydown', e=>{
+            if (!lb.classList.contains('active')) return;
+            if (e.key==='Escape') lb.classList.remove('active');
+            else if (e.key==='ArrowLeft'&&lbPrev&&!lbPrev.classList.contains('hidden')) lbPrev.click();
+            else if (e.key==='ArrowRight'&&lbNext&&!lbNext.classList.contains('hidden')) lbNext.click();
+        });
+
+        // Focus trap
+        function focusables(c) {
+            return Array.from(c.querySelectorAll('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')).filter(el=>!el.closest('.hidden'));
+        }
+        document.addEventListener('keydown', e=>{
+            if (!lb.classList.contains('active')||e.key!=='Tab') return;
+            const els=focusables(lb); if(!els.length) return;
+            if (e.shiftKey&&document.activeElement===els[0]){e.preventDefault();els[els.length-1].focus();}
+            else if(!e.shiftKey&&document.activeElement===els[els.length-1]){e.preventDefault();els[0].focus();}
+        });
+        new MutationObserver(()=>{
+            if(lb.classList.contains('active')){const els=focusables(lb);if(els.length)els[0].focus();}
+        }).observe(lb,{attributes:true,attributeFilter:['class']});
+
+        // 4. SLIDESHOW
+        const slides     = Array.from(document.querySelectorAll('#slides-container .slide'));
+        const dotsWrap   = document.getElementById('slide-dots');
+        const counterEl  = document.getElementById('hero-counter');
+        const progressEl = document.getElementById('hero-progress');
+        const prevBtn    = document.querySelector('.prev-btn');
+        const nextBtn    = document.querySelector('.next-btn');
+        const N          = slides.length;
+        let cur          = 0;
+        let timer        = null;
+
+        function pad2(n) { return String(n).padStart(2,'0'); }
+
+        // Build dots
+        slides.forEach((_,i) => {
+            const d = document.createElement('button');
+            d.className = 'slide-dot' + (i===0 ? ' active' : '');
+            d.setAttribute('aria-label', 'Go to slide ' + (i+1));
+            d.addEventListener('click', e => { e.stopPropagation(); goTo(i); resetTimer(); });
+            dotsWrap.appendChild(d);
+        });
+
+        function goTo(i) {
+            slides[cur].classList.remove('active');
+            document.querySelectorAll('.slide-dot')[cur].classList.remove('active');
+            cur = (i + N) % N;
+            slides[cur].classList.add('active');
+            document.querySelectorAll('.slide-dot')[cur].classList.add('active');
+            counterEl.textContent = pad2(cur+1) + ' / ' + pad2(N);
+            progressEl.style.width = ((cur+1)/N * 100) + '%';
+        }
+
+        function startTimer() {
+            timer = setInterval(() => goTo(cur + 1), 5000);
+        }
+        function resetTimer() {
+            clearInterval(timer);
+            startTimer();
+        }
+
+        prevBtn && prevBtn.addEventListener('click', e => { e.stopPropagation(); goTo(cur-1); resetTimer(); });
+        nextBtn && nextBtn.addEventListener('click', e => { e.stopPropagation(); goTo(cur+1); resetTimer(); });
+
+        // Touch swipe
+        let tx0 = 0;
+        const heroEl = document.querySelector('.hero-section');
+        heroEl && heroEl.addEventListener('touchstart', e => { tx0 = e.changedTouches[0].clientX; }, { passive: true });
+        heroEl && heroEl.addEventListener('touchend', e => {
+            const dx = tx0 - e.changedTouches[0].clientX;
+            if (Math.abs(dx) > 40) { goTo(dx > 0 ? cur+1 : cur-1); resetTimer(); }
+        }, { passive: true });
+
+        // Init
+        goTo(0);
+        startTimer();
+
+        // 5. INTERSECTION OBSERVER for fade-up + grid items
+        const io = new IntersectionObserver(entries=>{
+            entries.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('visible');io.unobserve(en.target);} });
+        },{threshold:0.07});
+        setTimeout(()=>{
+            document.querySelectorAll('.fade-up, .visual-item').forEach(el=>io.observe(el));
+        }, 100);
+
+    });
     </script>
 </body>
 </html>
