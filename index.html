@@ -74,7 +74,8 @@
         }
 
         /* Simplified PLUS cursor for zoomable artworks */
-        .item-image-wrapper, .slide img, .about img {
+        .item-image-wrapper, .slide img, .about img, .clickable-ref {
+            cursor: pointer; /* Zabezpieczenie dla starszych przeglądarek / iOS */
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
         }
 
@@ -306,6 +307,7 @@
             height: auto;
             object-fit: contain;
             transition: opacity 0.3s ease;
+            pointer-events: none; /* Zabezpieczenie przed błędem warstw kliknięcia na telefonach */
         }
 
         .item-image-wrapper:hover img {
@@ -335,7 +337,6 @@
             font-size: 0.65rem;
             line-height: 1.2;
             transition: opacity 0.2s ease;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 2v20M2 12h20' stroke='%23111111' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, zoom-in !important;
         }
 
         .legend-item:hover {
@@ -352,6 +353,7 @@
         .legend-details {
             display: flex;
             flex-direction: column;
+            pointer-events: none; /* Propagacja klikniecia w gore */
         }
 
         .legend-title {
@@ -397,6 +399,7 @@
             font-size: 0.85rem;
             transition: opacity 0.2s ease;
             width: fit-content;
+            pointer-events: auto; /* Aktywne linki globalne w panelu Available works */
         }
 
         .inquire-link:hover {
@@ -460,10 +463,12 @@
             color: #555;
             line-height: 1.4;
             text-align: left;
+        }
+
         /* Contact Section - More Compact & Centered */
         #contact.section-padding {
             padding: 3rem 3rem 2rem 3rem;
-            text-align: center; /* Dodano wyśrodkowanie całego bloku */
+            text-align: center;
         }
         
         .contact-section {
@@ -472,10 +477,10 @@
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Zwiększone minmax dla lepszego rozłożenia */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 1.5rem;
-            justify-content: center; /* Wyśrodkowanie siatki */
+            justify-content: center;
         }
 
         .contact-block h3 {
@@ -866,9 +871,9 @@
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="Chromatic | blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[25]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="Chromatic | blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[26]</span></div>
                     <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="Chromatic | turquoise, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">[27]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2026, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">[28]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2026, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">[29]</span></div>
-                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="Chromatic | blue, oil on canvas, 24 × 18 cm, 2026, 150 €" width="1000" height="750" loading="lazy" decoding="async"></div><span class="ref-number">[30]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">[28]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">[29]</span></div>
+                    <div class="visual-item fade-up"><div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="Chromatic | blue, oil on canvas, 24 × 18 cm, 2024, 150 €" width="1000" height="750" loading="lazy" decoding="async"></div><span class="ref-number">[30]</span></div>
                 </div>
                 <div id="legend-2" class="legend-grid border-t"></div>
             </div>
@@ -1054,7 +1059,7 @@
                     const priceText = priceMatch ? priceMatch[0] : '';
                     let cleanSpecs = item.specs;
                     if (priceText) {
-                        cleanSpecs = item.specs.replace(new RegExp(`(<br>)?${priceText}`), '');
+                        cleanSpecs = item.specs.replace(new RegExp(`(<br>)?\\s*${priceText}`), '');
                     }
 
                     const specsSpan = document.createElement('span');
@@ -1095,7 +1100,7 @@
             renderLegend(col1Data, 'legend-1', 0);
             renderLegend(col2Data, 'legend-2', col1Data.length);
 
-            // --- 3. LIGHTBOX LOGIC & REFACTORING ---
+            // --- 3. LIGHTBOX LOGIC & REFACTORING (Robust Click Handling) ---
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const lbPrevBtn = document.getElementById('lb-prev-btn');
@@ -1106,74 +1111,84 @@
             let currentLbIndex = 0;
 
             function populateLightbox({ src, alt, titleOverride, specsOverride, isArtwork = true }) {
-                lightboxImg.classList.remove('is-zoomed');
-                lightboxImg.style.transformOrigin = 'center center';
+                try {
+                    lightboxImg.classList.remove('is-zoomed');
+                    lightboxImg.style.transformOrigin = 'center center';
 
-                lightboxImg.src = src;
-                lightboxImg.alt = alt || "Fullscreen image";
-                
-                const inquirySection = document.getElementById('lb-inquiry-section');
-                const priceSection = document.getElementById('lb-price');
-                
-                if (isArtwork) {
-                    let finalPrice = "";
-                    let finalSpecs = specsOverride;
-                    let finalTitleHtml = titleOverride;
+                    lightboxImg.src = src || '';
+                    lightboxImg.alt = alt || "Fullscreen image";
                     
-                    if (alt) {
-                        const priceMatch = alt.match(/(\d+\s?€)/);
-                        if (priceMatch) {
-                            finalPrice = priceMatch[0];
-                            finalSpecs = specsOverride.replace(new RegExp(`(<br>)?${finalPrice}`), '');
+                    const inquirySection = document.getElementById('lb-inquiry-section');
+                    const priceSection = document.getElementById('lb-price');
+                    
+                    if (isArtwork) {
+                        let finalPrice = "";
+                        let finalSpecs = specsOverride || "";
+                        let finalTitleHtml = titleOverride || "";
+                        
+                        if (alt) {
+                            const priceMatch = alt.match(/(\d+\s?€)/);
+                            if (priceMatch) {
+                                finalPrice = priceMatch[0];
+                                finalSpecs = finalSpecs.replace(new RegExp(`(<br>)?\\s*${finalPrice}`), '');
+                            }
+                            if (finalTitleHtml.includes('|')) {
+                                const tParts = finalTitleHtml.split('|');
+                                finalTitleHtml = `${tParts[0].trim()}<br><span class="color-subtitle">${tParts[1].trim()}</span>`;
+                            }
                         }
-                        // Przechwytuje specjalny separator | i formatuje go na mniejszy podtytuł w oknie powiększenia
-                        if (titleOverride.includes('|')) {
-                            const tParts = titleOverride.split('|');
-                            finalTitleHtml = `${tParts[0].trim()}<br><span class="color-subtitle">${tParts[1].trim()}</span>`;
+                        
+                        document.getElementById('lb-title').innerHTML = finalTitleHtml;
+                        if (priceSection) priceSection.textContent = finalPrice;
+                        document.getElementById('lb-specs').innerHTML = finalSpecs;
+                        
+                        const plainTitle = (titleOverride || "").replace(/\|/g, '-');
+                        const subject = encodeURIComponent(`Inquiry — ${plainTitle}`);
+                        const mailLink = document.getElementById('lb-inquire-mail');
+                        if (mailLink) {
+                            mailLink.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}`;
                         }
+                        
+                        if (inquirySection) inquirySection.classList.remove('hidden');
+                        if (priceSection) priceSection.classList.remove('hidden');
+                        if (lbPrevBtn) lbPrevBtn.classList.remove('hidden');
+                        if (lbNextBtn) lbNextBtn.classList.remove('hidden');
+                    } else {
+                        document.getElementById('lb-title').textContent = titleOverride || "";
+                        document.getElementById('lb-specs').innerHTML = specsOverride || "";
+                        
+                        if (inquirySection) inquirySection.classList.add('hidden');
+                        if (priceSection) priceSection.classList.add('hidden');
+                        if (lbPrevBtn) lbPrevBtn.classList.add('hidden');
+                        if (lbNextBtn) lbNextBtn.classList.add('hidden');
                     }
                     
-                    document.getElementById('lb-title').innerHTML = finalTitleHtml;
-                    priceSection.textContent = finalPrice;
-                    document.getElementById('lb-specs').innerHTML = finalSpecs;
-                    
-                    // Bezpieczne usuwanie tagów HTML dla tematu maila
-                    const plainTitle = titleOverride.replace(/\|/g, '-');
-                    const subject = encodeURIComponent(`Inquiry — ${plainTitle}`);
-                    const mailLink = document.getElementById('lb-inquire-mail');
-                    if (mailLink) {
-                        mailLink.href = `mailto:chojnacki.studio@gmail.com?subject=${subject}`;
-                    }
-                    
-                    inquirySection.classList.remove('hidden');
-                    priceSection.classList.remove('hidden');
-                    lbPrevBtn.classList.remove('hidden');
-                    lbNextBtn.classList.remove('hidden');
-                } else {
-                    document.getElementById('lb-title').textContent = titleOverride;
-                    document.getElementById('lb-specs').innerHTML = specsOverride;
-                    
-                    // WŁAŚCIWE UKRYWANIE ELEMENTÓW
-                    inquirySection.classList.add('hidden');
-                    priceSection.classList.add('hidden');
-                    lbPrevBtn.classList.add('hidden');
-                    lbNextBtn.classList.add('hidden');
+                    lightbox.classList.add('active');
+                } catch(e) {
+                    console.error('Error opening lightbox:', e);
                 }
-                
-                lightbox.classList.add('active');
             }
 
-            // Otwieranie z siatki (Obrazy)
+            // Otwieranie z siatki (Obrazy) - Gwarantowane kliknięcie w kontener lub obraz
+            function openGridImage(index) {
+                currentLbIndex = index;
+                const img = gridImages[index];
+                if (!img) return;
+                const altText = img.alt || "Fullscreen artwork";
+                const parts = altText.split(',');
+                const title = parts[0] ? parts[0].trim() : "Artwork detail";
+                const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
+                
+                populateLightbox({ src: img.src, alt: altText, titleOverride: title, specsOverride: specs, isArtwork: true });
+            }
+
             gridImages.forEach((img, index) => {
-                img.addEventListener('click', () => {
-                    currentLbIndex = index;
-                    const altText = img.alt || "Fullscreen artwork";
-                    const parts = altText.split(',');
-                    const title = parts[0] ? parts[0].trim() : "Artwork detail";
-                    const specs = parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "";
-                    
-                    populateLightbox({ src: img.src, alt: altText, titleOverride: title, specsOverride: specs, isArtwork: true });
-                });
+                const wrapper = img.closest('.item-image-wrapper');
+                if (wrapper) {
+                    wrapper.addEventListener('click', () => openGridImage(index));
+                } else {
+                    img.addEventListener('click', () => openGridImage(index));
+                }
             });
 
             // Otwieranie ze slidera (Obrazy)
@@ -1225,50 +1240,36 @@
             });
 
             // Strzałki lightboxa
-            lbPrevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentLbIndex = (currentLbIndex > 0) ? currentLbIndex - 1 : gridImages.length - 1;
-                const img = gridImages[currentLbIndex];
-                const altText = img.alt || "Fullscreen artwork";
-                const parts = altText.split(',');
-                populateLightbox({
-                    src: img.src, 
-                    alt: altText, 
-                    titleOverride: parts[0] ? parts[0].trim() : "Artwork detail", 
-                    specsOverride: parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "",
-                    isArtwork: true
+            if (lbPrevBtn) {
+                lbPrevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentLbIndex = (currentLbIndex > 0) ? currentLbIndex - 1 : gridImages.length - 1;
+                    openGridImage(currentLbIndex);
                 });
-            });
+            }
 
-            lbNextBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentLbIndex = (currentLbIndex < gridImages.length - 1) ? currentLbIndex + 1 : 0;
-                const img = gridImages[currentLbIndex];
-                const altText = img.alt || "Fullscreen artwork";
-                const parts = altText.split(',');
-                populateLightbox({
-                    src: img.src, 
-                    alt: altText, 
-                    titleOverride: parts[0] ? parts[0].trim() : "Artwork detail", 
-                    specsOverride: parts.length > 1 ? parts.slice(1).map(p => p.trim()).join('<br>') : "",
-                    isArtwork: true
+            if (lbNextBtn) {
+                lbNextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentLbIndex = (currentLbIndex < gridImages.length - 1) ? currentLbIndex + 1 : 0;
+                    openGridImage(currentLbIndex);
                 });
-            });
+            }
 
             // Przycisk "X" zamykający lightbox
-            lbCloseBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                lightbox.classList.remove('active');
-            });
+            if (lbCloseBtn) {
+                lbCloseBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    lightbox.classList.remove('active');
+                });
+            }
 
             // Kliknięcie w blok tekstowy w legendzie otwiera zdjęcie
             const clickableRefs = document.querySelectorAll('.clickable-ref');
             clickableRefs.forEach((ref) => {
                 ref.addEventListener('click', (e) => {
                     const globalIndex = parseInt(e.currentTarget.getAttribute('data-index'));
-                    if(gridImages[globalIndex]) {
-                        gridImages[globalIndex].click(); 
-                    }
+                    openGridImage(globalIndex);
                 });
             });
 
@@ -1284,9 +1285,9 @@
                 
                 if (e.key === 'Escape') {
                     lightbox.classList.remove('active');
-                } else if (e.key === 'ArrowLeft' && !lbPrevBtn.classList.contains('hidden')) {
+                } else if (e.key === 'ArrowLeft' && lbPrevBtn && !lbPrevBtn.classList.contains('hidden')) {
                     lbPrevBtn.click();
-                } else if (e.key === 'ArrowRight' && !lbNextBtn.classList.contains('hidden')) {
+                } else if (e.key === 'ArrowRight' && lbNextBtn && !lbNextBtn.classList.contains('hidden')) {
                     lbNextBtn.click();
                 }
             });
@@ -1320,19 +1321,23 @@
                 startSlideshow();
             }
 
-            prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
-                showSlide(currentSlide);
-                resetSlideshow();
-            });
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+                    showSlide(currentSlide);
+                    resetSlideshow();
+                });
+            }
 
-            nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
-                showSlide(currentSlide);
-                resetSlideshow();
-            });
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+                    showSlide(currentSlide);
+                    resetSlideshow();
+                });
+            }
 
             startSlideshow();
 
