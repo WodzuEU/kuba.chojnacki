@@ -710,7 +710,7 @@
         <div class="slides-container" id="slides-container">
 
             <div class="slide active">
-                <img src="IMAGES/30.jpg" alt="Atmosphere | burgundy khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" fetchpriority="high" decoding="async" onerror="this.style.background='#1a0a06'">
+                <img src="IMAGES/30_A.jpg" data-full="IMAGES/30.jpg" alt="Atmosphere | burgundy khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="952" height="1270" fetchpriority="high" decoding="async" onerror="this.style.background='#1a0a06'">
                 <div class="slide-vignette"></div>
                 <div class="slide-caption">
                     <div class="slide-caption-title">Atmosphere | burgundy khaki</div>
@@ -719,7 +719,7 @@
             </div>
 
             <div class="slide">
-                <img src="IMAGES/31.jpg" alt="Atmosphere | maroon khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.background='#180808'">
+                <img src="IMAGES/31_A.jpg" data-full="IMAGES/31.jpg" alt="Atmosphere | maroon khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="952" height="1270" loading="lazy" decoding="async" onerror="this.style.background='#180808'">
                 <div class="slide-vignette"></div>
                 <div class="slide-caption">
                     <div class="slide-caption-title">Atmosphere | maroon khaki</div>
@@ -728,16 +728,16 @@
             </div>
 
             <div class="slide">
-                <img src="IMAGES/26.jpg" alt="Atmosphere | cyan purple blue, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async" onerror="this.style.background='#08101a'">
+                <img src="IMAGES/17_A.jpg" data-full="IMAGES/17.jpg" alt="Atmosphere | navy khaki, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="952" height="1270" loading="lazy" decoding="async" onerror="this.style.background='#080c14'">
                 <div class="slide-vignette"></div>
                 <div class="slide-caption">
-                    <div class="slide-caption-title">Atmosphere | cyan purple blue</div>
-                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 100 &times; 80 cm &ensp;&middot;&ensp; 2026</div>
+                    <div class="slide-caption-title">Atmosphere | navy khaki</div>
+                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 150 &times; 100 cm &ensp;&middot;&ensp; 2025</div>
                 </div>
             </div>
 
             <div class="slide">
-                <img src="IMAGES/25.jpg" alt="Chromatic | blue orange, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async" onerror="this.style.background='#0a0c18'">
+                <img src="IMAGES/25_A.jpg" data-full="IMAGES/25.jpg" alt="Chromatic | blue orange, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="952" height="1270" loading="lazy" decoding="async" onerror="this.style.background='#0a0c18'">
                 <div class="slide-vignette"></div>
                 <div class="slide-caption">
                     <div class="slide-caption-title">Chromatic | blue orange</div>
@@ -746,7 +746,16 @@
             </div>
 
             <div class="slide">
-                <img src="IMAGES/19.jpg" alt="Chromatic | red, acrylic on raw canvas, 100 × 100 cm, 2025, 1300 €" width="1000" height="1000" loading="lazy" decoding="async" onerror="this.style.background='#1a0606'">
+                <img src="IMAGES/21_A.jpg" data-full="IMAGES/21.jpg" alt="Chromatic | blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" width="952" height="1270" loading="lazy" decoding="async" onerror="this.style.background='#060c1a'">
+                <div class="slide-vignette"></div>
+                <div class="slide-caption">
+                    <div class="slide-caption-title">Chromatic | blue</div>
+                    <div class="slide-caption-specs">acrylic on raw canvas &ensp;&middot;&ensp; 100 &times; 70 cm &ensp;&middot;&ensp; 2026</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="IMAGES/19_A.jpg" data-full="IMAGES/19.jpg" alt="Chromatic | red, acrylic on raw canvas, 100 × 100 cm, 2025, 1300 €" width="952" height="1270" loading="lazy" decoding="async" onerror="this.style.background='#1a0606'">
                 <div class="slide-vignette"></div>
                 <div class="slide-caption">
                     <div class="slide-caption-title">Chromatic | red</div>
@@ -764,7 +773,7 @@
         </button>
 
         <div class="hero-progress" id="hero-progress"></div>
-        <div class="hero-counter" id="hero-counter">01 / 05</div>
+        <div class="hero-counter" id="hero-counter">01 / 06</div>
         <div class="slide-dots" id="slide-dots"></div>
     </div>
 
@@ -1065,7 +1074,9 @@
         document.querySelectorAll('.slide img').forEach(img => {
             img.addEventListener('click', () => {
                 const parts = (img.alt||'').split(',');
-                openLb({ src:img.src, alt:img.alt, title:parts[0]?.trim(), specs:parts.slice(1).map(p=>p.trim()).join('<br>'), isArt:true });
+                // Use original full image (data-full) not the _A crop
+                const fullSrc = img.dataset.full || img.src;
+                openLb({ src: fullSrc, alt:img.alt, title:parts[0]?.trim(), specs:parts.slice(1).map(p=>p.trim()).join('<br>'), isArt:true });
             });
         });
         document.querySelectorAll('.about-photo img').forEach(img => {
