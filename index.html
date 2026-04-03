@@ -339,6 +339,12 @@
             color: var(--ink);
             line-height: 1.3;
         }
+        .ref-number.sold {
+            color: #d32f2f;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
         /* Legend — compact, no lines between cells */
         .legend-grid {
@@ -403,15 +409,19 @@
             color: var(--ink);
             margin-top: 0.12rem;
         }
-        .legend-status {
+        
+        /* Status styling - MODIFIED FOR SOLD */
+        .legend-status, .lb-status {
             display: flex; align-items: center; gap: 0.35rem;
             margin-top: 0.1rem;
+        }
+        .lb-status {
+            margin-top: 0.3rem; margin-bottom: 0.2rem;
         }
         .status-dot {
             width: 5px; height: 5px; border-radius: 50%;
             background: var(--ink); flex-shrink: 0; display: inline-block;
         }
-        /* status-text: black Montserrat lowercase */
         .status-text {
             font-family: var(--sans);
             font-size: 10px;
@@ -419,6 +429,17 @@
             letter-spacing: 0.03em;
             text-transform: lowercase;
             color: var(--ink);
+        }
+
+        /* Sold states */
+        .legend-price.sold, .lb-price.sold {
+            color: var(--mid); /* Grayed out price */
+        }
+        .status-dot.sold {
+            background: #d32f2f; /* Red dot */
+        }
+        .status-text.sold {
+            color: #d32f2f; /* Red text */
         }
 
         .inquire-link {
@@ -804,7 +825,9 @@
                 <div class="visual-grid">
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="Atmosphere | navy khaki, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">01</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="Atmosphere | burgundy blue, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">02</span></div>
-                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="Atmosphere | maroon khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">03</span></div>
+                    
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="Atmosphere | maroon khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number sold">03 <span class="status-dot sold"></span></span></div>
+                    
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/26.jpg" alt="Atmosphere | cyan purple blue, acrylic on raw canvas, 100 × 80 cm, 2026, 1100 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">04</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/27.jpg" alt="Atmosphere | burnt red green I, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">05</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/28.jpg" alt="Atmosphere | burnt red green II, acrylic on raw canvas, 50 × 40 cm, 2026, 450 €" width="1000" height="800" loading="lazy" decoding="async"></div><span class="ref-number">06</span></div>
@@ -912,6 +935,7 @@
                 <div>
                     <h3 id="lb-title" class="lb-title"></h3>
                     <div id="lb-price" class="lb-price"></div>
+                    <div id="lb-status" class="lb-status hidden"></div>
                     <div id="lb-specs" class="lb-specs"></div>
                 </div>
                 <div class="lb-inquiry-section" id="lb-inquiry-section">
@@ -959,9 +983,9 @@
 
         // 2. LEGEND
         const col1Data = [
-            { ref:"01", title:"Atmosphere | navy khaki",             specs:"acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
-            { ref:"02", title:"Atmosphere | burgundy blue",         specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
-            { ref:"03", title:"Atmosphere | maroon khaki",       specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+            { ref:"01", title:"Atmosphere | navy khaki",       specs:"acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
+            { ref:"02", title:"Atmosphere | burgundy blue",   specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+            { ref:"03", title:"Atmosphere | maroon khaki",    specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €", sold: true },
             { ref:"04", title:"Atmosphere | cyan purple blue",   specs:"acrylic on raw canvas<br>100 × 80 cm<br>2026<br>1100 €" },
             { ref:"05", title:"Atmosphere | burnt red green I",  specs:"acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
             { ref:"06", title:"Atmosphere | burnt red green II", specs:"acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
@@ -979,18 +1003,18 @@
             { ref:"18", title:"Atmosphere | orange blue yellow",     specs:"acrylic on raw canvas<br>20 × 20 cm<br>2025<br>180 €" },
         ];
         const col2Data = [
-            { ref:"19", title:"Chromatic | blue orange",            specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
-            { ref:"20", title:"Chromatic | red",                    specs:"acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1300 €" },
-            { ref:"21", title:"Chromatic | orange",                 specs:"acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
-            { ref:"22", title:"Chromatic | blue",                   specs:"acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
+            { ref:"19", title:"Chromatic | blue orange",             specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+            { ref:"20", title:"Chromatic | red",                     specs:"acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1300 €" },
+            { ref:"21", title:"Chromatic | orange",                  specs:"acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
+            { ref:"22", title:"Chromatic | blue",                    specs:"acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
             { ref:"23", title:"Chromatic | blue red green yellow",  specs:"acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
-            { ref:"24", title:"Chromatic | blue green",             specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-            { ref:"25", title:"Chromatic | blue red",               specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-            { ref:"26", title:"Chromatic | turquoise",              specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-            { ref:"27", title:"Chromatic | blue",                   specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
-            { ref:"28", title:"Chromatic | blue",                   specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
-            { ref:"29", title:"Chromatic | blue",                   specs:"oil on canvas<br>24 × 18 cm<br>2024<br>150 €" },
-            { ref:"30", title:"Chromatic | blue",                   specs:"acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
+            { ref:"24", title:"Chromatic | blue green",              specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
+            { ref:"25", title:"Chromatic | blue red",                specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
+            { ref:"26", title:"Chromatic | turquoise",               specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
+            { ref:"27", title:"Chromatic | blue",                    specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
+            { ref:"28", title:"Chromatic | blue",                    specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
+            { ref:"29", title:"Chromatic | blue",                    specs:"oil on canvas<br>24 × 18 cm<br>2024<br>150 €" },
+            { ref:"30", title:"Chromatic | blue",                    specs:"acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
         ];
 
         function protectRoman(str) {
@@ -1008,6 +1032,9 @@
                 const price = pm ? pm[0].trim() : '';
                 const cleanSpecs = price ? item.specs.replace(new RegExp('(<br>)?\\s*' + price.replace(/[€]/g,'\\$&')), '') : item.specs;
                 const [tMain, tSub] = item.title.split('|').map(s => s.trim());
+                
+                const isSold = item.sold || false;
+                
                 const el = document.createElement('div');
                 el.className = 'legend-item clickable-ref';
                 el.dataset.index = globalIdx;
@@ -1015,13 +1042,16 @@
                     `<span class="legend-ref">${item.ref}</span>` +
                     `<span class="legend-title">${tMain}${tSub ? `<br><span class="color-subtitle">${protectRoman(tSub)}</span>` : ''}</span>` +
                     `<span class="legend-specs">${cleanSpecs}</span>` +
-                    (price ? `<span class="legend-price">${price}</span>` : '') +
-                    `<div class="legend-status"><span class="status-dot"></span><span class="status-text">Available</span></div>`;
+                    (price ? `<span class="legend-price ${isSold ? 'sold' : ''}">${price}</span>` : '') +
+                    `<div class="legend-status"><span class="status-dot ${isSold ? 'sold' : ''}"></span><span class="status-text ${isSold ? 'sold' : ''}">${isSold ? 'sold' : 'Available'}</span></div>`;
                 c.appendChild(el);
             });
         }
         renderLegend(col1Data, 'legend-1', 0);
         renderLegend(col2Data, 'legend-2', col1Data.length);
+
+        // ZMIANA TUTAJ: Wrzucenie wszystkich danych do tablicy ułatwia znalezienie statusu "sold"
+        const allWorksData = [...col1Data, ...col2Data];
 
         // 3. LIGHTBOX
         const lb       = document.getElementById('lightbox');
@@ -1032,12 +1062,14 @@
         const gridImgs = Array.from(document.querySelectorAll('.visual-item .item-image-wrapper img'));
         let lbIdx = 0;
 
-        function openLb({ src, alt, title, specs, isArt = true }) {
+        function openLb({ src, alt, title, specs, isArt = true, isSold = false }) {
             lbImg.classList.remove('is-zoomed');
             lbImg.style.transformOrigin = 'center center';
             lbImg.src = src; lbImg.alt = alt || '';
             const inq = document.getElementById('lb-inquiry-section');
             const prc = document.getElementById('lb-price');
+            const st  = document.getElementById('lb-status');
+
             if (isArt) {
                 const pm = (alt||'').match(/(\d[\d\s]*\s*€)/);
                 const price = pm ? pm[0].trim() : '';
@@ -1049,7 +1081,22 @@
                     titleHtml = a + (b ? `<br><span class="color-subtitle">${protectRoman(b)}</span>` : '');
                 }
                 document.getElementById('lb-title').innerHTML = titleHtml;
-                if (prc) prc.textContent = price;
+                
+                if (prc) {
+                    prc.textContent = price;
+                    // ZMIANA TUTAJ: Obsługa wyszarzenia ceny w Lightboxie
+                    if (isSold) prc.classList.add('sold');
+                    else prc.classList.remove('sold');
+                }
+
+                // ZMIANA TUTAJ: Wyświetlenie elementu ze statusem "sold"
+                if (isSold) {
+                    st.innerHTML = `<span class="status-dot sold"></span><span class="status-text sold" style="font-size: 11px;">Sold</span>`;
+                    st.classList.remove('hidden');
+                } else {
+                    st.classList.add('hidden');
+                }
+
                 document.getElementById('lb-specs').innerHTML = sp;
                 const mail = document.getElementById('lb-inquire-mail');
                 if (mail) mail.href = 'mailto:chojnacki.studio@gmail.com?subject=' + encodeURIComponent('Inquiry — ' + (title||'').replace(/\|/g,'-'));
@@ -1057,7 +1104,7 @@
             } else {
                 document.getElementById('lb-title').textContent = title||'';
                 document.getElementById('lb-specs').innerHTML = specs||'';
-                [inq,prc,lbPrev,lbNext].forEach(el=>el&&el.classList.add('hidden'));
+                [inq,prc,lbPrev,lbNext,st].forEach(el=>el&&el.classList.add('hidden'));
             }
             lb.classList.add('active');
         }
@@ -1066,7 +1113,12 @@
             lbIdx = i;
             const img = gridImgs[i]; if (!img) return;
             const parts = (img.alt||'').split(',');
-            openLb({ src: img.src, alt: img.alt, title: parts[0]?.trim(), specs: parts.slice(1).map(p=>p.trim()).join('<br>'), isArt: true });
+            
+            // Pobranie danych by sprawdzić status "sold" po indexie (odpowiada strukturze gridImgs)
+            const itemData = allWorksData[i];
+            const isSold = itemData ? itemData.sold : false;
+
+            openLb({ src: img.src, alt: img.alt, title: parts[0]?.trim(), specs: parts.slice(1).map(p=>p.trim()).join('<br>'), isArt: true, isSold: isSold });
         }
 
         gridImgs.forEach((img,i) => {
@@ -1075,9 +1127,14 @@
         document.querySelectorAll('.slide img').forEach(img => {
             img.addEventListener('click', () => {
                 const parts = (img.alt||'').split(',');
-                // Use original full image (data-full) not the _A crop
+                const title = parts[0]?.trim();
                 const fullSrc = img.dataset.full || img.src;
-                openLb({ src: fullSrc, alt:img.alt, title:parts[0]?.trim(), specs:parts.slice(1).map(p=>p.trim()).join('<br>'), isArt:true });
+
+                // Szukanie czy obraz wyświetlany w hero slide ma status "sold" na podstawie nazwy
+                const dataItem = allWorksData.find(d => d.title === title);
+                const isSold = dataItem ? dataItem.sold : false;
+
+                openLb({ src: fullSrc, alt:img.alt, title:title, specs:parts.slice(1).map(p=>p.trim()).join('<br>'), isArt:true, isSold: isSold });
             });
         });
         document.querySelectorAll('.about-photo img').forEach(img => {
