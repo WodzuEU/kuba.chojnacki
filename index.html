@@ -50,23 +50,20 @@
         .hidden { display: none !important; }
 
         /* ── CURSOR SYSTEM ── */
-        /* Default: black square everywhere */
         *, *::before, *::after {
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Crect x='0' y='0' width='12' height='12' fill='%23111'/%3E%3C/svg%3E") 6 6, auto !important;
         }
 
-        /* Circle: all clickable / interactive */
         a, button, [role="button"], label, select,
         input[type="checkbox"], input[type="radio"],
         .collapsible-header, .collection-label,
         .slide-dot, .lightbox-btn, .slider-btn,
         .legend-item, .clickable-ref,
         .inquire-link, .lb-submit,
-        .works-header-right a, .contact-col a {
+        .contact-col a {
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='6.5' fill='%23111'/%3E%3C/svg%3E") 7 7, pointer !important;
         }
 
-        /* Plus: zoom-in on artwork images */
         .item-image-wrapper,
         .slide img,
         .about-photo img,
@@ -74,13 +71,12 @@
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cline x1='10' y1='2' x2='10' y2='18' stroke='%23111' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='2' y1='10' x2='18' y2='10' stroke='%23111' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 10 10, zoom-in !important;
         }
 
-        /* Minus: zoom-out on lightbox bg and zoomed image */
         .lightbox,
         .lightbox img.is-zoomed {
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cline x1='2' y1='10' x2='18' y2='10' stroke='%23111' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 10 10, zoom-out !important;
         }
 
-        /* HEADER — always solid white */
+        /* HEADER */
         header {
             position: fixed;
             inset: 0 0 auto;
@@ -115,7 +111,7 @@
         }
         nav a:hover { opacity: 0.45; }
 
-        /* HERO — classic full-bleed slideshow */
+        /* HERO */
         .hero-section {
             position: relative;
             width: 100%;
@@ -171,7 +167,6 @@
         .slide.active .slide-caption-title,
         .slide.active .slide-caption-specs { opacity: 1; transform: translateY(0); }
 
-        /* Slide counter bottom-right */
         .hero-counter {
             position: absolute; bottom: 2.8rem; right: var(--pad);
             font-family: var(--sans);
@@ -179,14 +174,12 @@
             color: rgba(255,255,255,0.38); z-index: 10;
         }
 
-        /* Progress line */
         .hero-progress {
             position: absolute; bottom: 0; left: 0;
             height: 1px; background: rgba(255,255,255,0.45); width: 0;
             z-index: 10; transition: width 0.12s linear;
         }
 
-        /* Dot navigation — sits just above progress line, clear of caption */
         .slide-dots {
             position: absolute;
             bottom: 0.55rem;
@@ -203,7 +196,6 @@
         }
         .slide-dot.active { background: rgba(255,255,255,0.9); transform: scale(1.25); }
 
-        /* Prev / next arrow buttons */
         .slider-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: none; border: none; color: #fff;
@@ -218,54 +210,14 @@
         .hero-hint, .hero-track, .hero-sticky, .hero-end-spacer { display: none; }
 
         /* WORKS */
-        #works { padding: 6rem var(--pad) 0; }
+        #works { padding: 4rem var(--pad) 0; }
 
-        .works-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: end;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--rule);
-            margin-bottom: 4rem;
-        }
-        .works-header h2 {
-            font-family: var(--serif);
-            font-size: 1.4rem;
-            font-weight: 400;
-            font-style: normal;
-            text-transform: lowercase;
-            letter-spacing: 0.01em;
-            line-height: 1.1;
-        }
-        .works-header-right {
-            display: flex; flex-direction: column; align-items: flex-end; gap: 0.55rem;
-        }
-        .works-header-right p {
-            font-family: var(--sans);
-            font-size: 11px;
-            letter-spacing: 0.04em;
-            text-transform: lowercase;
-            color: var(--mid);
-        }
-        .works-header-right a {
-            font-family: var(--serif);
-            font-size: 1rem;
-            font-style: italic;
-            font-weight: 400;
-            text-transform: lowercase;
-            text-decoration: underline;
-            text-underline-offset: 3px;
-            transition: opacity 0.2s;
-        }
-        .works-header-right a:hover { opacity: 0.42; }
-
-        /* Collection */
         .collection-block { margin-bottom: 5rem; }
         .collection-block:last-child { margin-bottom: 0; padding-bottom: 6rem; }
 
         .collection-label {
             display: flex; align-items: baseline; justify-content: space-between;
-            padding: 1.8rem 0; border-bottom: 1px solid var(--rule);
+            padding: 1.8rem 0; border-bottom: none;
             cursor: pointer; user-select: none; transition: opacity 0.2s;
         }
         .collection-label:hover { opacity: 0.55; }
@@ -299,11 +251,11 @@
         }
         .collapsible-section.open .collapsible-content { max-height: 9999px; }
 
-        /* Grid — compact */
+        /* VISUAL GRID — 5 columns */
         .visual-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            border-top: 1px solid var(--rule);
+            grid-template-columns: repeat(5, 1fr);
+            border-top: none;
         }
         .visual-item {
             padding: 0.6rem 0.7rem 0.5rem;
@@ -330,7 +282,6 @@
         }
         .item-image-wrapper:hover img { transform: scale(1.04); opacity: 0.88; }
 
-        /* ref-number: matches legend-ref exactly */
         .ref-number {
             font-family: var(--sans);
             font-size: 10px;
@@ -346,110 +297,110 @@
             gap: 4px;
         }
 
-        /* Legend — compact, no lines between cells */
+        /* LEGEND GRID — Condensed, 12 columns */
         .legend-grid {
-            display: grid; grid-template-columns: repeat(6, 1fr);
-            border-top: 1px solid var(--rule);
-            margin-top: 1.2rem;
+            display: grid; 
+            grid-template-columns: repeat(12, 1fr);
+            border-top: none;
+            margin-top: 1.5rem;
+            gap: 0.5rem 0.2rem;
+            padding: 0 0.5rem;
         }
         .legend-item {
-            padding: 0.65rem 0.7rem;
-            display: flex; flex-direction: column; gap: 0.12rem;
+            padding: 0.3rem 0.4rem;
+            display: flex; flex-direction: column; gap: 0.08rem;
             transition: background 0.18s;
         }
         .legend-item:hover { background: rgba(26,26,24,0.05); }
 
-        /* legend-ref: identical to ref-number */
         .legend-ref {
             font-family: var(--sans);
-            font-size: 10px;
+            font-size: 8.5px;
             font-weight: 500;
             letter-spacing: 0.04em;
             color: var(--ink);
-            margin-bottom: 0.1rem;
-            line-height: 1.3;
+            margin-bottom: 0.05rem;
+            line-height: 1.2;
         }
-        /* legend-title: Garamond normal lowercase — "atmosphere" */
         .legend-title {
             font-family: var(--serif);
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-style: normal;
             font-weight: 400;
             text-transform: lowercase;
-            line-height: 1.25;
+            line-height: 1.15;
             margin-bottom: 0;
         }
-        /* color-subtitle: grey Montserrat lowercase — "navy khaki" */
         .color-subtitle {
             font-family: var(--sans);
             font-style: normal;
-            font-size: 10px;
+            font-size: 8px;
             letter-spacing: 0.02em;
             text-transform: lowercase;
             color: var(--mid);
             display: block;
             margin-top: 0.08rem;
         }
-        /* legend-specs: grey Montserrat lowercase */
         .legend-specs {
             font-family: var(--sans);
-            font-size: 10px;
+            font-size: 8px;
             letter-spacing: 0.02em;
             text-transform: lowercase;
             color: var(--mid);
-            line-height: 1.4;
+            line-height: 1.35;
             margin-top: 0.12rem;
         }
-        /* legend-price: black Montserrat medium */
         .legend-price {
             font-family: var(--sans);
-            font-size: 11px;
+            font-size: 9px;
             font-weight: 500;
             letter-spacing: 0.02em;
             color: var(--ink);
             margin-top: 0.12rem;
         }
         
-        /* Status styling - MODIFIED FOR SOLD */
+        /* Status styling & FULL RED for SOLD items */
         .legend-status, .lb-status {
-            display: flex; align-items: center; gap: 0.35rem;
+            display: flex; align-items: center; gap: 0.3rem;
             margin-top: 0.1rem;
         }
         .lb-status {
             margin-top: 0.3rem; margin-bottom: 0.2rem;
         }
         .status-dot {
-            width: 5px; height: 5px; border-radius: 50%;
+            width: 4px; height: 4px; border-radius: 50%;
             background: var(--ink); flex-shrink: 0; display: inline-block;
         }
         .status-text {
             font-family: var(--sans);
-            font-size: 10px;
+            font-size: 8.5px;
             font-weight: 500;
             letter-spacing: 0.03em;
             text-transform: lowercase;
             color: var(--ink);
         }
 
-        /* Sold states */
-        .legend-price.sold, .lb-price.sold {
-            color: var(--mid); /* Grayed out price */
-        }
+        /* Sold states globally red */
         .status-dot.sold {
-            background: #d32f2f; /* Red dot */
+            background: #d32f2f !important;
         }
-        .status-text.sold {
-            color: #d32f2f; /* Red text */
+        
+        .legend-item.is-sold .legend-ref,
+        .legend-item.is-sold .legend-title,
+        .legend-item.is-sold .color-subtitle,
+        .legend-item.is-sold .legend-specs,
+        .legend-item.is-sold .legend-price,
+        .legend-item.is-sold .status-text {
+            color: #d32f2f !important;
         }
 
-        .inquire-link {
-            font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-            border-bottom: 1px solid var(--ink); padding-bottom: 1px;
-            background: none; border-top: none; border-left: none; border-right: none;
-            border-bottom: 1px solid var(--ink);
-            cursor: pointer; transition: opacity 0.2s; width: fit-content; color: var(--ink);
+        .lightbox-info.is-sold .lb-title,
+        .lightbox-info.is-sold .color-subtitle,
+        .lightbox-info.is-sold .lb-price,
+        .lightbox-info.is-sold .lb-specs,
+        .lightbox-info.is-sold .status-text {
+            color: #d32f2f !important;
         }
-        .inquire-link:hover { opacity: 0.42; }
 
         /* ABOUT */
         #about {
@@ -487,7 +438,7 @@
         }
         .about-text-col p:last-child { margin-bottom: 0; }
         .artist-name {
-            text-transform: none; /* preserves "Kuba Chojnacki" exact casing */
+            text-transform: none;
             font-family: var(--sans);
         }
 
@@ -509,7 +460,7 @@
             text-align: left;
         }
 
-        /* CONTACT — 4-col editorial layout */
+        /* CONTACT */
         #contact {
             border-top: 1px solid var(--rule);
             padding: 4rem var(--pad) 3rem;
@@ -686,14 +637,12 @@
         /* RESPONSIVE */
         @media (max-width: 1100px) {
             .visual-grid  { grid-template-columns: repeat(4, 1fr); }
-            .legend-grid  { grid-template-columns: repeat(4, 1fr); }
+            .legend-grid  { grid-template-columns: repeat(8, 1fr); }
             .contact-inner { grid-template-columns: 1fr 1fr; gap: 3rem; }
         }
         @media (max-width: 800px) {
             .visual-grid  { grid-template-columns: repeat(3, 1fr); }
-            .legend-grid  { grid-template-columns: repeat(3, 1fr); }
-            .works-header { grid-template-columns: 1fr; gap: 1.5rem; }
-            .works-header-right { align-items: flex-start; }
+            .legend-grid  { grid-template-columns: repeat(6, 1fr); }
             .about-grid   {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -716,7 +665,7 @@
         }
         @media (max-width: 520px) {
             .visual-grid  { grid-template-columns: repeat(2, 1fr); }
-            .legend-grid  { grid-template-columns: repeat(2, 1fr); }
+            .legend-grid  { grid-template-columns: repeat(4, 1fr); }
             nav a { margin-left: 1.4rem; }
         }
     </style>
@@ -804,27 +753,19 @@
     </div>
 
     <section id="works">
-        <div class="works-header fade-up">
-            <div><h2>Available works</h2></div>
-            <div class="works-header-right">
-                <p>30 works &ensp;&middot;&ensp; 2 collections</p>
-                <a href="mailto:chojnacki.studio@gmail.com">Inquire via email</a>
-                <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener">Inquire via instagram</a>
-            </div>
-        </div>
-
         <div class="collection-block collapsible-section open">
             <div class="collection-label collapsible-header" role="button" tabindex="0" aria-expanded="true" aria-controls="collection-atmosphere">
                 <div class="collection-label-left">
                     <h3>Atmosphere</h3>
-                    <span class="col-count">18 works</span>
+                    <span class="col-count">16 works</span>
                 </div>
                 <span class="col-toggle">Close</span>
             </div>
             <div class="collapsible-content" id="collection-atmosphere">
                 <div class="visual-grid">
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/17.jpg" alt="Atmosphere | navy khaki, acrylic on raw canvas, 150 × 100 cm, 2025, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">01</span></div>
-                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="Atmosphere | burgundy blue, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">02</span></div>
+                    
+                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/30.jpg" alt="Atmosphere | burgundy blue, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number sold">02 <span class="status-dot sold"></span></span></div>
                     
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/31.jpg" alt="Atmosphere | maroon khaki, acrylic on raw canvas, 150 × 100 cm, 2026, 1500 €" width="1500" height="1000" loading="lazy" decoding="async"></div><span class="ref-number sold">03 <span class="status-dot sold"></span></span></div>
                     
@@ -837,12 +778,10 @@
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/13.jpg" alt="Atmosphere | navy red khaki, acrylic on raw canvas, 35 × 35 cm, 2026, 320 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">10</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/7.jpg" alt="Atmosphere | burgundy navy, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">11</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/14.jpg" alt="Atmosphere | brown black red, acrylic on raw canvas, 35 × 25 cm, 2026, 240 €" width="1000" height="714" loading="lazy" decoding="async"></div><span class="ref-number">12</span></div>
-                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/15.jpg" alt="Atmosphere | red blue, acrylic on raw canvas, 35 × 20 cm, 2026, 220 €" width="1000" height="571" loading="lazy" decoding="async"></div><span class="ref-number">13</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/5.jpg" alt="Atmosphere | khaki navy red, acrylic on raw canvas, 20 × 20 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">14</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/1.jpg" alt="Atmosphere | red blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">15</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/6.jpg" alt="Atmosphere | steel blue red, acrylic on raw canvas, 20 × 20 cm, 2026, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">16</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/2.jpg" alt="Atmosphere | deep orange blue, acrylic on raw canvas, 18 × 18 cm, 2025, 150 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">17</span></div>
-                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/4.jpg" alt="Atmosphere | orange blue yellow, acrylic on raw canvas, 20 × 20 cm, 2025, 180 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">18</span></div>
                 </div>
                 <div id="legend-1" class="legend-grid"></div>
             </div>
@@ -852,7 +791,7 @@
             <div class="collection-label collapsible-header" role="button" tabindex="0" aria-expanded="true" aria-controls="collection-chromatic">
                 <div class="collection-label-left">
                     <h3>Chromatic</h3>
-                    <span class="col-count">12 works</span>
+                    <span class="col-count">9 works</span>
                 </div>
                 <span class="col-toggle">View</span>
             </div>
@@ -862,10 +801,7 @@
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/19.jpg" alt="Chromatic | red, acrylic on raw canvas, 100 × 100 cm, 2025, 1300 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">20</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/16.jpg" alt="Chromatic | orange, acrylic on raw canvas, 100 × 70 cm, 2024, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">21</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/21.jpg" alt="Chromatic | blue, acrylic on raw canvas, 100 × 70 cm, 2026, 950 €" width="1000" height="700" loading="lazy" decoding="async"></div><span class="ref-number">22</span></div>
-                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/20.jpg" alt="Chromatic | blue red green yellow, acrylic on raw canvas, 70 × 70 cm, 2026, 650 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">23</span></div>
-                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/9.jpg" alt="Chromatic | blue green, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">24</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/10.jpg" alt="Chromatic | blue red, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">25</span></div>
-                    <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/8.jpg" alt="Chromatic | turquoise, acrylic on raw canvas, 30 × 30 cm, 2026, 260 €" width="1000" height="1000" loading="lazy" decoding="async"></div><span class="ref-number">26</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/22.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">27</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/24.jpg" alt="Chromatic | blue, oil on canvas, 27 × 22 cm, 2024, 150 €" width="1000" height="814" loading="lazy" decoding="async"></div><span class="ref-number">28</span></div>
                     <div class="visual-item"><div class="item-image-wrapper"><img src="IMAGES/23.jpg" alt="Chromatic | blue, oil on canvas, 24 × 18 cm, 2024, 150 €" width="1000" height="750" loading="lazy" decoding="async"></div><span class="ref-number">29</span></div>
@@ -984,7 +920,7 @@
         // 2. LEGEND
         const col1Data = [
             { ref:"01", title:"Atmosphere | navy khaki",       specs:"acrylic on raw canvas<br>150 × 100 cm<br>2025<br>1500 €" },
-            { ref:"02", title:"Atmosphere | burgundy blue",   specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
+            { ref:"02", title:"Atmosphere | burgundy blue",   specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €", sold: true },
             { ref:"03", title:"Atmosphere | maroon khaki",    specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €", sold: true },
             { ref:"04", title:"Atmosphere | cyan purple blue",   specs:"acrylic on raw canvas<br>100 × 80 cm<br>2026<br>1100 €" },
             { ref:"05", title:"Atmosphere | burnt red green I",  specs:"acrylic on raw canvas<br>50 × 40 cm<br>2026<br>450 €" },
@@ -995,22 +931,17 @@
             { ref:"10", title:"Atmosphere | navy red khaki",     specs:"acrylic on raw canvas<br>35 × 35 cm<br>2026<br>320 €" },
             { ref:"11", title:"Atmosphere | burgundy navy",          specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
             { ref:"12", title:"Atmosphere | brown black red",        specs:"acrylic on raw canvas<br>35 × 25 cm<br>2026<br>240 €" },
-            { ref:"13", title:"Atmosphere | red blue",               specs:"acrylic on raw canvas<br>35 × 20 cm<br>2026<br>220 €" },
             { ref:"14", title:"Atmosphere | khaki navy red",         specs:"acrylic on raw canvas<br>20 × 20 cm<br>2026<br>180 €" },
             { ref:"15", title:"Atmosphere | red blue",               specs:"acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
             { ref:"16", title:"Atmosphere | steel blue red",         specs:"acrylic on raw canvas<br>20 × 20 cm<br>2026<br>180 €" },
             { ref:"17", title:"Atmosphere | deep orange blue",       specs:"acrylic on raw canvas<br>18 × 18 cm<br>2025<br>150 €" },
-            { ref:"18", title:"Atmosphere | orange blue yellow",     specs:"acrylic on raw canvas<br>20 × 20 cm<br>2025<br>180 €" },
         ];
         const col2Data = [
             { ref:"19", title:"Chromatic | blue orange",             specs:"acrylic on raw canvas<br>150 × 100 cm<br>2026<br>1500 €" },
             { ref:"20", title:"Chromatic | red",                     specs:"acrylic on raw canvas<br>100 × 100 cm<br>2025<br>1300 €" },
             { ref:"21", title:"Chromatic | orange",                  specs:"acrylic on raw canvas<br>100 × 70 cm<br>2024<br>950 €" },
             { ref:"22", title:"Chromatic | blue",                    specs:"acrylic on raw canvas<br>100 × 70 cm<br>2026<br>950 €" },
-            { ref:"23", title:"Chromatic | blue red green yellow",  specs:"acrylic on raw canvas<br>70 × 70 cm<br>2026<br>650 €" },
-            { ref:"24", title:"Chromatic | blue green",              specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
             { ref:"25", title:"Chromatic | blue red",                specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
-            { ref:"26", title:"Chromatic | turquoise",               specs:"acrylic on raw canvas<br>30 × 30 cm<br>2026<br>260 €" },
             { ref:"27", title:"Chromatic | blue",                    specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
             { ref:"28", title:"Chromatic | blue",                    specs:"oil on canvas<br>27 × 22 cm<br>2024<br>150 €" },
             { ref:"29", title:"Chromatic | blue",                    specs:"oil on canvas<br>24 × 18 cm<br>2024<br>150 €" },
@@ -1018,7 +949,6 @@
         ];
 
         function protectRoman(str) {
-                // Wrap standalone roman numerals (I, II, III) so text-transform:lowercase doesn't affect them
                 return str.replace(/\b(III|II|I)\b/g, '<span style="text-transform:none">$1</span>');
             }
 
@@ -1036,21 +966,20 @@
                 const isSold = item.sold || false;
                 
                 const el = document.createElement('div');
-                el.className = 'legend-item clickable-ref';
+                el.className = 'legend-item clickable-ref' + (isSold ? ' is-sold' : '');
                 el.dataset.index = globalIdx;
                 el.innerHTML =
                     `<span class="legend-ref">${item.ref}</span>` +
                     `<span class="legend-title">${tMain}${tSub ? `<br><span class="color-subtitle">${protectRoman(tSub)}</span>` : ''}</span>` +
                     `<span class="legend-specs">${cleanSpecs}</span>` +
-                    (price ? `<span class="legend-price ${isSold ? 'sold' : ''}">${price}</span>` : '') +
-                    `<div class="legend-status"><span class="status-dot ${isSold ? 'sold' : ''}"></span><span class="status-text ${isSold ? 'sold' : ''}">${isSold ? 'sold' : 'Available'}</span></div>`;
+                    (price ? `<span class="legend-price">${price}</span>` : '') +
+                    `<div class="legend-status"><span class="status-dot"></span><span class="status-text">${isSold ? 'sold' : 'Available'}</span></div>`;
                 c.appendChild(el);
             });
         }
         renderLegend(col1Data, 'legend-1', 0);
         renderLegend(col2Data, 'legend-2', col1Data.length);
 
-        // ZMIANA TUTAJ: Wrzucenie wszystkich danych do tablicy ułatwia znalezienie statusu "sold"
         const allWorksData = [...col1Data, ...col2Data];
 
         // 3. LIGHTBOX
@@ -1069,6 +998,7 @@
             const inq = document.getElementById('lb-inquiry-section');
             const prc = document.getElementById('lb-price');
             const st  = document.getElementById('lb-status');
+            const lbInfo = document.querySelector('.lightbox-info');
 
             if (isArt) {
                 const pm = (alt||'').match(/(\d[\d\s]*\s*€)/);
@@ -1084,16 +1014,14 @@
                 
                 if (prc) {
                     prc.textContent = price;
-                    // ZMIANA TUTAJ: Obsługa wyszarzenia ceny w Lightboxie
-                    if (isSold) prc.classList.add('sold');
-                    else prc.classList.remove('sold');
                 }
 
-                // ZMIANA TUTAJ: Wyświetlenie elementu ze statusem "sold"
                 if (isSold) {
+                    lbInfo.classList.add('is-sold');
                     st.innerHTML = `<span class="status-dot sold"></span><span class="status-text sold" style="font-size: 11px;">Sold</span>`;
                     st.classList.remove('hidden');
                 } else {
+                    lbInfo.classList.remove('is-sold');
                     st.classList.add('hidden');
                 }
 
@@ -1102,6 +1030,7 @@
                 if (mail) mail.href = 'mailto:chojnacki.studio@gmail.com?subject=' + encodeURIComponent('Inquiry — ' + (title||'').replace(/\|/g,'-'));
                 [inq,prc,lbPrev,lbNext].forEach(el=>el&&el.classList.remove('hidden'));
             } else {
+                lbInfo.classList.remove('is-sold');
                 document.getElementById('lb-title').textContent = title||'';
                 document.getElementById('lb-specs').innerHTML = specs||'';
                 [inq,prc,lbPrev,lbNext,st].forEach(el=>el&&el.classList.add('hidden'));
@@ -1114,7 +1043,6 @@
             const img = gridImgs[i]; if (!img) return;
             const parts = (img.alt||'').split(',');
             
-            // Pobranie danych by sprawdzić status "sold" po indexie (odpowiada strukturze gridImgs)
             const itemData = allWorksData[i];
             const isSold = itemData ? itemData.sold : false;
 
@@ -1130,7 +1058,6 @@
                 const title = parts[0]?.trim();
                 const fullSrc = img.dataset.full || img.src;
 
-                // Szukanie czy obraz wyświetlany w hero slide ma status "sold" na podstawie nazwy
                 const dataItem = allWorksData.find(d => d.title === title);
                 const isSold = dataItem ? dataItem.sold : false;
 
