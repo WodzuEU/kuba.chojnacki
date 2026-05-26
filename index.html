@@ -30,6 +30,7 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         html { scroll-behavior: smooth; }
+        :target { scroll-margin-top: 60px; }
 
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg); }
@@ -1173,6 +1174,17 @@
         }, 100);
 
     });
+
+    // Anchor jump that waits for layout (hero + lazy images) to settle
+    function scrollToHash() {
+        if (!location.hash) return;
+        const el = document.querySelector(location.hash);
+        if (!el) return;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 60;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    window.addEventListener('load', () => setTimeout(scrollToHash, 350));
+    window.addEventListener('hashchange', scrollToHash);
     </script>
 </body>
 </html>
