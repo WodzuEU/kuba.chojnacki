@@ -21,7 +21,7 @@ body {
     background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -73,7 +73,7 @@ header {
 }
 .logo {
     font-family: var(--serif);
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0.08em;
@@ -83,7 +83,7 @@ header {
 nav { display: flex; gap: 0; }
 nav a {
     font-family: var(--serif);
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0.01em;
@@ -142,7 +142,7 @@ nav a:hover { opacity: 0.45; }
 }
 .slide-caption-specs {
     font-family: var(--sans);
-    font-size: 10.5px; letter-spacing: 0.1em; text-transform: lowercase;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: lowercase;
     color: rgba(255,255,255,0.65);
     opacity: 0; transform: translateY(10px);
     transition: opacity 0.7s cubic-bezier(.16,1,.3,1) 0.22s,
@@ -154,7 +154,7 @@ nav a:hover { opacity: 0.45; }
 .hero-counter {
     position: absolute; bottom: 2.8rem; right: var(--pad);
     font-family: var(--sans);
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
     color: rgba(255,255,255,0.38); z-index: 10;
 }
 
@@ -206,7 +206,7 @@ nav a:hover { opacity: 0.45; }
 .collection-label-left { display: flex; align-items: baseline; gap: 1.5rem; }
 .collection-label h3 {
     font-family: var(--serif);
-    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 400;
     font-style: normal;
     text-transform: lowercase;
@@ -214,7 +214,7 @@ nav a:hover { opacity: 0.45; }
 }
 .col-count {
     font-family: var(--sans);
-    font-size: 11.5px;
+    font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: lowercase;
     color: var(--mid);
@@ -222,7 +222,7 @@ nav a:hover { opacity: 0.45; }
 }
 .col-toggle {
     font-family: var(--sans);
-    font-size: 11.5px;
+    font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: lowercase;
     color: var(--mid);
@@ -270,14 +270,14 @@ nav a:hover { opacity: 0.45; }
 
 .ref-number {
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.06em;
     color: var(--ink);
     line-height: 1.3;
 }
 .ref-number.sold {
-    color: #d32f2f;
+    color: #991b1b;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -301,7 +301,7 @@ nav a:hover { opacity: 0.45; }
 
 .legend-ref {
     font-family: var(--sans);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.08em;
     color: var(--mid);
@@ -310,7 +310,7 @@ nav a:hover { opacity: 0.45; }
 }
 .legend-title {
     font-family: var(--serif);
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-style: normal;
     font-weight: 400;
     text-transform: lowercase;
@@ -320,7 +320,7 @@ nav a:hover { opacity: 0.45; }
 .color-subtitle {
     font-family: var(--sans);
     font-style: normal;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.03em;
     text-transform: lowercase;
     color: var(--mid);
@@ -329,7 +329,7 @@ nav a:hover { opacity: 0.45; }
 }
 .legend-specs {
     font-family: var(--sans);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.03em;
     text-transform: lowercase;
     color: var(--mid);
@@ -338,7 +338,7 @@ nav a:hover { opacity: 0.45; }
 }
 .legend-price {
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.03em;
     color: var(--ink);
@@ -359,7 +359,7 @@ nav a:hover { opacity: 0.45; }
 }
 .status-text {
     font-family: var(--sans);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: lowercase;
@@ -369,7 +369,7 @@ nav a:hover { opacity: 0.45; }
 
 /* Sold states globally red */
 .status-dot.sold {
-    background: #d32f2f !important;
+    background: #991b1b !important;
 }
 
 .legend-item.is-sold .legend-ref,
@@ -378,7 +378,7 @@ nav a:hover { opacity: 0.45; }
 .legend-item.is-sold .legend-specs,
 .legend-item.is-sold .legend-price,
 .legend-item.is-sold .status-text {
-    color: #d32f2f !important;
+    color: #991b1b !important;
 }
 
 .lightbox-info.is-sold .lb-title,
@@ -386,7 +386,7 @@ nav a:hover { opacity: 0.45; }
 .lightbox-info.is-sold .lb-price,
 .lightbox-info.is-sold .lb-specs,
 .lightbox-info.is-sold .status-text {
-    color: #d32f2f !important;
+    color: #991b1b !important;
 }
 
 /* ABOUT */
@@ -405,7 +405,7 @@ nav a:hover { opacity: 0.45; }
 .about-text-col { padding-top: 0; }
 .about-label {
     font-family: var(--serif);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
     font-weight: 400;
     font-style: normal;
     text-transform: lowercase;
@@ -416,7 +416,7 @@ nav a:hover { opacity: 0.45; }
 }
 .about-text-col p {
     font-family: var(--sans);
-    font-size: 12.5px;
+    font-size: 13.5px;
     line-height: 1.8;
     color: var(--ink);
     margin-bottom: 1.1rem;
@@ -439,7 +439,7 @@ nav a:hover { opacity: 0.45; }
 .photo-caption {
     width: 28%;
     font-family: var(--sans);
-    font-size: 10.5px;
+    font-size: 11px;
     letter-spacing: 0.05em;
     margin-top: 0.7rem;
     color: var(--mid);
@@ -460,7 +460,7 @@ nav a:hover { opacity: 0.45; }
 }
 .contact-headline {
     font-family: var(--serif);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
     font-style: normal;
     font-weight: 400;
     text-transform: lowercase;
@@ -472,7 +472,7 @@ nav a:hover { opacity: 0.45; }
 .contact-col { width: auto; text-align: left; }
 .contact-col h4 {
     font-family: var(--serif);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
     font-weight: 400;
     font-style: normal;
     text-transform: lowercase;
@@ -484,7 +484,7 @@ nav a:hover { opacity: 0.45; }
 .contact-col a {
     display: block;
     font-family: var(--sans);
-    font-size: 12.5px;
+    font-size: 13.5px;
     line-height: 1.8;
     color: var(--ink);
     margin-bottom: 0.35rem;
@@ -507,7 +507,7 @@ nav a:hover { opacity: 0.45; }
 }
 .newsletter-block h4 {
     font-family: var(--serif);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
     font-weight: 400;
     text-transform: lowercase;
     letter-spacing: 0.01em;
@@ -516,7 +516,7 @@ nav a:hover { opacity: 0.45; }
 }
 .newsletter-note {
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.7;
     text-transform: lowercase;
     color: var(--mid);
@@ -526,7 +526,7 @@ nav a:hover { opacity: 0.45; }
 .newsletter-form input {
     flex: 1;
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 12px;
     text-transform: lowercase;
     color: var(--ink);
     background: none;
@@ -549,7 +549,7 @@ nav a:hover { opacity: 0.45; }
 }
 .footer-note span {
     font-family: var(--sans);
-    font-size: 10px;
+    font-size: 10.5px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--mid);
@@ -587,7 +587,7 @@ nav a:hover { opacity: 0.45; }
 
 .lb-title {
     font-family: var(--serif);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;
     text-transform: lowercase;
@@ -595,14 +595,14 @@ nav a:hover { opacity: 0.45; }
 }
 .lb-price {
     font-family: var(--sans);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--ink);
     margin-top: 0.35rem;
 }
 .lb-specs {
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.85;
     text-transform: lowercase;
     color: var(--mid);
@@ -615,14 +615,14 @@ nav a:hover { opacity: 0.45; }
 }
 .purchase-info {
     font-family: var(--sans);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.7;
     text-transform: lowercase;
     color: var(--mid);
 }
 .lb-submit {
     font-family: var(--serif);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-style: italic;
     font-weight: 400;
     text-transform: lowercase;
@@ -640,7 +640,7 @@ nav a:hover { opacity: 0.45; }
 .lb-submit:hover { opacity: 0.42; }
 .lb-extra {
     font-family: var(--sans);
-    font-size: 10.5px;
+    font-size: 11px;
     text-transform: lowercase;
     color: var(--mid);
     line-height: 1.8;
