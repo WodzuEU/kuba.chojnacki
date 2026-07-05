@@ -2,6 +2,8 @@
 
 Portfolio and catalog of paintings by Kuba Chojnacki. Static site served by GitHub Pages.
 
+Design decisions, tokens, and workflow rules live in [DESIGN.md](DESIGN.md) — read it before changing anything visual.
+
 ## Structure
 
 ```

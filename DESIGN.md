@@ -1,0 +1,127 @@
+# kubachojnacki.com — design system
+
+The reference for how this site looks, reads, and grows. Any change should
+follow this file; if a change contradicts it, update the file in the same
+commit — deliberately, not by accident.
+
+**Guiding principle: refine, never replace.** The layout is the artist's own
+design. Improvements adjust readability, spacing, and consistency inside it.
+Redesigns, new visual concepts, or layout experiments are out — the one
+full redesign attempt (the 2026-07 "printed catalogue") was rejected and
+lives only in git history (`aeefb41`).
+
+---
+
+## 1. Color
+
+The paintings supply all the color. The UI stays achromatic.
+
+| Token | Value | Use |
+|---|---|---|
+| `--bg` | `#ffffff` | Page background — **pure white, never tinted.** The artwork photos have white backgrounds; on white the photo edges disappear and the paintings float. |
+| `--ink` | `#1a1a18` | Text, primary UI |
+| `--mid` | `#767672` | Secondary text: specs, captions, counts |
+| `--rule` | `#111111` | Strong hairlines (header, section borders) |
+| faint rule | `rgba(26,26,24,0.12–0.15)` | Legend top rule, footer rule, inquiry divider |
+| sold | `#991b1b` | The only accent. Dark brick red — deliberately muted, not alarm-red. |
+| hero backdrop | `#0c0c0a` | Behind hero slides while images load |
+
+Rules: no gradients, shadows, or colored UI elements. Never introduce a
+second accent color. Sold styling applies the same `#991b1b` consistently in
+grid ref-numbers, legend entries, status dots, and the lightbox.
+
+## 2. Typography
+
+Two families, two jobs:
+
+- **EB Garamond (serif)** — identity and titles: logo, nav, collection
+  headings, work titles, section headings, and the italic underlined
+  *inquire* links.
+- **Montserrat (sans)** — information: specs, prices, captions, counts,
+  contact details, footer.
+
+Casing: everything lowercase via `text-transform`, with three exceptions —
+the logo (uppercase, letterspaced 0.08em+), the artist's name in prose, and
+roman numerals in titles (protected by `protectRoman()` in site.js; never
+lowercase titles in JS — CSS does the transform).
+
+Scale (current, after the 2026-07 readability pass — sizes may grow, never
+shrink below these):
+
+| Element | Size |
+|---|---|
+| body base | 14px |
+| logo / nav | 1.1rem serif |
+| collection heading (h3) | clamp(1.5rem, 3vw, 2.2rem) |
+| section headings (about, contact h4) | clamp(1.2rem, 2.2vw, 1.6rem) |
+| hero caption title | clamp(1.4rem, 3vw, 2.4rem) |
+| lightbox title | 1.6rem |
+| legend work title | 1.15rem serif |
+| body/meta sans | 12–13.5px |
+| small labels (refs, captions, counts) | 11–12px |
+| absolute minimum anywhere | 10.5px |
+
+## 3. Layout & spacing
+
+- Page gutter: `--pad: clamp(1.5rem, 4vw, 4rem)`; sections separated by
+  1px `--rule` hairlines.
+- Works grid: 5 columns desktop → 4 (≤1100px) → 3 (≤800px) → 2 (≤520px).
+  Uniform cells; the photos themselves communicate scale.
+- Legend: 6 columns → 4 → 3 → 2. Text must never crowd — the legend is the
+  price list, it is read at the buying moment.
+- Header: fixed, single line at every width (compact logo/nav under 520px).
+- Hero caption is right-constrained so it can never overlap the counter.
+
+## 4. Catalog rules
+
+- One work = one line in `js/data.js`. No artwork data anywhere else.
+- Slug/file scheme: `<ref>-<collection>-<colors>` (e.g.
+  `02-atmosphere-burgundy-blue`). Ref numbers are permanent and never
+  reused; gaps (13, 18, 23, 24, 26…) are intentional.
+- **Ordering: within each collection strictly by physical size, largest
+  first; catalog-number order within equal sizes. Old and new works
+  interleave — no "new works" grouping.**
+- Titles: `"Collection | colors"`. Color words, plain and lowercase
+  (burgundy, khaki, navy, plum…). Repeat titles are fine; roman numerals
+  (I, II, III) distinguish siblings.
+- Sold: `sold: true` — nothing else. Sold works stay in the catalog.
+- Prices are the artist's decision, stated plainly in EUR. Current anchors:
+  18×18 = 150 · 50×40 = 450 · 60×50 = 600 · 100×100 = 1300 ·
+  150×100 = 1500 · 150×130 = 1900 · 200×150 = 2800.
+
+## 5. Imagery pipeline
+
+- Source photos: painting on a white background (this is why the site bg is
+  white). Masters live outside the repo in `STRONA/CATALOG/full`.
+- Repo tiers: `IMAGES/works/<slug>.jpg` display (max 3450px, JPEG q85,
+  ~1 MB) · `IMAGES/thumbs/<slug>.webp` 400px + `<slug>-800.webp` 800px
+  (grid srcset) · `<slug>-hero.webp` 1600px (slideshow).
+- Hero slides use `<slug>-hero.jpg`: a studio shot if one exists, otherwise
+  an auto-crop of the display image with white borders trimmed (see
+  scratchpad script history) so slides run full-bleed with no white strips.
+- Regenerate thumbs anytime: `python scripts/make_thumbs.py` (skips
+  existing).
+
+## 6. Signature details (keep these)
+
+- Custom cursors: black square (default), black dot (interactive),
+  crosshair plus/minus (zoomable images). This is the site's fingerprint.
+- Catalog ref numbers under every grid image.
+- Permalinks: `kubachojnacki.com/#<slug>` opens the work's lightbox —
+  the link to send collectors.
+- Hero slideshow: currently 03 maroon khaki → 39 → 40 → 44 → 45 → 46,
+  set via `hero: 1…n` in data.js.
+- The lowercase voice: short factual lines, prices stated openly,
+  "certificate of authenticity included. shipping worldwide."
+
+## 7. Workflow (non-negotiable)
+
+1. All changes are built and verified locally, then pushed to staging:
+   `git push dev dev-pages:main` → https://wodzueu.github.io/kubachojnacki-dev/
+2. **Production (`git push origin refactor:main` → kubachojnacki.com) only
+   when the artist clearly and explicitly says to promote.** A general
+   "looks good" is not an instruction to deploy.
+3. Before any production push, tag the current live commit for one-command
+   rollback (see `v1-single-file` precedent).
+4. Analytics (GoatCounter) loads on the live domain only — staging and
+   local previews must never pollute the statistics.
