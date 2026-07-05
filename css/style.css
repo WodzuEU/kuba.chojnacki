@@ -538,6 +538,13 @@ nav a:hover { opacity: 0.45; }
 }
 .newsletter-form input:focus { border-bottom-color: var(--ink); }
 .newsletter-form input::placeholder { color: var(--mid); }
+.newsletter-confirm {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    text-transform: lowercase;
+    color: var(--ink);
+}
 
 .footer-note {
     margin-top: 3rem;

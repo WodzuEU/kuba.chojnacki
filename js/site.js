@@ -289,6 +289,29 @@ document.addEventListener('DOMContentLoaded', () => {
                  <button type="submit" class="lb-submit">subscribe</button>
              </form>`;
         document.querySelector('#contact .contact-inner').after(nl);
+
+        // submit in the background and confirm inline, in our own
+        // typography; if the request fails, fall back to a normal
+        // form submission (opens the provider's page in a new tab)
+        const form = nl.querySelector('form');
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            btn.disabled = true;
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' },
+                });
+                if (!res.ok) throw new Error('subscribe failed: ' + res.status);
+                form.outerHTML =
+                    '<p class="newsletter-confirm">thank you — now check your inbox to confirm the subscription.</p>';
+            } catch (err) {
+                btn.disabled = false;
+                form.submit();
+            }
+        });
     }
 
     // ── scroll-in animations ─────────────────────────────────
