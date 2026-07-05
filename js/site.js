@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  </div>
                  <span class="col-toggle">Close</span>
              </div>
+             ${col.note ? `<p class="collection-note">${col.note}</p>` : ''}
              <div class="collapsible-content" id="${bodyId}">
                  <div class="visual-grid"></div>
                  <div class="legend-grid"></div>
