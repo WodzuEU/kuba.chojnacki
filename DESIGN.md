@@ -75,9 +75,14 @@ shrink below these):
 ## 4. Catalog rules
 
 - One work = one line in `js/data.js`. No artwork data anywhere else.
+- **Two numbering systems, two jobs.** The `ref` in data.js is the permanent
+  archive number — it lives in file slugs, never changes, never gets reused;
+  gaps (13, 18, 23, 24, 26…) are intentional. The numbers *shown* on the site
+  (grid, legend, inquiry emails) are display numbers: sequential 01, 02, 03…
+  in display order across the whole site, computed automatically at render.
+  Re-sorting collections keeps visible numbering clean with zero renames.
 - Slug/file scheme: `<ref>-<collection>-<colors>` (e.g.
-  `02-atmosphere-burgundy-blue`). Ref numbers are permanent and never
-  reused; gaps (13, 18, 23, 24, 26…) are intentional.
+  `02-atmosphere-burgundy-blue`).
 - **Ordering: within each collection strictly by physical size, largest
   first; catalog-number order within equal sizes. Old and new works
   interleave — no "new works" grouping.**
@@ -106,7 +111,9 @@ shrink below these):
 
 - Custom cursors: black square (default), black dot (interactive),
   crosshair plus/minus (zoomable images). This is the site's fingerprint.
-- Catalog ref numbers under every grid image.
+- Sequential display numbers under every grid image.
+- Collections may carry a short lowercase `note` under the heading —
+  written from the work, concrete images, no gallery jargon.
 - Permalinks: `kubachojnacki.com/#<slug>` opens the work's lightbox —
   the link to send collectors.
 - Hero slideshow: currently 03 maroon khaki → 39 → 40 → 44 → 45 → 46,

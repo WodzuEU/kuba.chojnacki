@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `IMAGES/thumbs/${w.slug}.webp 400w, IMAGES/thumbs/${w.slug}-800.webp 800w, ${displaySrc(w)} ${w.w}w`;
     const GRID_SIZES = '(max-width: 520px) 50vw, (max-width: 800px) 33vw, (max-width: 1100px) 25vw, 20vw';
 
+    // displayed numbers are sequential in display order (01, 02, ...);
+    // w.ref stays the permanent archive number used in file names
+    const pad = n => String(n).padStart(2, '0');
+    const displayNo = w => pad(WORKS.indexOf(w) + 1);
+
     const altText  = w => `${w.title.replace(' | ', ', ')}, ${w.medium}, ${w.size}, ${w.year}`;
     const specsHtml = w => `${w.medium}<br>${w.size}<br>${w.year}`;
     const priceText = w => `${w.price} €`;
@@ -77,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                      <img src="IMAGES/thumbs/${w.slug}.webp" srcset="${gridSrcset(w)}" sizes="${GRID_SIZES}"
                           alt="${altText(w)}" width="${w.w}" height="${w.h}" loading="lazy" decoding="async">
                  </div>
-                 <span class="ref-number${w.sold ? ' sold' : ''}">${w.ref}${w.sold ? ' <span class="status-dot sold"></span>' : ''}</span>`;
+                 <span class="ref-number${w.sold ? ' sold' : ''}">${displayNo(w)}${w.sold ? ' <span class="status-dot sold"></span>' : ''}</span>`;
             const wrap = item.querySelector('.item-image-wrapper');
             wrap.addEventListener('click', () => openWork(idx));
             wrap.addEventListener('keydown', e => {
@@ -88,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('div');
             li.className = 'legend-item clickable-ref' + (w.sold ? ' is-sold' : '');
             li.innerHTML =
-                `<span class="legend-ref">${w.ref}</span>` +
+                `<span class="legend-ref">${displayNo(w)}</span>` +
                 `<span class="legend-title">${titleHtml(w.title)}</span>` +
                 `<span class="legend-specs">${specsHtml(w)}</span>` +
                 `<span class="legend-price">${priceText(w)}</span>` +
@@ -159,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         document.getElementById('lb-inquire-mail').href =
-            `mailto:${SITE.email}?subject=` + encodeURIComponent(`Inquiry — ${w.ref} ${w.title.replace(/\|/g, '-')}`);
+            `mailto:${SITE.email}?subject=` + encodeURIComponent(`Inquiry — ${displayNo(w)} — ${w.title.replace(/\|/g, '-')}`);
 
         ['lb-inquiry-section', 'lb-price'].forEach(id => document.getElementById(id).classList.remove('hidden'));
         [lbPrev, lbNext].forEach(el => el.classList.remove('hidden'));

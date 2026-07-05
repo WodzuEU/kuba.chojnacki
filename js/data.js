@@ -49,7 +49,7 @@ const SITE = {
 const COLLECTIONS = [
   {
     name: "Atmosphere",
-    note: "thin acrylic washes poured onto raw canvas and given to gravity — pigment drifts, pools and dries into slow vertical weather. control at the start, chance at the end.",
+    note: "each atmosphere begins as thin acrylic poured along the top edge of raw canvas and given to gravity. the pigment travels down the weave — drifting, branching, pooling — and the cotton itself decides where every color stops and dries. what remains reads like weather held still: curtains of rain, smoke rising in reverse, dusk settling over a field. the palette falls from violets and blues through greens into burgundy and earth, and the scale runs from two-meter fields to studies the size of a book. the first minute is controlled; everything after belongs to chance.",
     works: [
       { ref: "44", slug: "44-atmosphere-lavender-green-ochre", title: "Atmosphere | lavender green ochre", medium: "acrylic on raw canvas", size: "200 × 150 cm", year: 2026, price: 2800, w: 2588, h: 3450, hero: 4 },
       { ref: "45", slug: "45-atmosphere-deep-violet",          title: "Atmosphere | deep violet",          medium: "acrylic on raw canvas", size: "150 × 130 cm", year: 2026, price: 1900, w: 2588, h: 3450, hero: 5 },
