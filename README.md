@@ -6,12 +6,11 @@ Design decisions, tokens, and workflow rules live in [DESIGN.md](DESIGN.md) — 
 
 ## Structure
 
-Four pages, one design system (see [DESIGN.md](DESIGN.md) §8):
+Three pages, one design system (see [DESIGN.md](DESIGN.md) §8):
 
 ```
-index.html            splash — fixed header over the hero slideshow
-works/index.html      the catalog: collections grid, legend, lightbox
-about/index.html      bio, artist statement, cv (static prose)
+index.html            home — hero slideshow over the catalog (grid, legend, lightbox)
+about/index.html      bio + artist statement (static prose)
 contact/index.html    inquiries + the newsletter (signup + archive)
 css/style.css         all styling
 js/data.js            ★ THE CATALOG — the only file to edit for new works
@@ -24,7 +23,7 @@ IMAGES/about/         studio & portrait photos
 scripts/              image tooling
 ```
 
-Assets and cross-page links are **relative** (`../css/…`, `../works/`) so the
+Assets and cross-page links are **relative** (`../css/…`, `../about/`) so the
 site also works when served under a sub-path on staging. Each page sets
 `window.ROOT` before its scripts so image paths resolve from any depth.
 
@@ -40,7 +39,7 @@ sold or withdrawn works. All image files use the slug as their base name.
    (plus `<slug>-hero.jpg` if it should appear in the splash slideshow).
 2. Run `python scripts/make_thumbs.py` (generates the WebP thumbnails).
 3. Add one entry to `js/data.js` — instructions are at the top of that file.
-4. Open `works/` locally to check, then commit and push.
+4. Open `index.html` locally to check, then commit and push.
 
 ## Adding a collection
 
@@ -54,10 +53,9 @@ lightbox plus the structured-data availability all follow from that one flag.
 
 ## Sharing a link to one painting
 
-Every work has a permalink: `https://kubachojnacki.com/works/#<slug>`, e.g.
-`https://kubachojnacki.com/works/#02-atmosphere-burgundy-blue`. Opening it shows
+Every work has a permalink: `https://kubachojnacki.com/#<slug>`, e.g.
+`https://kubachojnacki.com/#02-atmosphere-burgundy-blue`. Opening it shows
 that painting in the lightbox — ideal for Instagram DMs and email inquiries.
-(A hero slide on the splash links to the same URL.)
 
 ## Staging → production workflow
 
