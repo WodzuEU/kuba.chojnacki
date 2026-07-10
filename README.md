@@ -6,16 +6,27 @@ Design decisions, tokens, and workflow rules live in [DESIGN.md](DESIGN.md) — 
 
 ## Structure
 
+Four pages, one design system (see [DESIGN.md](DESIGN.md) §8):
+
 ```
-index.html          page skeleton (rarely changes)
-css/style.css       all styling
-js/data.js          ★ THE CATALOG — the only file to edit for new works
-js/site.js          renders hero / grid / legend / lightbox from data.js
-IMAGES/works/       display images + hero shots   <slug>.jpg, <slug>-hero.jpg
-IMAGES/thumbs/      generated WebP (400/800/1600px) — run scripts/make_thumbs.py
-IMAGES/about/       studio & portrait photos
-scripts/            image tooling
+index.html            splash — fixed header over the hero slideshow
+works/index.html      the catalog: collections grid, legend, lightbox
+about/index.html      bio, artist statement, cv (static prose)
+contact/index.html    inquiries + the newsletter (signup + archive)
+css/style.css         all styling
+js/data.js            ★ THE CATALOG — the only file to edit for new works
+js/site.js            page-aware: renders hero / grid / legend / lightbox from data.js
+js/newsletter-data.js past newsletter issues, newest first (contact page)
+js/newsletter.js      renders the signup form + archive on the contact page
+IMAGES/works/         display images + hero shots   <slug>.jpg, <slug>-hero.jpg
+IMAGES/thumbs/        generated WebP (400/800/1600px) — run scripts/make_thumbs.py
+IMAGES/about/         studio & portrait photos
+scripts/              image tooling
 ```
+
+Assets and cross-page links are **relative** (`../css/…`, `../works/`) so the
+site also works when served under a sub-path on staging. Each page sets
+`window.ROOT` before its scripts so image paths resolve from any depth.
 
 ## Naming scheme
 
@@ -26,10 +37,10 @@ sold or withdrawn works. All image files use the slug as their base name.
 ## Adding a painting
 
 1. Export the display photo as `IMAGES/works/<slug>.jpg`
-   (plus `<slug>-hero.jpg` if it should appear in the homepage slideshow).
+   (plus `<slug>-hero.jpg` if it should appear in the splash slideshow).
 2. Run `python scripts/make_thumbs.py` (generates the WebP thumbnails).
 3. Add one entry to `js/data.js` — instructions are at the top of that file.
-4. Open `index.html` locally to check, then commit and push.
+4. Open `works/` locally to check, then commit and push.
 
 ## Adding a collection
 
@@ -43,9 +54,10 @@ lightbox plus the structured-data availability all follow from that one flag.
 
 ## Sharing a link to one painting
 
-Every work has a permalink: `https://kubachojnacki.com/#<slug>`, e.g.
-`https://kubachojnacki.com/#02-atmosphere-burgundy-blue`. Opening it shows
+Every work has a permalink: `https://kubachojnacki.com/works/#<slug>`, e.g.
+`https://kubachojnacki.com/works/#02-atmosphere-burgundy-blue`. Opening it shows
 that painting in the lightbox — ideal for Instagram DMs and email inquiries.
+(A hero slide on the splash links to the same URL.)
 
 ## Staging → production workflow
 
@@ -67,9 +79,10 @@ staging site never pollute the numbers. Dashboard: https://kubachojnacki.goatcou
 
 ## Newsletter
 
-The signup form appears in the contact section once `SITE.newsletter.action` in
-`js/data.js` is filled in. It is provider-agnostic — any service that accepts a
-plain form POST works. Set `action` and `field`:
+The signup form lives on the **contact page** (`contact/index.html`, rendered by
+`js/newsletter.js`) and works once `SITE.newsletter.action` in `js/data.js` is
+filled in. It is provider-agnostic — any service that accepts a plain form POST
+works. Set `action` and `field`:
 
 | Provider   | action                                                        | field           |
 |------------|---------------------------------------------------------------|-----------------|
@@ -79,3 +92,22 @@ plain form POST works. Set `action` and `field`:
 | Mailchimp  | the `<form action>` URL from their embedded form code         | `EMAIL`         |
 
 Switching providers later = changing these two values.
+
+### Past-issues archive
+
+Below the signup form, the contact page shows an archive of past issues in the
+site's own type — so the newsletter lives on the domain, not on a separate
+Kit-hosted subdomain. Issues are listed from `js/newsletter-data.js`, one entry
+per published Kit broadcast, newest first:
+
+```js
+const NEWSLETTER_ISSUES = [
+  { date: "2026-07-10", title: "first light", excerpt: "…", url: "https://…" },
+];
+```
+
+`date` (ISO) and `title` are required; `excerpt` and `url` (the broadcast's
+public "view in browser" link) are optional. Empty array → the page shows a
+graceful "first issue on its way" state. Add a line here each time you send an
+issue; the list can also be regenerated automatically from Kit's broadcast RSS
+feed by a small build step (GitHub Action) if you want it hands-off.

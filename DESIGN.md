@@ -120,6 +120,10 @@ shrink below these):
   set via `hero: 1…n` in data.js.
 - The lowercase voice: short factual lines, prices stated openly,
   "certificate of authenticity included. shipping worldwide."
+- Newsletter lives on the domain, not a Kit subdomain: the signup form
+  and an archive of past issues (rendered from `js/newsletter-data.js`)
+  sit on the **contact** page. Keep them inside this system — achromatic,
+  two families, lowercase — never a second layout language.
 
 ## 7. Workflow (non-negotiable)
 
@@ -132,3 +136,26 @@ shrink below these):
    rollback (see `v1-single-file` precedent).
 4. Analytics (GoatCounter) loads on the live domain only — staging and
    local previews must never pollute the statistics.
+
+## 8. Site structure
+
+Four pages, one design system, all sharing `css/style.css` and the fixed
+header (logo → home; nav: works · about · contact):
+
+- **`/` splash** — the fixed header over the full-bleed hero slideshow
+  (`hero: n` works from data.js). A hero slide leads into `works/#<slug>`,
+  which opens that work's lightbox on the works page. Hero only; no catalog.
+- **`/works/`** — the catalog: collections (grid + legend) and the lightbox,
+  rendered from `js/data.js`. Collection descriptions come from the portfolio
+  PDFs and live in each collection's `note` in data.js.
+- **`/about/`** — bio, artist statement, and cv. Static prose, sourced from
+  the portfolio; no catalog data.
+- **`/contact/`** — inquiries / studio / purchase details, plus the
+  newsletter (signup + past-issues archive).
+
+`js/site.js` is **page-aware**: each block (hero / collections / lightbox)
+runs only if its container is present, so one script drives both the splash
+and the works page. Image paths are prefixed with `window.ROOT` (`''` at the
+site root, `'../'` in a sub-folder) — set it in each page before the scripts,
+and always link assets and pages **relatively** so staging under a sub-path
+keeps working.

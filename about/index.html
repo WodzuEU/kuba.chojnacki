@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuba Chojnacki | About</title>
+    <meta name="description" content="Kuba Chojnacki is a painter, born 2001 — an architect by training, now working full time from a studio in Cracow on color and the gradient.">
+    <link rel="canonical" href="https://kubachojnacki.com/about/">
+    <meta property="og:title" content="Kuba Chojnacki | About">
+    <meta property="og:description" content="Painter, born 2001. An architect by training, working from a studio in Cracow.">
+    <meta property="og:image" content="https://kubachojnacki.com/IMAGES/about/portrait.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kubachojnacki.com/about/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header id="site-header">
+        <h1 class="logo"><a href="../">Kuba Chojnacki</a></h1>
+        <nav>
+            <a href="../works/">Works</a>
+            <a href="./" aria-current="page">About</a>
+            <a href="../contact/">Contact</a>
+        </nav>
+    </header>
+
+    <main class="about-page">
+
+        <section class="about-hero fade-up">
+            <div class="about-hero-photo">
+                <img src="../IMAGES/about/portrait.jpg" alt="Kuba Chojnacki in his studio, Cracow" width="1512" height="2016" loading="eager" decoding="async">
+                <p class="photo-caption">kuba chojnacki, cracow</p>
+            </div>
+            <div class="about-hero-text">
+                <span class="about-label">about</span>
+                <p><span class="artist-name">Kuba Chojnacki</span> is a painter, born 2001. an architect by training — a bachelor at poznań university of technology and, ongoing, a master&rsquo;s in cracow — he spent time in an architecture studio in italy before turning fully to painting. today he works from a studio in cracow, driven by a single pursuit: color and the gradient.</p>
+            </div>
+        </section>
+
+        <section class="about-statement fade-up">
+            <span class="about-label">statement</span>
+            <p class="statement-text">i make abstract paintings: color absorbed directly into unprimed canvas. i&rsquo;m drawn to the moment before a color becomes a name, when it is still pure sensation. the pigment is poured and moved by gravity; what matters is what i leave alone. i want the viewer to slow down, and to feel without needing to explain.</p>
+        </section>
+
+        <section class="about-cv fade-up">
+            <span class="about-label">cv</span>
+            <div class="cv-rows">
+                <div class="cv-row">
+                    <span class="cv-cat">education</span>
+                    <span class="cv-entry">master of architecture &mdash; cracow university of technology</span>
+                    <span class="cv-meta">ongoing</span>
+                </div>
+                <div class="cv-row">
+                    <span class="cv-cat"></span>
+                    <span class="cv-entry">bachelor of architecture &mdash; poznań university of technology</span>
+                    <span class="cv-meta">poland</span>
+                </div>
+                <div class="cv-row">
+                    <span class="cv-cat">practice</span>
+                    <span class="cv-entry">architecture studio</span>
+                    <span class="cv-meta">italy</span>
+                </div>
+                <div class="cv-row">
+                    <span class="cv-cat">studio</span>
+                    <span class="cv-entry">painting, full time &mdash; cracow</span>
+                    <span class="cv-meta">2024 &mdash; present</span>
+                </div>
+            </div>
+            <p class="cv-note">the <em>atmosphere</em> series began in 2025. collectors and galleries are welcome to <a href="../contact/">inquire about available works</a>.</p>
+        </section>
+
+        <div class="footer-note fade-up">
+            <span>&copy; Kuba Chojnacki, 2026</span>
+            <span>Cracow, Poland</span>
+        </div>
+
+    </main>
+
+    <script>
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        }), { threshold: 0.07 });
+        setTimeout(() => document.querySelectorAll('.fade-up').forEach(el => io.observe(el)), 100);
+    </script>
+</body>
+</html>

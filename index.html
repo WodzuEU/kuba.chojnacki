@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuba Chojnacki | Paintings</title>
-    <meta name="description" content="Abstract paintings by Polish artist Kuba Chojnacki. Large gradient works on raw canvas exploring gravity, diffusion and color flow.">
+    <title>Kuba Chojnacki | Painter</title>
+    <meta name="description" content="Kuba Chojnacki — Polish painter working with gradients, gravity and diffusion on raw canvas. Cracow, Poland.">
     <link rel="canonical" href="https://kubachojnacki.com/">
-    <meta property="og:title" content="Kuba Chojnacki | Paintings">
-    <meta property="og:description" content="Abstract paintings by Polish artist Kuba Chojnacki. Large gradient works on raw canvas exploring gravity, diffusion and color flow.">
+    <meta property="og:title" content="Kuba Chojnacki | Painter">
+    <meta property="og:description" content="Abstract paintings — color absorbed directly into unprimed canvas.">
     <meta property="og:image" content="https://kubachojnacki.com/IMAGES/works/03-atmosphere-maroon-khaki-hero.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kubachojnacki.com/">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="#f5f4f0">
+    <meta name="theme-color" content="#0c0c0a">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,11 +22,11 @@
 <body>
 
     <header id="site-header">
-        <h1 class="logo"><a href="#">Kuba Chojnacki</a></h1>
+        <h1 class="logo"><a href=".">Kuba Chojnacki</a></h1>
         <nav>
-            <a href="#works">Works</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+            <a href="works/">Works</a>
+            <a href="about/">About</a>
+            <a href="contact/">Contact</a>
         </nav>
     </header>
 
@@ -45,86 +45,7 @@
         <div class="slide-dots" id="slide-dots"></div>
     </div>
 
-    <section id="works"><!-- collections are rendered here from js/data.js --></section>
-
-    <section id="about">
-        <div class="about-grid">
-            <div class="about-photo fade-up">
-                <img src="IMAGES/about/studio.jpg" alt="Kuba Chojnacki working in his studio, Cracow" loading="lazy" width="1512" height="2016" decoding="async">
-            </div>
-            <div class="about-text-col fade-up">
-                <span class="about-label">about</span>
-                <p><span class="artist-name">Kuba Chojnacki</span> is a Polish painter working with gradients, gravity and diffusion on raw canvas.</p>
-                <p>With a background in architecture, his work explores spatial tension, structural balance, and the delicate intersection between rigorous control and fluid chance.</p>
-            </div>
-            <div class="about-portrait-col fade-up">
-                <img src="IMAGES/about/portrait.jpg" alt="Kuba Chojnacki portrait in studio" loading="lazy" width="1512" height="2016" decoding="async">
-                <p class="photo-caption">studio view, 2026<br>cracow, poland</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="contact-inner">
-            <div class="fade-up">
-                <p class="contact-headline">Collectors and galleries<br>are welcome to inquire<br>about available works.</p>
-            </div>
-            <div class="contact-col fade-up">
-                <h4>Inquiries</h4>
-                <p>For artwork inquiries, commissions or additional images:</p>
-                <a href="mailto:chojnacki.studio@gmail.com">chojnacki.studio@gmail.com</a>
-                <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener">@chojnacki.studio</a>
-            </div>
-            <div class="contact-col fade-up">
-                <h4>Studio</h4>
-                <p>Cracow, Poland</p>
-                <p>Visits by appointment only.</p>
-            </div>
-            <div class="contact-col fade-up">
-                <h4>Purchase &amp; Shipping</h4>
-                <p>Worldwide shipping.</p>
-                <p>80&ndash;200&euro; typical cost.</p>
-                <p>Certificate of authenticity included.</p>
-            </div>
-        </div>
-        <div class="footer-note fade-up">
-            <span>&copy; Kuba Chojnacki, 2026</span>
-            <span>Cracow, Poland</span>
-        </div>
-    </section>
-
-    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Artwork detail">
-        <button class="lightbox-btn lb-close" id="lb-close-btn" aria-label="Close lightbox">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
-        <button class="lightbox-btn lb-prev" id="lb-prev-btn" aria-label="Previous artwork">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="Fullscreen artwork">
-            <div class="lightbox-info">
-                <div>
-                    <h3 id="lb-title" class="lb-title"></h3>
-                    <div id="lb-price" class="lb-price"></div>
-                    <div id="lb-status" class="lb-status hidden"></div>
-                    <div id="lb-specs" class="lb-specs"></div>
-                </div>
-                <div class="lb-inquiry-section" id="lb-inquiry-section">
-                    <p class="purchase-info">For inquiries please use email or instagram direct message.</p>
-                    <a id="lb-inquire-mail" href="mailto:chojnacki.studio@gmail.com" class="lb-submit">Inquire via email</a>
-                    <a href="https://instagram.com/chojnacki.studio" target="_blank" rel="noopener" class="lb-submit">Inquire via instagram</a>
-                    <div class="lb-extra">
-                        <p>Certificate of authenticity included.</p>
-                        <p>Shipping worldwide.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="lightbox-btn lb-next" id="lb-next-btn" aria-label="Next artwork">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-    </div>
-
+    <script>window.ROOT = '';</script>
     <script src="js/data.js"></script>
     <script src="js/site.js"></script>
 </body>
