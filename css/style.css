@@ -6,12 +6,13 @@
     --serif: "EB Garamond", Georgia, serif;
     --sans:  "Montserrat", sans-serif;
     --pad:   clamp(1.5rem, 4vw, 4rem);
+    --header-h: 58px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
-:target { scroll-margin-top: 60px; }
+:target { scroll-margin-top: calc(var(--header-h) + 8px); }
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -103,10 +104,11 @@ nav a[aria-current="page"] {
 .hero-section {
     position: relative;
     width: 100%;
-    height: calc(100vh - 46px);
+    height: calc(100vh - var(--header-h));
+    height: calc(100svh - var(--header-h));
     overflow: hidden;
     background: #0c0c0a;
-    margin-top: 46px;
+    margin-top: var(--header-h);
 }
 .slides-container { position: relative; width: 100%; height: 100%; }
 .slide {
@@ -241,7 +243,7 @@ nav a[aria-current="page"] {
     line-height: 1.75;
     text-transform: lowercase;
     color: var(--mid);
-    max-width: 34em;
+    max-width: 40em;
     margin: -0.9rem 0 1.6rem;
 }
 
@@ -258,7 +260,7 @@ nav a[aria-current="page"] {
     border-top: none;
 }
 .visual-item {
-    scroll-margin-top: 60px;
+    scroll-margin-top: calc(var(--header-h) + 8px);
     padding: 0.9rem 1rem 0.8rem;
     display: flex; flex-direction: column; gap: 0.45rem;
     opacity: 0; transform: translateY(10px);
@@ -425,10 +427,12 @@ nav a[aria-current="page"] {
 .page-section {
     padding: 4.5rem var(--pad);
     border-top: 1px solid var(--rule);
-    scroll-margin-top: 52px;
+    scroll-margin-top: calc(var(--header-h) - 6px);
 }
-.page-section .section-inner { max-width: 940px; }
-.page-section .section-inner.contact-wide { max-width: 1000px; }
+/* section content runs gutter-to-gutter, like the works grid —
+   line length is capped on the text blocks themselves */
+.page-section .section-inner { max-width: none; }
+.page-section .section-inner > .section-label { margin-bottom: 2.2rem; }
 
 /* ── ABOUT PAGE (/about) ── */
 .about-page {
@@ -437,8 +441,8 @@ nav a[aria-current="page"] {
 }
 .about-hero {
     display: grid;
-    grid-template-columns: 4fr 6fr;
-    gap: clamp(2rem, 5vw, 4rem);
+    grid-template-columns: minmax(240px, 400px) 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
     align-items: start;
     padding-bottom: 3.5rem;
 }
@@ -456,11 +460,11 @@ nav a[aria-current="page"] {
 .about-hero-text { padding-top: 0.2rem; }
 .about-hero-text p {                 /* bio — serif prose */
     font-family: var(--serif);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     line-height: 1.75;
     color: var(--ink);
     text-transform: lowercase;
-    max-width: 30em;
+    max-width: 34em;
 }
 
 .about-statement {
@@ -469,11 +473,11 @@ nav a[aria-current="page"] {
 }
 .statement-text {                    /* the one emphasised line */
     font-family: var(--serif);
-    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
     line-height: 1.5;
     text-transform: lowercase;
     color: var(--ink);
-    max-width: 20em;
+    max-width: 28em;
 }
 
 /* ── CONTACT PAGE (/contact) ── */
@@ -484,12 +488,12 @@ nav a[aria-current="page"] {
 .contact-lead { padding-bottom: 3.5rem; }
 .lead-text {
     font-family: var(--serif);
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 400;
     line-height: 1.4;
     text-transform: lowercase;
     color: var(--ink);
-    max-width: 15em;
+    max-width: 26em;
 }
 
 .contact-details {
@@ -679,8 +683,8 @@ nav a[aria-current="page"] {
 
 /* ── COLLECTOR PAGE (/collector) — focused signup landing ── */
 .collector-page {
-    min-height: calc(100vh - 46px);
-    margin-top: 46px;
+    min-height: calc(100vh - var(--header-h));
+    margin-top: var(--header-h);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -873,7 +877,20 @@ nav a[aria-current="page"] {
 }
 @media (max-width: 800px) {
     .visual-grid  { grid-template-columns: repeat(3, 1fr); }
-    .legend-grid  { grid-template-columns: repeat(4, 1fr); }
+    /* condensed catalogue legend — the original mobile design:
+       many small tiles instead of a long two-column wall */
+    .legend-grid  {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.55rem 0.45rem;
+    }
+    .legend-item  { padding: 0.25rem 0.3rem; }
+    .legend-ref   { font-size: 8.5px; letter-spacing: 0.04em; }
+    .legend-title { font-size: 0.85rem; }
+    .color-subtitle { font-size: 8px; letter-spacing: 0.02em; }
+    .legend-specs { font-size: 8px; letter-spacing: 0.02em; line-height: 1.35; margin-top: 0.12rem; }
+    .legend-price { font-size: 9px; margin-top: 0.12rem; }
+    .legend-status .status-text { font-size: 8.5px; }
+    .legend-status .status-dot  { width: 4px; height: 4px; }
     .about-hero {
         grid-template-columns: 1fr;
         gap: 1.8rem;
@@ -892,8 +909,9 @@ nav a[aria-current="page"] {
     header { padding-left: clamp(1rem, 3vw, 2.5rem); padding-right: clamp(1rem, 3vw, 2.5rem); }
 }
 @media (max-width: 520px) {
+    :root { --header-h: 45px; }
     .visual-grid  { grid-template-columns: repeat(2, 1fr); }
-    .legend-grid  { grid-template-columns: repeat(2, 1fr); gap: 0.7rem 1rem; }
+    .legend-grid  { grid-template-columns: repeat(4, 1fr); gap: 0.5rem 0.4rem; }
     header { padding-top: 0.75rem; padding-bottom: 0.75rem; }
     .logo { font-size: 0.8rem; letter-spacing: 0.1em; white-space: nowrap; }
     nav a { font-size: 0.95rem; margin-left: 0.9rem; }

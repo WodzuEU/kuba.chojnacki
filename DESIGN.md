@@ -61,15 +61,28 @@ shrink below these):
 | small labels (refs, captions, counts) | 11–12px |
 | absolute minimum anywhere | 10.5px |
 
+One deliberate exception: below 800px the legend drops to the original
+condensed catalogue density (titles 0.85rem, sans 8–9px). The artist prefers
+the old site's compact price tiles on mobile over long readable columns —
+the legend is scanned there, not read.
+
 ## 3. Layout & spacing
 
 - Page gutter: `--pad: clamp(1.5rem, 4vw, 4rem)`; sections separated by
   1px `--rule` hairlines.
 - Works grid: 5 columns desktop → 4 (≤1100px) → 3 (≤800px) → 2 (≤520px).
   Uniform cells; the photos themselves communicate scale.
-- Legend: 6 columns → 4 → 3 → 2. Text must never crowd — the legend is the
-  price list, it is read at the buying moment.
+- Legend: 8 columns → 6 (≤1100px) → condensed 6 (≤800px) → condensed 4
+  (≤520px). Desktop keeps the readable sizes; mobile switches to the compact
+  catalogue tiles (see the typography exception above).
+- **Every section runs gutter-to-gutter**, like the works grid — no
+  max-width on section containers, hairline rules span the full page.
+  Line length is capped on the text blocks themselves (bio 34em,
+  statement 28em, contact lead 26em, collection note 40em) so nothing
+  ends mid-page while prose stays readable.
 - Header: fixed, single line at every width (compact logo/nav under 520px).
+  `--header-h` (58px, 45px ≤520px) keeps the hero offset and scroll
+  margins aligned with the real header height.
 - Hero caption is right-constrained so it can never overlap the counter.
 
 ## 4. Catalog rules
