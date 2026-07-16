@@ -524,6 +524,32 @@ nav a[aria-current="page"] {
 .contact-newsletter .nl-signup { max-width: 380px; }
 .nl-archive { margin-top: 3.5rem; }
 
+/* ── NEWSLETTER PAGE (/newsletter) — clean minimal signup ── */
+.newsletter-page {
+    padding: 8rem var(--pad) 4rem;
+    max-width: 640px;
+}
+.newsletter-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    text-transform: lowercase;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+}
+.newsletter-lead {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.75;
+    text-transform: lowercase;
+    color: var(--mid);
+    max-width: 34em;
+    margin-bottom: 2.2rem;
+}
+.newsletter-page .nl-signup { max-width: 380px; }
+.newsletter-page .footer-note { margin-top: 5rem; }
+
 /* NEWSLETTER — signup form + archive (contact page) */
 .newsletter-note {
     font-family: var(--sans);
@@ -862,7 +888,7 @@ nav a[aria-current="page"] {
     }
     .lightbox img { max-width: 88vw; max-height: 48vh; }
     .lightbox-info { width: 100%; max-width: 380px; }
-    #works, .about-page, .contact-page, .page-section { padding-left: clamp(1rem, 3vw, 2.5rem); padding-right: clamp(1rem, 3vw, 2.5rem); }
+    #works, .about-page, .contact-page, .page-section, .newsletter-page { padding-left: clamp(1rem, 3vw, 2.5rem); padding-right: clamp(1rem, 3vw, 2.5rem); }
     header { padding-left: clamp(1rem, 3vw, 2.5rem); padding-right: clamp(1rem, 3vw, 2.5rem); }
 }
 @media (max-width: 520px) {
