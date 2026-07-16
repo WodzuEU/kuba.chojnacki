@@ -1,21 +1,27 @@
-/* Renders the /newsletter subpage: the signup form (same site-native
-   Kit submission as the homepage) and the archive of past issues from
-   js/newsletter-data.js. No content lives in the page HTML. */
+/* Renders the newsletter signup form (site-native Kit submission) and, where
+   its containers are present, the archive of past issues from
+   js/newsletter-data.js. Used on the contact page (signup + archive) and the
+   collector page (signup only — the archive block simply doesn't run). */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── signup form (same behaviour as the homepage block) ────
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
+    }, { threshold: 0.07 });
+    const reveal = () => setTimeout(() => document.querySelectorAll('.fade-up').forEach(el => io.observe(el)), 100);
+
+    // ── signup form ───────────────────────────────────────────
     const signup = document.getElementById('nl-signup');
     if (signup && typeof SITE !== 'undefined' && SITE.newsletter && SITE.newsletter.action) {
+        const cta = signup.dataset.cta || 'subscribe';
         signup.innerHTML =
             `<form action="${SITE.newsletter.action}" method="post" target="_blank" class="newsletter-form">
                  <input type="email" name="${SITE.newsletter.field || 'email'}" required placeholder="your email" aria-label="Email address">
-                 <button type="submit" class="lb-submit">subscribe</button>
+                 <button type="submit" class="lb-submit nl-submit">${cta}</button>
              </form>`;
 
-        // submit in the background and confirm inline, in our own
-        // typography; if the request fails, fall back to a normal
-        // form submission (opens the provider's page in a new tab)
+        // submit in the background and confirm inline, in our own typography;
+        // if the request fails, fall back to a normal form submission
         const form = signup.querySelector('form');
         form.addEventListener('submit', async e => {
             e.preventDefault();
@@ -37,55 +43,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── archive of past issues ────────────────────────────────
+    // ── archive of past issues (only where its containers exist) ─
     const list  = document.getElementById('nl-issues');
     const count = document.getElementById('nl-count');
-    const issues = (typeof NEWSLETTER_ISSUES !== 'undefined' ? NEWSLETTER_ISSUES : [])
-        .slice()
-        .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    if (list && count) {
+        const issues = (typeof NEWSLETTER_ISSUES !== 'undefined' ? NEWSLETTER_ISSUES : [])
+            .slice()
+            .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
-    const MONTHS = ['january','february','march','april','may','june',
-                    'july','august','september','october','november','december'];
-    function formatDate(iso) {
-        const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || '').trim());
-        if (!m) return String(iso || '');
-        const [, y, mo, d] = m;
-        return `${Number(d)} ${MONTHS[Number(mo) - 1]} ${y}`;
+        const MONTHS = ['january','february','march','april','may','june',
+                        'july','august','september','october','november','december'];
+        const formatDate = iso => {
+            const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || '').trim());
+            if (!m) return String(iso || '');
+            const [, y, mo, d] = m;
+            return `${Number(d)} ${MONTHS[Number(mo) - 1]} ${y}`;
+        };
+
+        if (!issues.length) {
+            count.textContent = '';
+            list.innerHTML =
+                `<p class="nl-empty">the first issue is on its way. subscribe above and it will land in your inbox — and appear here — as soon as it goes out.</p>`;
+        } else {
+            count.textContent = `${issues.length} issue${issues.length === 1 ? '' : 's'}`;
+            issues.forEach(it => {
+                const row = document.createElement('article');
+                row.className = 'issue-item fade-up';
+                const link = it.url ? String(it.url) : '';
+                row.innerHTML =
+                    `<div class="issue-date">${formatDate(it.date)}</div>
+                     <div class="issue-body">
+                         <h3 class="issue-title">${link ? `<a href="${link}" target="_blank" rel="noopener">${it.title || 'untitled'}</a>` : (it.title || 'untitled')}</h3>
+                         ${it.excerpt ? `<p class="issue-excerpt">${it.excerpt}</p>` : ''}
+                     </div>
+                     ${link ? `<a class="issue-link lb-submit" href="${link}" target="_blank" rel="noopener">read</a>` : ''}`;
+                list.appendChild(row);
+            });
+        }
     }
 
-    if (!issues.length) {
-        count.textContent = '';
-        list.innerHTML =
-            `<p class="nl-empty">the first issue is on its way. subscribe above and it will land in your inbox — and appear here — as soon as it goes out.</p>`;
-        revealAll();
-        return;
-    }
-
-    count.textContent = `${issues.length} issue${issues.length === 1 ? '' : 's'}`;
-
-    issues.forEach(it => {
-        const row = document.createElement('article');
-        row.className = 'issue-item fade-up';
-        const link = it.url ? String(it.url) : '';
-        row.innerHTML =
-            `<div class="issue-date">${formatDate(it.date)}</div>
-             <div class="issue-body">
-                 <h3 class="issue-title">${link ? `<a href="${link}" target="_blank" rel="noopener">${it.title || 'untitled'}</a>` : (it.title || 'untitled')}</h3>
-                 ${it.excerpt ? `<p class="issue-excerpt">${it.excerpt}</p>` : ''}
-             </div>
-             ${link ? `<a class="issue-link lb-submit" href="${link}" target="_blank" rel="noopener">read</a>` : ''}`;
-        list.appendChild(row);
-    });
-
-    revealAll();
-
-    // ── scroll-in animations (matches the rest of the site) ───
-    function revealAll() {
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
-        }, { threshold: 0.07 });
-        setTimeout(() => document.querySelectorAll('.fade-up').forEach(el => io.observe(el)), 100);
-    }
+    reveal();
 
     // ── analytics (live domain only, same rule as the homepage) ─
     if (typeof SITE !== 'undefined' && SITE.goatcounter && location.hostname === 'kubachojnacki.com') {
