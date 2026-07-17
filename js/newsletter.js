@@ -43,8 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── collector drop: sliding closeup carousel (collector page only) ─
-    const preview = document.getElementById('collector-preview');
+    // ── the atmosphere drop: sliding closeup carousel ─
+    //    (collector landing + newsletter page — wherever .preview-carousel is)
+    const preview = document.querySelector('.preview-carousel');
     if (preview && typeof COLLECTIONS !== 'undefined') {
         const ROOT = window.ROOT || '';
         // closeups of the new atmosphere series, in order (works held back
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const slides = SLUGS.map((slug, i) => {
             const cap = capOf(slug);
             return `<div class="preview-slide">
-                        <img src="${ROOT}IMAGES/thumbs/${slug}-hero.webp" alt="${cap ? 'atmosphere — ' + cap : 'atmosphere closeup'}"${i ? ' loading="lazy"' : ''} decoding="async" onerror="this.style.opacity=0">
+                        <img src="${ROOT}IMAGES/thumbs/${slug}-hero.webp" alt="${cap ? 'atmosphere — ' + cap : 'atmosphere closeup'}" decoding="async" onerror="this.style.opacity=0">
                         ${cap ? `<span class="preview-caption">${cap}</span>` : ''}
                     </div>`;
         }).join('');

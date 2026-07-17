@@ -441,26 +441,30 @@ nav a[aria-current="page"] {
 }
 .about-hero {
     display: grid;
-    grid-template-columns: minmax(240px, 400px) 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
+    grid-template-columns: 200px 1fr;
+    gap: clamp(1.75rem, 4vw, 3.5rem);
     align-items: start;
     padding-bottom: 3.5rem;
 }
 .about-hero-photo img { width: 100%; height: auto; display: block; }
+/* photo credit sits at the top of the text column, beside the portrait */
 .photo-caption {
     font-family: var(--sans);
     font-size: 11px;
-    letter-spacing: 0.05em;
-    margin-top: 0.8rem;
+    letter-spacing: 0.08em;
     color: var(--mid);
     line-height: 1.5;
-    text-align: left;
     text-transform: lowercase;
+    margin-bottom: 1.1rem;
 }
-.about-hero-text { padding-top: 0.2rem; }
-.about-hero-text p {                 /* bio — serif prose, fills its column */
+.about-hero-text { padding-top: 0.15rem; }
+
+/* bio and statement share one serif voice and one size — nothing reads
+   as an accidental second scale sitting next to the other */
+.about-bio,
+.statement-text {
     font-family: var(--serif);
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     line-height: 1.75;
     color: var(--ink);
     text-transform: lowercase;
@@ -471,22 +475,7 @@ nav a[aria-current="page"] {
     padding: 3.5rem 0 1rem;
     border-top: 1px solid rgba(26,26,24,0.12);
 }
-/* statement reads in the same serif voice as the bio, set across the
-   full page in two editorial columns so nothing ends mid-width */
-.statement-text {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    line-height: 1.6;
-    text-transform: lowercase;
-    color: var(--ink);
-    max-width: none;
-}
-@media (min-width: 900px) {
-    .statement-text {
-        columns: 2;
-        column-gap: clamp(2.5rem, 5vw, 5rem);
-    }
-}
+.statement-text { line-height: 1.7; }
 
 /* ── CONTACT PAGE (/contact) ── */
 .contact-page {
@@ -536,60 +525,17 @@ nav a[aria-current="page"] {
 .contact-newsletter .nl-signup { max-width: 380px; }
 .nl-archive { margin-top: 3.5rem; }
 
-/* ── NEWSLETTER PAGE (/newsletter) — full-width split hero ── */
+/* ── NEWSLETTER PAGE (/newsletter) — the atmosphere drop ──
+   the same full-width split as the collector landing: the sliding
+   closeup carousel of the coming drop beside the signup. drop-split,
+   drop-media, drop-text and the carousel styles are shared below. */
 .newsletter-page {
-    padding: clamp(2.5rem, 5vw, 4rem) var(--pad) 2.5rem;
-    max-width: none;
     margin-top: var(--header-h);
-    min-height: calc(100vh - var(--header-h));
-    min-height: calc(100svh - var(--header-h));
-    display: flex;
-    flex-direction: column;
+    padding: 0;
 }
-.newsletter-page > .section-label { margin-bottom: 0; }
-
-/* generic full-width split: prose on one side, action on the other,
-   vertically centered so it fills the page (shared by newsletter) */
-.split-hero {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: clamp(2rem, 6vw, 6rem);
-    align-items: center;
-    padding: clamp(2rem, 5vw, 4rem) 0;
-}
-.split-action { max-width: 460px; }
-
-.newsletter-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    text-transform: lowercase;
-    color: var(--ink);
-    max-width: 12em;
-}
-.newsletter-lead {
-    font-family: var(--sans);
-    font-size: 13.5px;
-    line-height: 1.8;
-    text-transform: lowercase;
-    color: var(--mid);
-    max-width: 36em;
-    margin-bottom: 2.4rem;
-}
-.newsletter-page .nl-signup { max-width: 420px; }
-.newsletter-page .footer-note { margin-top: auto; }
-
-@media (max-width: 800px) {
-    .split-hero {
-        grid-template-columns: 1fr;
-        gap: 2.2rem;
-        align-items: start;
-        padding: 2.5rem 0;
-    }
-    .newsletter-title { font-size: clamp(2.2rem, 9vw, 3rem); }
+.newsletter-page .footer-note {
+    margin: 0;
+    padding: 1.5rem var(--pad) 2rem;
 }
 
 /* NEWSLETTER — signup form + archive (contact page) */
@@ -970,9 +916,9 @@ nav a[aria-current="page"] {
     .legend-status .status-dot  { width: 4px; height: 4px; }
     .about-hero {
         grid-template-columns: 1fr;
-        gap: 1.8rem;
+        gap: 1.4rem;
     }
-    .about-hero-photo { max-width: 300px; }
+    .about-hero-photo { max-width: 200px; }
     .contact-details { grid-template-columns: 1fr; gap: 2rem; }
     .footer-note { flex-direction: column; gap: 0.6rem; align-items: flex-start; }
     .lightbox-content {
