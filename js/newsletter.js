@@ -10,6 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.07 });
     const reveal = () => setTimeout(() => document.querySelectorAll('.fade-up').forEach(el => io.observe(el)), 100);
 
+    // ── analytics events (GoatCounter) ───────────────────────
+    // count.js loads only on the live domain (bottom of this file); track()
+    // queues until it is ready, then the loader flushes. Nothing is sent off
+    // the live domain.
+    const gcQueue = [];
+    const track = (path, title) => {
+        const vars = { path, title: title || path, event: true };
+        if (window.goatcounter && typeof window.goatcounter.count === 'function') window.goatcounter.count(vars);
+        else gcQueue.push(vars);
+    };
+
     // ── signup form ───────────────────────────────────────────
     const signup = document.getElementById('nl-signup');
     if (signup && typeof SITE !== 'undefined' && SITE.newsletter && SITE.newsletter.action) {
@@ -27,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const btn = form.querySelector('button');
             btn.disabled = true;
+            track('signup/' + (location.pathname.includes('collector') ? 'collector' : 'newsletter'), 'Drop signup');
             try {
                 const res = await fetch(form.action, {
                     method: 'POST',
@@ -35,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 if (!res.ok) throw new Error('subscribe failed: ' + res.status);
                 signup.innerHTML =
-                    '<p class="newsletter-confirm">thank you — now check your inbox to confirm the subscription.</p>';
+                    '<p class="newsletter-confirm">thank you. now check your inbox to confirm the subscription.</p>';
             } catch (err) {
                 btn.disabled = false;
                 form.submit();
@@ -141,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         s.async = true;
         s.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
         s.src = 'https://gc.zgo.at/count.js';
+        s.onload = () => { gcQueue.forEach(v => window.goatcounter.count(v)); gcQueue.length = 0; };
         document.body.appendChild(s);
     }
 });

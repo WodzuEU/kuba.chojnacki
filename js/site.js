@@ -12,6 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const ROOT = window.ROOT || '';
     const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // ── analytics events (GoatCounter) ───────────────────────
+    // count.js loads only on the live domain (bottom of this file). track()
+    // sends the event if the API is ready, otherwise queues it; the loader
+    // flushes the queue once count.js is in. Off the live domain the queue
+    // is never flushed, so nothing is ever sent from staging or local.
+    const gcQueue = [];
+    const track = (path, title) => {
+        const vars = { path, title: title || path, event: true };
+        if (window.goatcounter && typeof window.goatcounter.count === 'function') window.goatcounter.count(vars);
+        else gcQueue.push(vars);
+    };
+    const workLabel = w => w.title.replace(' | ', ' ');
+
     const hasHero        = !!document.getElementById('slides-container');
     const hasCollections = !!document.getElementById('works');
     const hasLightbox    = !!document.getElementById('lightbox');
@@ -98,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             [lbPrev, lbNext].forEach(el => el.classList.remove('hidden'));
             lb.classList.add('active');
             setHash(w.slug);
+            track('open/' + w.slug, workLabel(w));
         };
 
         lbImg.addEventListener('click', e => {
@@ -115,6 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
         lbPrev.addEventListener('click', e => { e.stopPropagation(); openWork(lbIdx - 1); });
         lbNext.addEventListener('click', e => { e.stopPropagation(); openWork(lbIdx + 1); });
         lbClose.addEventListener('click', e => { e.stopPropagation(); closeLb(); });
+
+        // inquiry-click events, attributed to the work currently open
+        const lbMailBtn = document.getElementById('lb-inquire-mail');
+        const lbIgBtn   = document.querySelector('#lb-inquiry-section a[href*="instagram"]');
+        lbMailBtn && lbMailBtn.addEventListener('click', () => track('inquire-email/' + WORKS[lbIdx].slug, workLabel(WORKS[lbIdx])));
+        lbIgBtn   && lbIgBtn.addEventListener('click',   () => track('inquire-instagram/' + WORKS[lbIdx].slug, workLabel(WORKS[lbIdx])));
         lb.addEventListener('click', e => {
             if (!e.target.closest('.lightbox-info,.lightbox-btn') && e.target !== lbImg) closeLb();
         });
@@ -341,6 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
         s.async = true;
         s.dataset.goatcounter = `https://${SITE.goatcounter}.goatcounter.com/count`;
         s.src = 'https://gc.zgo.at/count.js';
+        s.onload = () => { gcQueue.forEach(v => window.goatcounter.count(v)); gcQueue.length = 0; };
         document.body.appendChild(s);
     }
 });
