@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroSrc    = w => `${ROOT}IMAGES/works/${w.slug}-hero.jpg`;
     const gridSrcset = w =>
         `${ROOT}IMAGES/thumbs/${w.slug}.webp 400w, ${ROOT}IMAGES/thumbs/${w.slug}-800.webp 800w, ${displaySrc(w)} ${w.w}w`;
-    const GRID_SIZES = '(max-width: 520px) 50vw, (max-width: 800px) 33vw, (max-width: 1100px) 25vw, 20vw';
+    const GRID_SIZES = '(max-width: 800px) 33vw, (max-width: 1100px) 25vw, 20vw';
 
     // displayed numbers are sequential in display order (01, 02, ...);
     // w.ref stays the permanent archive number used in file names
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             document.getElementById('lb-inquire-mail').href =
-                `mailto:${SITE.email}?subject=` + encodeURIComponent(`Inquiry — ${displayNo(w)} — ${w.title.replace(/\|/g, '-')}`);
+                `mailto:${SITE.email}?subject=` + encodeURIComponent(`Inquiry: ${displayNo(w)}, ${w.title.replace(/\s*\|\s*/g, ' ')}`);
 
             ['lb-inquiry-section', 'lb-price'].forEach(id => document.getElementById(id).classList.remove('hidden'));
             [lbPrev, lbNext].forEach(el => el.classList.remove('hidden'));
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "position": i + 1,
                 "item": {
                     "@type": "VisualArtwork",
-                    "name": w.title.replace(/\s*\|\s*/, " — "),
+                    "name": w.title.replace(/\s*\|\s*/, " "),
                     "artform": "Painting",
                     "artMedium": w.medium,
                     "creator": { "@type": "Person", "name": "Kuba Chojnacki", "url": SITE.url },
