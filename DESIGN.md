@@ -20,7 +20,7 @@ The paintings supply all the color. The UI stays achromatic.
 |---|---|---|
 | `--bg` | `#ffffff` | Page background — **pure white, never tinted.** The artwork photos have white backgrounds; on white the photo edges disappear and the paintings float. |
 | `--ink` | `#1a1a18` | Text, primary UI |
-| `--mid` | `#767672` | Secondary text: specs, captions, counts |
+| `--mid` | `#6f6f6a` | Secondary text: specs, captions, counts. Held at ≥4.5:1 on white (WCAG AA) — never lighten past this. |
 | `--rule` | `#111111` | Strong hairlines (header, section borders) |
 | faint rule | `rgba(26,26,24,0.12–0.15)` | Legend top rule, footer rule, inquiry divider |
 | sold | `#991b1b` | The only accent. Dark brick red — deliberately muted, not alarm-red. |
