@@ -121,6 +121,31 @@ document.addEventListener('DOMContentLoaded', () => {
         start();
     }
 
+    // ── drop countdown (only where #drop-timer exists) ────────
+    const dropTimer = document.getElementById('drop-timer');
+    if (dropTimer) {
+        const deadline = new Date(dropTimer.dataset.deadline).getTime();
+        const cell = id => document.getElementById(id);
+        const pad2 = n => String(n).padStart(2, '0');
+        let iv = null;
+        const tick = () => {
+            const ms = deadline - Date.now();
+            if (ms <= 0) {
+                if (iv) clearInterval(iv);
+                const when = document.querySelector('.drop-when');
+                if (when) when.textContent = 'the preview is open.';
+                dropTimer.remove();
+                return;
+            }
+            cell('t-days').textContent  = pad2(Math.floor(ms / 864e5));
+            cell('t-hours').textContent = pad2(Math.floor(ms % 864e5 / 36e5));
+            cell('t-mins').textContent  = pad2(Math.floor(ms % 36e5 / 6e4));
+            cell('t-secs').textContent  = pad2(Math.floor(ms % 6e4 / 1e3));
+        };
+        tick();
+        iv = setInterval(tick, 1000);
+    }
+
     // ── archive of past issues (only where its containers exist) ─
     const list  = document.getElementById('nl-issues');
     const count = document.getElementById('nl-count');

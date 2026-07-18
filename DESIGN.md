@@ -135,8 +135,11 @@ the legend is scanned there, not read.
 ## 6. Signature details (keep these)
 
 - Custom cursors, two only: a small solid black square (default, 9px) and
-  an open black ring (anything clickable, 13px). Shape, not just size,
-  signals the change. This is the site's fingerprint.
+  a solid black circle (anything clickable, 13px). Every interactive
+  selector must also cover its descendants (`.legend-item *` etc.) — the
+  pointer takes the cursor of the exact element under it, and the
+  universal square rule matches children directly, overriding the parent.
+  This is the site's fingerprint.
 - Sequential display numbers under every grid image.
 - Collections may carry a short lowercase `note` under the heading —
   written from the work, concrete images, no gallery jargon.
@@ -182,8 +185,11 @@ header (logo → home; nav: works · about · contact):
   serif voice, flowed across two full-width columns.
 - **`/contact/`** — inquiries / studio / purchase details, plus the
   newsletter (signup + past-issues archive).
-- **`/newsletter/`** — the studio letters. Full-width split hero: the title
-  on one side, lead + signup on the other.
+- **`/newsletter/`** — the drop funnel. Full-width split: the closeup
+  carousel beside the release pitch — label, release name (atmosphere
+  drop II), "preview opens in" + live countdown (`#drop-timer`, deadline
+  in its `data-deadline`, driven by newsletter.js; after the deadline the
+  line reads "the preview is open."), one short paragraph, signup CTA.
 - **`/collector/`** — the atmosphere drop. Full-width split: a sliding
   closeup carousel of the unreleased `draft` atmosphere works (built by
   `newsletter.js` when `#collector-preview` is present, sourced from the

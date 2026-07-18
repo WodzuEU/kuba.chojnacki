@@ -35,24 +35,31 @@ a   { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
 /* ── CURSOR SYSTEM ──
-   two cursors only: a small solid black square everywhere, an open black
-   ring over anything clickable. Shape (not just size) marks the change. */
+   two cursors only: a small solid black square everywhere, a solid black
+   circle over anything clickable. The universal square rule also matches
+   every CHILD of an interactive element (the img inside a grid tile, the
+   text spans inside a legend entry), and the pointer takes the cursor of
+   the exact element under it — so each interactive selector needs its
+   descendants covered too, or children override their parent's circle. */
 *, *::before, *::after {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9'%3E%3Crect x='0' y='0' width='9' height='9' fill='%23111'/%3E%3C/svg%3E") 4 4, auto !important;
 }
 
-a, button, input, select, textarea, label, summary,
-[role="button"], [tabindex]:not([tabindex="-1"]),
-.collapsible-header, .collection-label,
-.slide-dot, .lightbox-btn, .slider-btn,
-.legend-item, .clickable-ref,
-.lb-submit, .detail a,
-.item-image-wrapper,
+a, a *, button, button *, input, select, textarea,
+label, label *, summary, summary *,
+[role="button"], [role="button"] *,
+[tabindex]:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"]) *,
+.collapsible-header, .collapsible-header *,
+.collection-label, .collection-label *,
+.slide-dot, .lightbox-btn, .lightbox-btn *, .slider-btn, .slider-btn *,
+.legend-item, .legend-item *, .clickable-ref, .clickable-ref *,
+.lb-submit, .lb-submit *, .detail a,
+.item-image-wrapper, .item-image-wrapper *,
 .slide img,
 .about-photo img,
 .lightbox,
 .lightbox img {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13'%3E%3Ccircle cx='6.5' cy='6.5' r='5.25' fill='none' stroke='%23111' stroke-width='2'/%3E%3C/svg%3E") 6 6, pointer !important;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13'%3E%3Ccircle cx='6.5' cy='6.5' r='6' fill='%23111'/%3E%3C/svg%3E") 6 6, pointer !important;
 }
 
 /* HEADER */
@@ -706,6 +713,40 @@ nav a[aria-current="page"] {
     text-transform: lowercase;
     color: var(--ink);
     max-width: 24em;
+}
+/* release line + countdown: the second level of the drop hierarchy */
+.drop-when {
+    font-family: var(--serif);
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    line-height: 1.3;
+    text-transform: lowercase;
+    color: var(--ink);
+}
+.drop-timer {
+    display: flex;
+    gap: clamp(1.2rem, 3vw, 2.4rem);
+    margin: 0.2rem 0 0.5rem;
+}
+.timer-cell { display: flex; flex-direction: column; gap: 0.25rem; }
+.timer-num {
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+    line-height: 1;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    min-width: 2ch;
+}
+.timer-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--mid);
+}
+@media (max-width: 800px) {
+    .drop-timer { justify-content: center; }
+    .timer-cell { align-items: center; }
 }
 .drop-sub {
     font-family: var(--sans);
