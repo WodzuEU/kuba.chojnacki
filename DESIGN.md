@@ -186,10 +186,11 @@ header (logo → home; nav: works · about · contact):
 - **`/contact/`** — inquiries / studio / purchase details, plus the
   newsletter (signup + past-issues archive).
 - **`/newsletter/`** — the drop funnel. Full-width split: the closeup
-  carousel beside the release pitch — label, release name (atmosphere
-  drop II), "preview opens in" + live countdown (`#drop-timer`, deadline
-  in its `data-deadline`, driven by newsletter.js; after the deadline the
-  line reads "the preview is open."), one short paragraph, signup CTA.
+  carousel (slides zoomed 1.5x, 800/1600px sources) beside the release
+  pitch — label, release name (atmosphere II), "drop is in" + live
+  countdown (`#drop-timer`, deadline in its `data-deadline`, driven by
+  newsletter.js; after the deadline the line reads "the preview is
+  open."), one short paragraph, signup CTA.
 - **`/collector/`** — the atmosphere drop. Full-width split: a sliding
   closeup carousel of the unreleased `draft` atmosphere works (built by
   `newsletter.js` when `#collector-preview` is present, sourced from the

@@ -78,14 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const slides = SLUGS.map((slug, i) => {
             const cap = capOf(slug);
-            // light sources only: the carousel is a preview strip, so the
-            // 800px thumb is the ceiling (the 1600px hero crops are 3-5x
-            // heavier and retina sizing would always select them). First
-            // slide loads up front, the rest are warmed right after (below).
+            // the slides render zoomed 1.5x, so effective width is ~1.5x the
+            // pane: offer the 800px thumb and the 1600px hero crop and let
+            // sizes reflect the zoom. First slide loads up front, the rest
+            // are warmed right after (below).
             return `<div class="preview-slide">
-                        <img src="${ROOT}IMAGES/thumbs/${slug}-800.webp"
-                             srcset="${ROOT}IMAGES/thumbs/${slug}.webp 400w, ${ROOT}IMAGES/thumbs/${slug}-800.webp 800w"
-                             sizes="(max-width: 800px) 100vw, 55vw"
+                        <img src="${ROOT}IMAGES/thumbs/${slug}-hero.webp"
+                             srcset="${ROOT}IMAGES/thumbs/${slug}-800.webp 800w, ${ROOT}IMAGES/thumbs/${slug}-hero.webp 1600w"
+                             sizes="(max-width: 800px) 150vw, 85vw"
                              alt="${cap ? 'atmosphere closeup, ' + cap : 'atmosphere closeup'}"
                              ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.style.opacity=0">
                         ${cap ? `<span class="preview-caption">${cap}</span>` : ''}
