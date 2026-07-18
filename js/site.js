@@ -41,10 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `${ROOT}IMAGES/thumbs/${w.slug}.webp 400w, ${ROOT}IMAGES/thumbs/${w.slug}-800.webp 800w, ${displaySrc(w)} ${w.w}w`;
     const GRID_SIZES = '(max-width: 800px) 33vw, (max-width: 1100px) 25vw, 20vw';
 
-    // displayed numbers are sequential in display order (01, 02, ...);
+    // displayed numbers are sequential per collection (each restarts at 01);
     // w.ref stays the permanent archive number used in file names
     const pad = n => String(n).padStart(2, '0');
-    const displayNo = w => pad(WORKS.indexOf(w) + 1);
+    const collNo = {};
+    COLLECTIONS.forEach(c => c.works.filter(w => !w.draft).forEach((w, i) => { collNo[w.slug] = pad(i + 1); }));
+    const displayNo = w => collNo[w.slug];
 
     const altText  = w => `${w.title.replace(' | ', ', ')}, ${w.medium}, ${w.size}, ${w.year}`;
     const specsHtml = w => `${w.medium}<br>${w.size}<br>${w.year}`;
@@ -250,8 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!visibleWorks.length) return;   // skip a collection with nothing to show yet
 
             const block = document.createElement('div');
-            block.className = 'collection-block collapsible-section open';
-            const bodyId = `collection-${col.name.toLowerCase().replace(/\s+/g, '-')}`;
+            const colSlug = col.name.toLowerCase().replace(/\s+/g, '-');
+            block.className = `collection-block collapsible-section open col-${colSlug}`;
+            const bodyId = `collection-${colSlug}`;
             block.innerHTML =
                 `<div class="collection-label collapsible-header" role="button" tabindex="0" aria-expanded="true" aria-controls="${bodyId}">
                      <div class="collection-label-left">

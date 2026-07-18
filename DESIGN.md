@@ -72,6 +72,8 @@ the legend is scanned there, not read.
   1px `--rule` hairlines.
 - Works grid: 5 columns desktop → 4 (≤1100px) → 3 (≤800px and below,
   including phones). Uniform cells; the photos themselves communicate scale.
+  Works on paper render at half the cell width (`.col-<collection-slug>`
+  modifier) so small originals read as small.
 - Legend: 8 columns → 6 (≤1100px) → condensed 6 (≤800px) → condensed 4
   (≤520px). Desktop keeps the readable sizes; mobile switches to the compact
   catalogue tiles (see the typography exception above).
@@ -95,7 +97,7 @@ the legend is scanned there, not read.
   archive number — it lives in file slugs, never changes, never gets reused;
   gaps (13, 18, 23, 24, 26…) are intentional. The numbers *shown* on the site
   (grid, legend, inquiry emails) are display numbers: sequential 01, 02, 03…
-  in display order across the whole site, computed automatically at render.
+  computed automatically at render, restarting at 01 in each collection.
   Re-sorting collections keeps visible numbering clean with zero renames.
 - Slug/file scheme: `<ref>-<collection>-<colors>` (e.g.
   `02-atmosphere-burgundy-blue`).
@@ -126,8 +128,9 @@ the legend is scanned there, not read.
 
 ## 6. Signature details (keep these)
 
-- Custom cursors: black square (default), black dot (interactive),
-  crosshair plus/minus (zoomable images). This is the site's fingerprint.
+- Custom cursors, two only: a small black square (default, 9px) and a
+  small black dot (anything clickable, 11px). This is the site's
+  fingerprint.
 - Sequential display numbers under every grid image.
 - Collections may carry a short lowercase `note` under the heading —
   written from the work, concrete images, no gallery jargon.
