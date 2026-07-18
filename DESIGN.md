@@ -109,6 +109,7 @@ the legend is scanned there, not read.
 - Prices are the artist's decision, stated plainly in EUR. Current anchors:
   18×18 = 150 · 50×40 = 450 · 60×50 = 600 · 100×100 = 1300 ·
   150×100 = 1500 · 150×130 = 1900 · 200×150 = 2800.
+  Works on paper: 10×7.5 = 80 · 20×15 = 150 · 40×30 = 250.
 
 ## 5. Imagery pipeline
 
