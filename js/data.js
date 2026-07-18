@@ -88,8 +88,9 @@ const COLLECTIONS = [
     name: "Chromatic",
     note: "archival works and experiments exploring hues and colors. earlier oils sit beside recent acrylics on raw canvas, each holding a single color as it opens.",
     works: [
-      { ref: "19", slug: "19-chromatic-blue-orange", title: "Chromatic | blue orange", medium: "acrylic on raw canvas", size: "150 × 100 cm", year: 2026, price: 1500, w: 3024, h: 4032, hero: 4 },
-      { ref: "20", slug: "20-chromatic-red",         title: "Chromatic | red",         medium: "acrylic on raw canvas", size: "100 × 100 cm", year: 2025, price: 1300, w: 3024, h: 4032, hero: 6 },
+      { ref: "19", slug: "19-chromatic-blue-orange",  title: "Chromatic | blue orange", medium: "acrylic on raw canvas", size: "150 × 100 cm", year: 2026, price: 1500, w: 3024, h: 4032, hero: 4 },
+      { ref: "18", slug: "18-chromatic-orange-ii",    title: "Chromatic | orange II",   medium: "acrylic on raw canvas", size: "100 × 100 cm", year: 2026, price: 1300, w: 2588, h: 3450 },
+      { ref: "20", slug: "20-chromatic-red",          title: "Chromatic | red",         medium: "acrylic on raw canvas", size: "100 × 100 cm", year: 2025, price: 1300, w: 3024, h: 4032, hero: 6 },
       { ref: "21", slug: "21-chromatic-orange",      title: "Chromatic | orange",      medium: "acrylic on raw canvas", size: "100 × 70 cm",  year: 2024, price: 950,  w: 3024, h: 4032 },
       { ref: "22", slug: "22-chromatic-blue-i",      title: "Chromatic | blue",        medium: "acrylic on raw canvas", size: "100 × 70 cm",  year: 2026, price: 950,  w: 6048, h: 8064, hero: 5 },
       { ref: "25", slug: "25-chromatic-blue-red",    title: "Chromatic | blue red",    medium: "acrylic on raw canvas", size: "30 × 30 cm",   year: 2026, price: 260,  w: 2574, h: 3432 },

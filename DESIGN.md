@@ -95,7 +95,9 @@ the legend is scanned there, not read.
 - One work = one line in `js/data.js`. No artwork data anywhere else.
 - **Two numbering systems, two jobs.** The `ref` in data.js is the permanent
   archive number — it lives in file slugs, never changes, never gets reused;
-  gaps (13, 18, 23, 24, 26…) are intentional. The numbers *shown* on the site
+  gaps (13, 23, 24, 26…) are intentional (18 was a gap until the artist
+  catalogued orange II in 2026-07 — a gap may be filled by its real work,
+  never recycled for a different one). The numbers *shown* on the site
   (grid, legend, inquiry emails) are display numbers: sequential 01, 02, 03…
   computed automatically at render, restarting at 01 in each collection.
   Re-sorting collections keeps visible numbering clean with zero renames.
@@ -128,9 +130,9 @@ the legend is scanned there, not read.
 
 ## 6. Signature details (keep these)
 
-- Custom cursors, two only: a small black square (default, 9px) and a
-  small black dot (anything clickable, 11px). This is the site's
-  fingerprint.
+- Custom cursors, two only: a small solid black square (default, 9px) and
+  an open black ring (anything clickable, 13px). Shape, not just size,
+  signals the change. This is the site's fingerprint.
 - Sequential display numbers under every grid image.
 - Collections may carry a short lowercase `note` under the heading —
   written from the work, concrete images, no gallery jargon.
@@ -156,6 +158,10 @@ the legend is scanned there, not read.
    rollback (see `v1-single-file` precedent).
 4. Analytics (GoatCounter) loads on the live domain only — staging and
    local previews must never pollute the statistics.
+5. Asset links carry a version stamp (`css/style.css?v=YYYYMMDDx`, same on
+   the js includes). **Bump the stamp in all three pages whenever
+   style.css or any js file changes** — it is what makes browsers drop
+   their cached copy; without it reviewers see the previous deploy.
 
 ## 8. Site structure
 
